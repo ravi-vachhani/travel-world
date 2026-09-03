@@ -246,6 +246,111 @@
 </section>
 
 <!-- ═══════════════════════════════════════════
+     VISA SERVICES — Home Section
+═══════════════════════════════════════════ -->
+<section class="visa-home-section" id="visa">
+    <div class="visa-home-inner">
+        <div class="visa-home-header">
+            <div class="visa-eyebrow">
+                <span class="visa-line"></span>
+                <span class="visa-eyebrow-text">VISA SERVICES</span>
+            </div>
+            <h2 class="visa-home-title reveal-text">HASSLE-FREE VISA<br>ASSISTANCE</h2>
+            <p class="visa-home-sub reveal-fade">Expert visa guidance for 50+ countries. 90% success rate on USA visas. We handle documentation, appointments & follow-ups end to end.</p>
+        </div>
+
+        <!-- USA Highlight Card -->
+        <div class="visa-usa-highlight reveal-fade">
+            <div class="visa-usa-badge">⭐ 90% Success Rate</div>
+            <div class="visa-usa-content">
+                <div class="visa-usa-flag"><img src="https://flagcdn.com/w80/us.png" alt="USA Flag"></div>
+                <div class="visa-usa-text">
+                    <h3>USA Visa — B1/B2 Tourist & Business</h3>
+                    <p>Our USA visa specialists have helped 5,000+ applicants secure their US visa. Complete documentation support, mock interview preparation, and DS-160 assistance.</p>
+                    <div class="visa-usa-stats">
+                        <span><strong>90%</strong> Approval Rate</span>
+                        <span><strong>5,000+</strong> Visas Processed</span>
+                        <span><strong>7 Days</strong> Avg Processing</span>
+                    </div>
+                </div>
+            </div>
+            <a href="visa/usa" class="visa-usa-cta">Apply for USA Visa →</a>
+        </div>
+
+        <!-- Other Countries Grid -->
+        <div class="visa-countries-grid">
+            <a href="visa/uk" class="visa-country-card reveal-fade">
+                <span class="visa-flag"><img src="https://flagcdn.com/w80/gb.png" alt="UK"></span>
+                <span class="visa-country-name">United Kingdom</span>
+                <span class="visa-country-type">Tourist / Business</span>
+                <span class="visa-arrow">→</span>
+            </a>
+            <a href="visa/schengen" class="visa-country-card reveal-fade delay-1">
+                <span class="visa-flag"><img src="https://flagcdn.com/w80/eu.png" alt="EU"></span>
+                <span class="visa-country-name">Schengen (Europe)</span>
+                <span class="visa-country-type">26 Countries</span>
+                <span class="visa-arrow">→</span>
+            </a>
+            <a href="visa/canada" class="visa-country-card reveal-fade delay-2">
+                <span class="visa-flag"><img src="https://flagcdn.com/w80/ca.png" alt="Canada"></span>
+                <span class="visa-country-name">Canada</span>
+                <span class="visa-country-type">Tourist / Student</span>
+                <span class="visa-arrow">→</span>
+            </a>
+            <a href="visa/australia" class="visa-country-card reveal-fade">
+                <span class="visa-flag"><img src="https://flagcdn.com/w80/au.png" alt="Australia"></span>
+                <span class="visa-country-name">Australia</span>
+                <span class="visa-country-type">Tourist / ETA</span>
+                <span class="visa-arrow">→</span>
+            </a>
+            <a href="visa/dubai" class="visa-country-card reveal-fade delay-1">
+                <span class="visa-flag"><img src="https://flagcdn.com/w80/ae.png" alt="UAE"></span>
+                <span class="visa-country-name">Dubai / UAE</span>
+                <span class="visa-country-type">Visa on Arrival / E-Visa</span>
+                <span class="visa-arrow">→</span>
+            </a>
+            <a href="visa/singapore" class="visa-country-card reveal-fade delay-2">
+                <span class="visa-flag"><img src="https://flagcdn.com/w80/sg.png" alt="Singapore"></span>
+                <span class="visa-country-name">Singapore</span>
+                <span class="visa-country-type">Tourist / Transit</span>
+                <span class="visa-arrow">→</span>
+            </a>
+            <a href="visa/thailand" class="visa-country-card reveal-fade">
+                <span class="visa-flag"><img src="https://flagcdn.com/w80/th.png" alt="Thailand"></span>
+                <span class="visa-country-name">Thailand</span>
+                <span class="visa-country-type">Visa on Arrival / E-Visa</span>
+                <span class="visa-arrow">→</span>
+            </a>
+            <a href="visa/japan" class="visa-country-card reveal-fade delay-1">
+                <span class="visa-flag"><img src="https://flagcdn.com/w80/jp.png" alt="Japan"></span>
+                <span class="visa-country-name">Japan</span>
+                <span class="visa-country-type">Tourist / Business</span>
+                <span class="visa-arrow">→</span>
+            </a>
+            <a href="visa/new-zealand" class="visa-country-card reveal-fade delay-2">
+                <span class="visa-flag"><img src="https://flagcdn.com/w80/nz.png" alt="New Zealand"></span>
+                <span class="visa-country-name">New Zealand</span>
+                <span class="visa-country-type">Tourist / NZeTA</span>
+                <span class="visa-arrow">→</span>
+            </a>
+            <a href="visa" class="visa-country-card visa-view-all reveal-fade">
+                <span class="visa-flag">🌍</span>
+                <span class="visa-country-name">50+ Countries</span>
+                <span class="visa-country-type">View All Visa Services</span>
+                <span class="visa-arrow">→</span>
+            </a>
+        </div>
+
+        <div class="visa-home-cta">
+            <a href="https://wa.me/919904040001?text=Hello%2C%20I%20need%20visa%20assistance!" target="_blank" class="btn-visa-wa">
+                <i class="fab fa-whatsapp"></i> Get Free Visa Consultation
+            </a>
+            <a href="visa" class="btn-visa-all">View All Visa Services →</a>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
      DESTINATIONS — Horizontal Scroll Cards
 ═══════════════════════════════════════════ -->
 <div class="dest-scroll-outer" id="destOuter">
@@ -396,90 +501,7 @@
                 </div>
             </div>
         </div>
-        <div class="dest-card-new">
-            <div class="dest-card-img">
-                <img src="https://images.unsplash.com/photo-1539020140153-e479b8c22e70?w=700&q=80" alt="Marrakech Morocco">
-                <div class="dest-card-overlay"></div>
-            </div>
-            <div class="dest-card-info">
-                <span class="dest-region">Africa</span>
-                <h3><a href="destinations/marrakech" style="color:inherit;text-decoration:none;">Marrakech, Morocco</a></h3>
-                <div class="dest-card-footer">
-                    <span class="dest-tag">5N · 6D · Cultural</span>
-                    <a href="destinations/marrakech" class="dest-book">Enquire →</a>
-                </div>
-            </div>
-        </div>
-        <div class="dest-card-new">
-            <div class="dest-card-img">
-                <img src="https://images.unsplash.com/photo-1485738422979-f5c462d49f74?w=700&q=80" alt="New York">
-                <div class="dest-card-overlay"></div>
-            </div>
-            <div class="dest-card-info">
-                <span class="dest-region">Americas</span>
-                <h3><a href="destinations/new-york" style="color:inherit;text-decoration:none;">New York, USA</a></h3>
-                <div class="dest-card-footer">
-                    <span class="dest-tag">6N · 7D · City Break</span>
-                    <a href="destinations/new-york" class="dest-book">Enquire →</a>
-                </div>
-            </div>
-        </div>
-        <div class="dest-card-new">
-            <div class="dest-card-img">
-                <img src="https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=700&q=80" alt="Singapore">
-                <div class="dest-card-overlay"></div>
-            </div>
-            <div class="dest-card-info">
-                <span class="dest-region">Asia</span>
-                <h3><a href="destinations/singapore" style="color:inherit;text-decoration:none;">Singapore</a></h3>
-                <div class="dest-card-footer">
-                    <span class="dest-tag">4N · 5D · Family</span>
-                    <a href="destinations/singapore" class="dest-book">Enquire →</a>
-                </div>
-            </div>
-        </div>
-        <div class="dest-card-new">
-            <div class="dest-card-img">
-                <img src="https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?w=700&q=80" alt="Istanbul">
-                <div class="dest-card-overlay"></div>
-            </div>
-            <div class="dest-card-info">
-                <span class="dest-region">Europe / Asia</span>
-                <h3><a href="destinations/istanbul" style="color:inherit;text-decoration:none;">Istanbul, Turkey</a></h3>
-                <div class="dest-card-footer">
-                    <span class="dest-tag">5N · 6D · Heritage</span>
-                    <a href="destinations/istanbul" class="dest-book">Enquire →</a>
-                </div>
-            </div>
-        </div>
-        <div class="dest-card-new">
-            <div class="dest-card-img">
-                <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=700&q=80" alt="Amsterdam">
-                <div class="dest-card-overlay"></div>
-            </div>
-            <div class="dest-card-info">
-                <span class="dest-region">Europe</span>
-                <h3><a href="destinations/amsterdam" style="color:inherit;text-decoration:none;">Amsterdam, Netherlands</a></h3>
-                <div class="dest-card-footer">
-                    <span class="dest-tag">5N · 6D · Leisure</span>
-                    <a href="destinations/amsterdam" class="dest-book">Enquire →</a>
-                </div>
-            </div>
-        </div>
-        <div class="dest-card-new">
-            <div class="dest-card-img">
-                <img src="https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=700&q=80" alt="Zermatt Matterhorn">
-                <div class="dest-card-overlay"></div>
-            </div>
-            <div class="dest-card-info">
-                <span class="dest-region">Europe</span>
-                <h3><a href="destinations/zermatt" style="color:inherit;text-decoration:none;">Zermatt, Switzerland</a></h3>
-                <div class="dest-card-footer">
-                    <span class="dest-tag">7N · 8D · Alpine</span>
-                    <a href="destinations/zermatt" class="dest-book">Enquire →</a>
-                </div>
-            </div>
-        </div>
+       
     </div>
     <!-- Drag hint -->
     <div class="drag-hint">← Scroll to explore →</div>
@@ -636,110 +658,7 @@ document.querySelectorAll('.dest-card-new').forEach(function(card) {
     </div>
 </section>
 
-<!-- ═══════════════════════════════════════════
-     VISA SERVICES — Home Section
-═══════════════════════════════════════════ -->
-<section class="visa-home-section" id="visa">
-    <div class="visa-home-inner">
-        <div class="visa-home-header">
-            <div class="visa-eyebrow">
-                <span class="visa-line"></span>
-                <span class="visa-eyebrow-text">VISA SERVICES</span>
-            </div>
-            <h2 class="visa-home-title reveal-text">HASSLE-FREE VISA<br>ASSISTANCE</h2>
-            <p class="visa-home-sub reveal-fade">Expert visa guidance for 50+ countries. 90% success rate on USA visas. We handle documentation, appointments & follow-ups end to end.</p>
-        </div>
 
-        <!-- USA Highlight Card -->
-        <div class="visa-usa-highlight reveal-fade">
-            <div class="visa-usa-badge">⭐ 90% Success Rate</div>
-            <div class="visa-usa-content">
-                <div class="visa-usa-flag"><img src="https://flagcdn.com/w80/us.png" alt="USA Flag"></div>
-                <div class="visa-usa-text">
-                    <h3>USA Visa — B1/B2 Tourist & Business</h3>
-                    <p>Our USA visa specialists have helped 5,000+ applicants secure their US visa. Complete documentation support, mock interview preparation, and DS-160 assistance.</p>
-                    <div class="visa-usa-stats">
-                        <span><strong>90%</strong> Approval Rate</span>
-                        <span><strong>5,000+</strong> Visas Processed</span>
-                        <span><strong>7 Days</strong> Avg Processing</span>
-                    </div>
-                </div>
-            </div>
-            <a href="visa/usa" class="visa-usa-cta">Apply for USA Visa →</a>
-        </div>
-
-        <!-- Other Countries Grid -->
-        <div class="visa-countries-grid">
-            <a href="visa/uk" class="visa-country-card reveal-fade">
-                <span class="visa-flag"><img src="https://flagcdn.com/w80/gb.png" alt="UK"></span>
-                <span class="visa-country-name">United Kingdom</span>
-                <span class="visa-country-type">Tourist / Business</span>
-                <span class="visa-arrow">→</span>
-            </a>
-            <a href="visa/schengen" class="visa-country-card reveal-fade delay-1">
-                <span class="visa-flag"><img src="https://flagcdn.com/w80/eu.png" alt="EU"></span>
-                <span class="visa-country-name">Schengen (Europe)</span>
-                <span class="visa-country-type">26 Countries</span>
-                <span class="visa-arrow">→</span>
-            </a>
-            <a href="visa/canada" class="visa-country-card reveal-fade delay-2">
-                <span class="visa-flag"><img src="https://flagcdn.com/w80/ca.png" alt="Canada"></span>
-                <span class="visa-country-name">Canada</span>
-                <span class="visa-country-type">Tourist / Student</span>
-                <span class="visa-arrow">→</span>
-            </a>
-            <a href="visa/australia" class="visa-country-card reveal-fade">
-                <span class="visa-flag"><img src="https://flagcdn.com/w80/au.png" alt="Australia"></span>
-                <span class="visa-country-name">Australia</span>
-                <span class="visa-country-type">Tourist / ETA</span>
-                <span class="visa-arrow">→</span>
-            </a>
-            <a href="visa/dubai" class="visa-country-card reveal-fade delay-1">
-                <span class="visa-flag"><img src="https://flagcdn.com/w80/ae.png" alt="UAE"></span>
-                <span class="visa-country-name">Dubai / UAE</span>
-                <span class="visa-country-type">Visa on Arrival / E-Visa</span>
-                <span class="visa-arrow">→</span>
-            </a>
-            <a href="visa/singapore" class="visa-country-card reveal-fade delay-2">
-                <span class="visa-flag"><img src="https://flagcdn.com/w80/sg.png" alt="Singapore"></span>
-                <span class="visa-country-name">Singapore</span>
-                <span class="visa-country-type">Tourist / Transit</span>
-                <span class="visa-arrow">→</span>
-            </a>
-            <a href="visa/thailand" class="visa-country-card reveal-fade">
-                <span class="visa-flag"><img src="https://flagcdn.com/w80/th.png" alt="Thailand"></span>
-                <span class="visa-country-name">Thailand</span>
-                <span class="visa-country-type">Visa on Arrival / E-Visa</span>
-                <span class="visa-arrow">→</span>
-            </a>
-            <a href="visa/japan" class="visa-country-card reveal-fade delay-1">
-                <span class="visa-flag"><img src="https://flagcdn.com/w80/jp.png" alt="Japan"></span>
-                <span class="visa-country-name">Japan</span>
-                <span class="visa-country-type">Tourist / Business</span>
-                <span class="visa-arrow">→</span>
-            </a>
-            <a href="visa/new-zealand" class="visa-country-card reveal-fade delay-2">
-                <span class="visa-flag"><img src="https://flagcdn.com/w80/nz.png" alt="New Zealand"></span>
-                <span class="visa-country-name">New Zealand</span>
-                <span class="visa-country-type">Tourist / NZeTA</span>
-                <span class="visa-arrow">→</span>
-            </a>
-            <a href="visa" class="visa-country-card visa-view-all reveal-fade">
-                <span class="visa-flag">🌍</span>
-                <span class="visa-country-name">50+ Countries</span>
-                <span class="visa-country-type">View All Visa Services</span>
-                <span class="visa-arrow">→</span>
-            </a>
-        </div>
-
-        <div class="visa-home-cta">
-            <a href="https://wa.me/919904040001?text=Hello%2C%20I%20need%20visa%20assistance!" target="_blank" class="btn-visa-wa">
-                <i class="fab fa-whatsapp"></i> Get Free Visa Consultation
-            </a>
-            <a href="visa" class="btn-visa-all">View All Visa Services →</a>
-        </div>
-    </div>
-</section>
 
 <!-- ═══════════════════════════════════════════
      CTA — Full Bleed Dark

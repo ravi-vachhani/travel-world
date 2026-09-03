@@ -97,10 +97,9 @@ include __DIR__ . '/includes/page-header.php';
 
       <!-- Social -->
       <div style="margin-top:2rem;display:flex;gap:1rem;">
-        <a href="#" style="color:var(--gold);font-size:1.3rem;"><i class="fab fa-instagram"></i></a>
-        <a href="#" style="color:var(--gold);font-size:1.3rem;"><i class="fab fa-facebook-f"></i></a>
-        <a href="#" style="color:var(--gold);font-size:1.3rem;"><i class="fab fa-youtube"></i></a>
-        <a href="#" style="color:var(--gold);font-size:1.3rem;"><i class="fab fa-whatsapp"></i></a>
+        <a target="_blank" href="https://www.instagram.com/travelworld_2012" style="color:var(--gold);font-size:1.3rem;"><i class="fab fa-instagram"></i></a>
+        <a target="_blank" href="https://www.facebook.com/share/19QcmM9xYV/?mibextid=wwXIfr" style="color:var(--gold);font-size:1.3rem;"><i class="fab fa-facebook-f"></i></a>       
+        <a target="_blank" href="https://wa.me/919904040001" style="color:var(--gold);font-size:1.3rem;"><i class="fab fa-whatsapp"></i></a>
       </div>
     </div>
 
