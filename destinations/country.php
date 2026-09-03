@@ -441,7 +441,7 @@ include __DIR__ . '/../includes/page-header.php';
     <a href="/destinations/<?php echo $rel; ?>" class="related-card reveal">
       <img src="<?php echo $relImg; ?>" alt="<?php echo $relName; ?>" loading="lazy">
       <div class="related-card-overlay">
-        <span><?php echo $relName; ?></span>
+        <div class="related-card-name"><?php echo $relName; ?></div>
       </div>
     </a>
     <?php endforeach; ?>

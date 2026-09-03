@@ -358,7 +358,7 @@
     <div class="dest-section-header">
         <div class="dest-label">DESTINATIONS</div>
         <h2 class="dest-title reveal-text">EXPLORE THE WORLD</h2>
-        <a href="destinations/" class="dest-view-all">View All <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        <a href="destinations" class="dest-view-all">View All <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
     </div>
     <div class="dest-scroll-track" id="destTrack">
         <div class="dest-card-new">
