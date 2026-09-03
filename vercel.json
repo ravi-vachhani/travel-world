@@ -1,8 +1,16 @@
 {
   "functions": {
-    "**/*.php": {
-      "runtime": "vercel-php@0.6.0"
-    }
+    "index.php": { "runtime": "vercel-php@0.6.0" },
+    "about.php": { "runtime": "vercel-php@0.6.0" },
+    "contact.php": { "runtime": "vercel-php@0.6.0" },
+    "destinations/index.php": { "runtime": "vercel-php@0.6.0" },
+    "destinations/country.php": { "runtime": "vercel-php@0.6.0" },
+    "visa/index.php": { "runtime": "vercel-php@0.6.0" },
+    "visa/visa.php": { "runtime": "vercel-php@0.6.0" },
+    "services/index.php": { "runtime": "vercel-php@0.6.0" },
+    "services/service.php": { "runtime": "vercel-php@0.6.0" },
+    "blog/index.php": { "runtime": "vercel-php@0.6.0" },
+    "blog/post.php": { "runtime": "vercel-php@0.6.0" }
   },
   "routes": [
     { "src": "/visa/([a-z0-9-]+)", "dest": "/visa/visa.php?slug=$1" },
@@ -15,7 +23,6 @@
     { "src": "/visa", "dest": "/visa/index.php" },
     { "src": "/services", "dest": "/services/index.php" },
     { "src": "/blog", "dest": "/blog/index.php" },
-    { "src": "/", "dest": "/index.php" }
+    { "src": "/(.*)", "dest": "/index.php" }
   ]
 }
-
