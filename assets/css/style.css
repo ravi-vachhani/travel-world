@@ -173,13 +173,18 @@ ul { list-style: none; }
 
 /* Mobile Menu Backdrop */
 .mobile-menu-backdrop {
-    display: none;
     position: fixed;
     inset: 0;
     background: rgba(0,0,0,0.45);
     z-index: 99998;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
 }
-.mobile-menu-backdrop.open { display: block; }
+.mobile-menu-backdrop.open {
+    opacity: 1;
+    pointer-events: all;
+}
 
 /* Mobile Menu Sidebar */
 .mobile-menu {
