@@ -98,7 +98,7 @@ include __DIR__ . '/../includes/page-header.php';
         ['slug'=>'kenya',       'fc'=>'ke', 'name'=>'Kenya',            'type'=>'E-Visa',                   'time'=>'3–5 days',   'note'=>'Online e-visa'],
       ];
       foreach ($visas as $v): ?>
-      <a href="<?php echo $v['slug']; ?>" class="visa-list-card reveal" style="background:#fff;border:1px solid rgba(0,0,0,0.08);border-radius:10px;padding:1.5rem;text-decoration:none;display:block;transition:border-color 0.3s,transform 0.3s,box-shadow 0.3s;">
+      <a href="/visa/<?php echo $v['slug']; ?>" class="visa-list-card reveal" style="background:#fff;border:1px solid rgba(0,0,0,0.08);border-radius:10px;padding:1.5rem;text-decoration:none;display:block;transition:border-color 0.3s,transform 0.3s,box-shadow 0.3s;">
         <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1rem;">
           <img src="https://flagcdn.com/w80/<?php echo $v['fc']; ?>.png" alt="<?php echo $v['name']; ?>" style="width:48px;height:48px;object-fit:cover;border-radius:50%;border:1px solid rgba(0,0,0,0.1);flex-shrink:0;">
           <div>

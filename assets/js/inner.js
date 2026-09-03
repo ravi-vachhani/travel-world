@@ -66,12 +66,14 @@ document.addEventListener('DOMContentLoaded', () => {
       mobileMenu.classList.remove('open');
       hamburger.classList.remove('open');
       document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
     }
 
     hamburger.addEventListener('click', () => {
       const isOpen = mobileMenu.classList.toggle('open');
       hamburger.classList.toggle('open', isOpen);
       document.body.style.overflow = isOpen ? 'hidden' : '';
+      document.documentElement.style.overflow = isOpen ? 'hidden' : '';
     });
 
     if (closeBtn) closeBtn.addEventListener('click', closeMenu);

@@ -138,7 +138,7 @@ $posts = [
     'title'    => 'How to Pack for a Luxury Holiday',
     'category' => 'Travel Tips',
     'date'     => 'March 8, 2025',
-    'author'   => 'Deepak Joshi',
+    'author'   => 'Deepika Joshi',
     'read'     => '6 min read',
     'hero_img' => 'https://images.unsplash.com/photo-1488085061387-422e29b40080?w=1600&q=85',
     'content'  => [

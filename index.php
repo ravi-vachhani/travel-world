@@ -625,9 +625,9 @@ document.querySelectorAll('.dest-card-new').forEach(function(card) {
             <div class="test-quote">"</div>
             <p>Europe trip covering Paris, Rome and Barcelona in 12 days — TravelWorld planned it perfectly. Visa assistance was smooth and the hotels were excellent value!</p>
             <div class="test-author">
-                <img src="https://i.pravatar.cc/80?img=32" alt="Deepak Joshi">
+                <img src="https://i.pravatar.cc/80?img=32" alt="Deepika Joshi">
                 <div>
-                    <strong>Deepak Joshi</strong>
+                    <strong>Deepika Joshi</strong>
                     <span>Pune, Maharashtra</span>
                     <div class="test-stars">★★★★★</div>
                 </div>
@@ -724,7 +724,7 @@ document.querySelectorAll('.dest-card-new').forEach(function(card) {
                 <span class="visa-country-type">Tourist / NZeTA</span>
                 <span class="visa-arrow">→</span>
             </a>
-            <a href="visa/" class="visa-country-card visa-view-all reveal-fade">
+            <a href="visa" class="visa-country-card visa-view-all reveal-fade">
                 <span class="visa-flag">🌍</span>
                 <span class="visa-country-name">50+ Countries</span>
                 <span class="visa-country-type">View All Visa Services</span>
@@ -736,7 +736,7 @@ document.querySelectorAll('.dest-card-new').forEach(function(card) {
             <a href="https://wa.me/919876543210?text=Hello%2C%20I%20need%20visa%20assistance!" target="_blank" class="btn-visa-wa">
                 <i class="fab fa-whatsapp"></i> Get Free Visa Consultation
             </a>
-            <a href="visa/" class="btn-visa-all">View All Visa Services →</a>
+            <a href="visa" class="btn-visa-all">View All Visa Services →</a>
         </div>
     </div>
 </section>
