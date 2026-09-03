@@ -59,7 +59,7 @@ include __DIR__ . '/../includes/page-header.php';
           <div><div style="font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--gold);">5,000+</div><div style="font-size:0.72rem;color:#6B6560;font-family:'Inter',sans-serif;">Visas Processed</div></div>
           <div><div style="font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--gold);">7 Days</div><div style="font-size:0.72rem;color:#6B6560;font-family:'Inter',sans-serif;">Avg Processing</div></div>
         </div>
-        <a href="usa" style="display:inline-block;background:var(--gold);color:#fff;font-family:'Inter',sans-serif;font-size:0.8rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;padding:0.9rem 2rem;border-radius:6px;text-decoration:none;">Apply for USA Visa →</a>
+        <a href="visa/usa" style="display:inline-block;background:var(--gold);color:#fff;font-family:'Inter',sans-serif;font-size:0.8rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;padding:0.9rem 2rem;border-radius:6px;text-decoration:none;">Apply for USA Visa →</a>
       </div>
     </div>
   </div>
