@@ -45,7 +45,7 @@ $jsonLd = json_encode([
   ],
 ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
 
-include 'includes/page-header.php';
+include __DIR__ . '/includes/page-header.php';
 ?>
 
 <!-- Hero -->
@@ -194,4 +194,4 @@ include 'includes/page-header.php';
   </a>
 </section>
 
-<?php include 'includes/page-footer.php'; ?>
+<?php include __DIR__ . '/includes/page-footer.php'; ?>

@@ -1,4 +1,4 @@
-<?php include 'includes/header.php'; ?>
+<?php include __DIR__ . '/includes/header.php'; ?>
 
 <!-- ═══════════════════════════════════════════
      HERO — Split Layout: Text Left, Map Right
@@ -764,4 +764,4 @@ document.querySelectorAll('.dest-card-new').forEach(function(card) {
     </div>
 </section>
 
-<?php include 'includes/footer.php'; ?>
+<?php include __DIR__ . '/includes/footer.php'; ?>

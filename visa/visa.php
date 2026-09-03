@@ -4,7 +4,7 @@ $slug = preg_replace('/[^a-z0-9-]/', '', $_GET['slug'] ?? 'usa');
 $dataFile = __DIR__ . '/data/' . $slug . '.php';
 
 if (!file_exists($dataFile)) {
-    header('Location: ../visa/');
+    header('Location: /visa');
     exit;
 }
 $d = include $dataFile;
@@ -49,7 +49,7 @@ $jsonLd = json_encode([
   ],
 ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
 
-include '../includes/page-header.php';
+include __DIR__ . '/../includes/page-header.php';
 ?>
 
 <!-- HERO -->
@@ -210,4 +210,4 @@ include '../includes/page-header.php';
   </form>
 </section>
 
-<?php include '../includes/page-footer.php'; ?>
+<?php include __DIR__ . '/../includes/page-footer.php'; ?>

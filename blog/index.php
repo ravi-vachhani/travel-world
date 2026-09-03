@@ -28,7 +28,7 @@ $jsonLd = json_encode([
   ],
 ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
 
-include '../includes/page-header.php';
+include __DIR__ . '/../includes/page-header.php';
 
 $posts = [
   ['slug'=>'top-10-things-dubai',      'title'=>'Top 10 Things to Do in Dubai',                'category'=>'Destination Guide', 'date'=>'August 2025', 'read'=>'8 min read', 'img'=>'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=600&q=80', 'excerpt'=>'From the world\'s tallest building to a desert safari under the stars — our definitive guide to Dubai\'s must-do experiences.'],
@@ -104,4 +104,4 @@ $posts = [
   </form>
 </section>
 
-<?php include '../includes/page-footer.php'; ?>
+<?php include __DIR__ . '/../includes/page-footer.php'; ?>

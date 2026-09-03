@@ -253,7 +253,7 @@ $jsonLd = json_encode([
   ],
 ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
 
-include '../includes/page-header.php';
+include __DIR__ . '/../includes/page-header.php';
 
 $relatedImages = [
   'dubai'=>'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=600&q=80',
@@ -421,4 +421,4 @@ $relatedImages = [
   </div>
 </section>
 
-<?php include '../includes/page-footer.php'; ?>
+<?php include __DIR__ . '/../includes/page-footer.php'; ?>
