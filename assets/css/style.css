@@ -176,7 +176,7 @@ ul { list-style: none; }
     position: fixed;
     inset: 0;
     background: rgba(0,0,0,0.45);
-    z-index: 99998;
+    /* z-index: 99998; */
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.35s ease;
