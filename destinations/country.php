@@ -302,12 +302,15 @@ include __DIR__ . '/../includes/page-header.php';
       <div class="itin-day reveal">
         <div class="itin-day-num"><?php echo str_pad($i + 1, 2, '0', STR_PAD_LEFT); ?></div>
         <div class="itin-day-content">
-          <?php if ($isNewFormat): ?>
-            <h5><?php echo $day['day'] . ': ' . $day['title']; ?></h5>
+          <?php if (is_array($day)): ?>
+            <h5><?php echo ($day['day'] ?? '') . (isset($day['day']) ? ': ' : '') . ($day['title'] ?? ''); ?></h5>
+            <?php if (!empty($day['activities'])): ?>
             <p><?php echo implode(' · ', $day['activities']); ?></p>
-          <?php else: ?>
-            <h5><?php echo $day['title']; ?></h5>
+            <?php elseif (!empty($day['desc'])): ?>
             <p><?php echo $day['desc']; ?></p>
+            <?php endif; ?>
+          <?php else: ?>
+            <p><?php echo $day; ?></p>
           <?php endif; ?>
         </div>
       </div>
