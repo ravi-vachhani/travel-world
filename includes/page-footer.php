@@ -14,47 +14,47 @@
     <div class="footer-col">
       <h5>Destinations</h5>
       <ul>
-        <li><a href="<?php echo $rootPath ?? './'; ?>destinations/dubai">Dubai</a></li>
-        <li><a href="<?php echo $rootPath ?? './'; ?>destinations/bali">Bali</a></li>
-        <li><a href="<?php echo $rootPath ?? './'; ?>destinations/paris">Paris</a></li>
-        <li><a href="<?php echo $rootPath ?? './'; ?>destinations/maldives">Maldives</a></li>
-        <li><a href="<?php echo $rootPath ?? './'; ?>destinations/tokyo">Tokyo</a></li>
-        <li><a href="<?php echo $rootPath ?? './'; ?>destinations/">View All →</a></li>
+        <li><a href="/destinations/dubai">Dubai</a></li>
+        <li><a href="/destinations/bali">Bali</a></li>
+        <li><a href="/destinations/paris">Paris</a></li>
+        <li><a href="/destinations/maldives">Maldives</a></li>
+        <li><a href="/destinations/tokyo">Tokyo</a></li>
+        <li><a href="/destinations">View All →</a></li>
       </ul>
     </div>
 
     <div class="footer-col">
       <h5>Services</h5>
       <ul>
-        <li><a href="<?php echo $rootPath ?? './'; ?>services/honeymoon">Honeymoon</a></li>
-        <li><a href="<?php echo $rootPath ?? './'; ?>services/adventure">Adventure</a></li>
-        <li><a href="<?php echo $rootPath ?? './'; ?>services/luxury">Luxury Escapes</a></li>
-        <li><a href="<?php echo $rootPath ?? './'; ?>services/family">Family Holidays</a></li>
-        <li><a href="<?php echo $rootPath ?? './'; ?>services/corporate">Corporate Travel</a></li>
-        <li><a href="<?php echo $rootPath ?? './'; ?>services/">View All →</a></li>
+        <li><a href="/services/honeymoon">Honeymoon</a></li>
+        <li><a href="/services/adventure">Adventure</a></li>
+        <li><a href="/services/luxury">Luxury Escapes</a></li>
+        <li><a href="/services/family">Family Holidays</a></li>
+        <li><a href="/services/corporate">Corporate Travel</a></li>
+        <li><a href="/services">View All →</a></li>
       </ul>
     </div>
 
     <div class="footer-col">
       <h5>Visa Services</h5>
       <ul>
-        <li><a href="<?php echo $rootPath ?? './'; ?>visa/usa">USA Visa (90% Rate)</a></li>
-        <li><a href="<?php echo $rootPath ?? './'; ?>visa/uk">UK Visa</a></li>
-        <li><a href="<?php echo $rootPath ?? './'; ?>visa/schengen">Schengen Visa</a></li>
-        <li><a href="<?php echo $rootPath ?? './'; ?>visa/canada">Canada Visa</a></li>
-        <li><a href="<?php echo $rootPath ?? './'; ?>visa/dubai">Dubai Visa</a></li>
-        <li><a href="<?php echo $rootPath ?? './'; ?>visa/">View All →</a></li>
+        <li><a href="/visa/usa">USA Visa (90% Rate)</a></li>
+        <li><a href="/visa/uk">UK Visa</a></li>
+        <li><a href="/visa/schengen">Schengen Visa</a></li>
+        <li><a href="/visa/canada">Canada Visa</a></li>
+        <li><a href="/visa/dubai">Dubai Visa</a></li>
+        <li><a href="/visa">View All →</a></li>
       </ul>
     </div>
 
     <div class="footer-col">
       <h5>Company</h5>
       <ul>
-        <li><a href="<?php echo $rootPath ?? './'; ?>about.php">About Us</a></li>
-        <li><a href="<?php echo $rootPath ?? './'; ?>contact.php">Contact</a></li>
-        <li><a href="<?php echo $rootPath ?? './'; ?>blog/">Travel Blog</a></li>
+        <li><a href="/about">About Us</a></li>
+        <li><a href="/contact">Contact</a></li>
+        <li><a href="/blog">Travel Blog</a></li>
         <li><a href="#">Privacy Policy</a></li>
-        <li><a href="#">Terms & Conditions</a></li>
+        <li><a href="#">Terms &amp; Conditions</a></li>
       </ul>
     </div>
 
@@ -80,6 +80,6 @@
 </a>
 
 <!-- ── SCRIPTS ────────────────────────────────────────────────── -->
-<script src="<?php echo $rootPath ?? './'; ?>assets/js/inner.js"></script>
+<script src="/assets/js/inner.js"></script>
 </body>
 </html>

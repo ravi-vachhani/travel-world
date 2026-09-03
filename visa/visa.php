@@ -58,8 +58,8 @@ include '../includes/page-header.php';
   <div class="page-hero-overlay"></div>
   <div class="page-hero-content">
     <div class="page-hero-breadcrumb">
-      <a href="../">Home</a><span>/</span>
-      <a href="../visa/">Visa Services</a><span>/</span>
+      <a href="/">Home</a><span>/</span>
+      <a href="/visa">Visa Services</a><span>/</span>
       <span><?php echo $d['name']; ?></span>
     </div>
     <h1 class="page-hero-title"><?php echo strtoupper($d['name']); ?> VISA</h1>

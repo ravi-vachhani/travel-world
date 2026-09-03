@@ -46,7 +46,7 @@ $posts = [
   <div class="page-hero-overlay"></div>
   <div class="page-hero-content">
     <div class="page-hero-breadcrumb">
-      <a href="../">Home</a><span>›</span><span>Blog</span>
+      <a href="/">Home</a><span>›</span><span>Blog</span>
     </div>
     <h1 class="page-hero-title">Travel Stories</h1>
     <p class="page-hero-tagline">Inspiration, guides and insider advice from our travel experts</p>
@@ -60,7 +60,7 @@ $posts = [
 
   <!-- Featured Post -->
   <div class="reveal" style="margin-top:3rem;margin-bottom:3rem;">
-    <a href="../blog/<?php echo $posts[0]['slug']; ?>" style="text-decoration:none;display:grid;grid-template-columns:1.2fr 1fr;gap:0;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.06);">
+    <a href="/blog/<?php echo $posts[0]['slug']; ?>" style="text-decoration:none;display:grid;grid-template-columns:1.2fr 1fr;gap:0;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.06);">
       <div style="position:relative;height:400px;overflow:hidden;">
         <img src="<?php echo $posts[0]['img']; ?>" alt="<?php echo $posts[0]['title']; ?>" style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s;" loading="lazy">
       </div>
@@ -76,7 +76,7 @@ $posts = [
   <!-- Post Grid -->
   <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem;">
     <?php foreach (array_slice($posts, 1) as $post): ?>
-    <a href="../blog/<?php echo $post['slug']; ?>" style="text-decoration:none;display:block;" class="reveal">
+    <a href="/blog/<?php echo $post['slug']; ?>" style="text-decoration:none;display:block;" class="reveal">
       <div style="background:var(--dark3);border:1px solid rgba(255,255,255,0.06);border-radius:12px;overflow:hidden;transition:border-color 0.3s,transform 0.3s;" onmouseover="this.style.borderColor='rgba(201,168,76,0.35)';this.style.transform='translateY(-5px)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.06)';this.style.transform='translateY(0)'">
         <div style="height:200px;overflow:hidden;">
           <img src="<?php echo $post['img']; ?>" alt="<?php echo $post['title']; ?>" style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s;" loading="lazy">

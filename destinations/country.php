@@ -78,8 +78,8 @@ include '../includes/page-header.php';
   <div class="page-hero-overlay"></div>
   <div class="page-hero-content">
     <div class="page-hero-breadcrumb">
-      <a href="../">Home</a><span>›</span>
-      <a href="../destinations/">Destinations</a><span>›</span>
+      <a href="/">Home</a><span>›</span>
+      <a href="/destinations">Destinations</a><span>›</span>
       <span><?php echo $d['name']; ?></span>
     </div>
     <h1 class="page-hero-title"><?php echo $d['name']; ?></h1>
@@ -431,7 +431,7 @@ include '../includes/page-header.php';
       $relImg = $relatedImages[$rel] ?? 'https://images.unsplash.com/photo-1488085061387-422e29b40080?w=600&q=80';
       $relName = ucwords(str_replace('-', ' ', $rel));
     ?>
-    <a href="../destinations/<?php echo $rel; ?>" class="related-card reveal">
+    <a href="/destinations/<?php echo $rel; ?>" class="related-card reveal">
       <img src="<?php echo $relImg; ?>" alt="<?php echo $relName; ?>" loading="lazy">
       <div class="related-card-overlay">
         <span><?php echo $relName; ?></span>

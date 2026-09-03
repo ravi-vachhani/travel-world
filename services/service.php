@@ -287,8 +287,8 @@ $relatedImages = [
   <div class="page-hero-overlay"></div>
   <div class="page-hero-content">
     <div class="page-hero-breadcrumb">
-      <a href="../">Home</a><span>›</span>
-      <a href="../services/">Services</a><span>›</span>
+      <a href="/">Home</a><span>›</span>
+      <a href="/services">Services</a><span>›</span>
       <span><?php echo $s['title']; ?></span>
     </div>
     <h1 class="page-hero-title"><?php echo $s['title']; ?></h1>
@@ -369,7 +369,7 @@ $relatedImages = [
         $dImg  = $dData['hero_image'];
       }
     ?>
-    <a href="../destinations/<?php echo $dSlug; ?>" class="related-card reveal">
+    <a href="/destinations/<?php echo $dSlug; ?>" class="related-card reveal">
       <img src="<?php echo $dImg; ?>" alt="<?php echo $dName; ?>" loading="lazy">
       <div class="related-card-overlay">
         <div class="related-card-name"><?php echo $dName; ?></div>

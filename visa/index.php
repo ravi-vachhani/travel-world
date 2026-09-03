@@ -36,7 +36,7 @@ include '../includes/page-header.php';
   <div class="page-hero-overlay"></div>
   <div class="page-hero-content">
     <div class="page-hero-breadcrumb">
-      <a href="../">Home</a><span>/</span><span>Visa Services</span>
+      <a href="/">Home</a><span>/</span><span>Visa Services</span>
     </div>
     <h1 class="page-hero-title">VISA SERVICES</h1>
     <p class="page-hero-tagline">Expert guidance for 50+ countries · 90% USA visa success rate</p>

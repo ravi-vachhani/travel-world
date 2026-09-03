@@ -218,8 +218,8 @@ include '../includes/page-header.php';
   <div class="page-hero-overlay"></div>
   <div class="page-hero-content">
     <div class="page-hero-breadcrumb">
-      <a href="../">Home</a><span>›</span>
-      <a href="../blog/">Blog</a><span>›</span>
+      <a href="/">Home</a><span>›</span>
+      <a href="/blog">Blog</a><span>›</span>
       <span><?php echo $post['category']; ?></span>
     </div>
     <h1 class="page-hero-title" style="font-size:clamp(1.8rem,4vw,3.5rem);"><?php echo $post['title']; ?></h1>
@@ -265,7 +265,7 @@ include '../includes/page-header.php';
   <div class="section-label">Ready to Go?</div>
   <h2 class="section-title">Plan Your Trip</h2>
   <p class="section-subtitle" style="margin:0 auto 2rem;">Let our experts craft a bespoke itinerary based on this guide.</p>
-  <a href="../contact.php" class="btn-submit" style="display:inline-block;text-decoration:none;padding:1rem 3rem;width:auto;">
+  <a href="/contact" class="btn-submit" style="display:inline-block;text-decoration:none;padding:1rem 3rem;width:auto;">
     Get a Free Consultation <i class="fas fa-arrow-right" style="margin-left:8px;"></i>
   </a>
 </section>

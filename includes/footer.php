@@ -11,30 +11,30 @@
         <div class="footer-col">
             <h5>Navigate</h5>
             <ul>
-                <li><a href="index.php">Home</a></li>
-                <li><a href="services/honeymoon">Honeymoon</a></li>
-                <li><a href="services/corporate">Corporate Travel</a></li>
-                <li><a href="destinations/">Destinations</a></li>
-                <li><a href="about.php">About Us</a></li>
-                <li><a href="blog/">Blog</a></li>
-                <li><a href="contact.php">Contact</a></li>
+                <li><a href="/">Home</a></li>
+                <li><a href="/services/honeymoon">Honeymoon</a></li>
+                <li><a href="/services/corporate">Corporate Travel</a></li>
+                <li><a href="/destinations">Destinations</a></li>
+                <li><a href="/about">About Us</a></li>
+                <li><a href="/blog">Blog</a></li>
+                <li><a href="/contact">Contact</a></li>
             </ul>
         </div>
         <div class="footer-col">
             <h5>Destinations</h5>
             <ul>
-                <li><a href="destinations/paris">Paris, France</a></li>
-                <li><a href="destinations/bali">Bali, Indonesia</a></li>
-                <li><a href="destinations/tokyo">Tokyo, Japan</a></li>
-                <li><a href="destinations/dubai">Dubai, UAE</a></li>
-                <li><a href="destinations/maldives">Maldives</a></li>
-                <li><a href="destinations/">View All →</a></li>
+                <li><a href="/destinations/paris">Paris, France</a></li>
+                <li><a href="/destinations/bali">Bali, Indonesia</a></li>
+                <li><a href="/destinations/tokyo">Tokyo, Japan</a></li>
+                <li><a href="/destinations/dubai">Dubai, UAE</a></li>
+                <li><a href="/destinations/maldives">Maldives</a></li>
+                <li><a href="/destinations">View All →</a></li>
             </ul>
         </div>
         <div class="footer-col">
             <h5>Contact</h5>
             <ul>
-                <li><a href="contact.php">Ghatlodia Road, CP Nagar 2, Ghatlodiya, Ahmedabad, Gujarat 380061</a></li>
+                <li><a href="/contact">Ghatlodia Road, CP Nagar 2, Ghatlodiya, Ahmedabad, Gujarat 380061</a></li>
                 <li><a href="tel:+919876543210">+91 98765 43210</a></li>
                 <li><a href="mailto:travelworld012@gmail.com">travelworld012@gmail.com</a></li>
                 <li><a href="https://wa.me/919876543210" target="_blank">WhatsApp Us</a></li>
@@ -53,6 +53,6 @@
     <i class="fab fa-whatsapp"></i>
 </a>
 
-<script src="assets/js/main.js"></script>
+<script src="/assets/js/main.js"></script>
 </body>
 </html>

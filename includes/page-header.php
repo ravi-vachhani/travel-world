@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/x-icon" href="<?php echo $rootPath ?? './'; ?>assets/image/favicon.ico">
-  <link rel="shortcut icon" type="image/x-icon" href="<?php echo $rootPath ?? './'; ?>assets/image/favicon.ico">
-  <link rel="apple-touch-icon" href="<?php echo $rootPath ?? './'; ?>assets/image/logo.png">
+  <link rel="icon" type="image/x-icon" href="/assets/image/favicon.ico">
+  <link rel="shortcut icon" type="image/x-icon" href="/assets/image/favicon.ico">
+  <link rel="apple-touch-icon" href="/assets/image/logo.png">
 
   <title><?php echo htmlspecialchars($pageTitle ?? 'TravelWorld'); ?> — TravelWorld Luxury Travel</title>
   <meta name="description" content="<?php echo htmlspecialchars($pageDesc ?? 'Luxury travel experiences crafted for the discerning traveller.'); ?>">
@@ -51,8 +51,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <!-- CSS -->
-  <link rel="stylesheet" href="<?php echo $rootPath ?? './'; ?>assets/css/style.css">
-  <link rel="stylesheet" href="<?php echo $rootPath ?? './'; ?>assets/css/inner.css">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="/assets/css/inner.css">
 
   <!-- JSON-LD Schema (page-specific) -->
   <?php if (!empty($jsonLd)): ?>
@@ -78,17 +78,17 @@
 <!-- ── HEADER / NAV ──────────────────────────────────────────── -->
 <header id="header" class="site-header">
   <nav class="nav-container">
-    <a href="<?php echo $rootPath ?? './'; ?>" class="nav-logo">
-      <img  src="<?php echo $rootPath ?? './'; ?>assets/image/logo.webp" alt="Travel World" class="inner_lage_logo nav-logo-img">
+    <a href="/" class="nav-logo">
+      <img  src="/assets/image/logo.webp" alt="Travel World" class="inner_lage_logo nav-logo-img">
     </a>
 
     <ul class="nav-links">
-      <li><a href="<?php echo $rootPath ?? './'; ?>">Home</a></li>
-      <li><a href="<?php echo $rootPath ?? './'; ?>destinations/">Destinations</a></li>
-      <li><a href="<?php echo $rootPath ?? './'; ?>services/">Services</a></li>
-      <li><a href="<?php echo $rootPath ?? './'; ?>visa/">Visa</a></li>
-      <li><a href="<?php echo $rootPath ?? './'; ?>about.php">About</a></li>
-      <li><a href="<?php echo $rootPath ?? './'; ?>contact.php" class="nav-cta">Enquire</a></li>
+      <li><a href="/">Home</a></li>
+      <li><a href="/destinations">Destinations</a></li>
+      <li><a href="/services">Services</a></li>
+      <li><a href="/visa">Visa</a></li>
+      <li><a href="/about">About</a></li>
+      <li><a href="/contact" class="nav-cta">Enquire</a></li>
     </ul>
 
     <button class="hamburger" id="hamburger" aria-label="Menu">
@@ -99,12 +99,12 @@
   <div class="mobile-menu" id="mobileMenu">
     <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Close menu"></button>
     <ul>
-      <li><a href="<?php echo $rootPath ?? './'; ?>">Home</a></li>
-      <li><a href="<?php echo $rootPath ?? './'; ?>destinations/">Destinations</a></li>
-      <li><a href="<?php echo $rootPath ?? './'; ?>services/">Services</a></li>
-      <li><a href="<?php echo $rootPath ?? './'; ?>visa/">Visa Services</a></li>
-      <li><a href="<?php echo $rootPath ?? './'; ?>about.php">About</a></li>
-      <li><a href="<?php echo $rootPath ?? './'; ?>contact.php">Enquire</a></li>
+      <li><a href="/">Home</a></li>
+      <li><a href="/destinations">Destinations</a></li>
+      <li><a href="/services">Services</a></li>
+      <li><a href="/visa">Visa Services</a></li>
+      <li><a href="/about">About</a></li>
+      <li><a href="/contact">Enquire</a></li>
     </ul>
   </div>
 </header>

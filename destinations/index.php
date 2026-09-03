@@ -136,7 +136,7 @@ $oceania_count = count(array_filter($destinations, fn($d) => $d['continent'] ===
 <section class="destinations-list-section">
   <div class="destinations-list-grid">
     <?php foreach ($destinations as $d): ?>
-    <a href="../destinations/<?php echo $d['slug']; ?>"
+    <a href="/destinations/<?php echo $d['slug']; ?>"
        class="dest-list-card"
        data-continent="<?php echo $d['continent']; ?>"
        data-name="<?php echo strtolower($d['name']); ?>">
@@ -157,7 +157,7 @@ $oceania_count = count(array_filter($destinations, fn($d) => $d['continent'] ===
   <div class="section-label">Can't Decide?</div>
   <h2 class="section-title">Let Us Choose for You</h2>
   <p class="section-subtitle" style="margin:0 auto 2rem;">Tell us your travel style, budget and dates — our experts will craft the perfect itinerary.</p>
-  <a href="../contact.php" class="btn-submit" style="display:inline-block;text-decoration:none;padding:1rem 3rem;width:auto;">
+  <a href="/contact" class="btn-submit" style="display:inline-block;text-decoration:none;padding:1rem 3rem;width:auto;">
     Get a Free Consultation <i class="fas fa-arrow-right" style="margin-left:8px;"></i>
   </a>
 </section>

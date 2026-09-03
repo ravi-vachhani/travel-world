@@ -111,7 +111,7 @@ $services = [
   <div class="page-hero-overlay"></div>
   <div class="page-hero-content">
     <div class="page-hero-breadcrumb">
-      <a href="../">Home</a><span>›</span><span>Services</span>
+      <a href="/">Home</a><span>›</span><span>Services</span>
     </div>
     <h1 class="page-hero-title">Our Services</h1>
     <p class="page-hero-tagline">Every journey crafted to perfection — whatever your travel style</p>
@@ -126,7 +126,7 @@ $services = [
 
   <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:2rem;margin-top:3rem;">
     <?php foreach ($services as $s): ?>
-    <a href="../services/<?php echo $s['slug']; ?>" style="text-decoration:none;display:block;" class="reveal">
+    <a href="/services/<?php echo $s['slug']; ?>" style="text-decoration:none;display:block;" class="reveal">
       <div style="background:var(--dark3);border:1px solid rgba(255,255,255,0.06);border-radius:12px;overflow:hidden;transition:border-color 0.3s,transform 0.3s;" onmouseover="this.style.borderColor='rgba(201,168,76,0.35)';this.style.transform='translateY(-6px)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.06)';this.style.transform='translateY(0)'">
         <div style="position:relative;height:200px;overflow:hidden;">
           <img src="<?php echo $s['img']; ?>" alt="<?php echo $s['title']; ?>" style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s;" loading="lazy">
@@ -170,7 +170,7 @@ $services = [
   <div class="section-label">Start Planning</div>
   <h2 class="section-title">Tell Us Your Dream</h2>
   <p class="section-subtitle" style="margin:0 auto 2rem;">Our experts are ready to craft your perfect journey — free consultation, no obligation.</p>
-  <a href="../contact.php" class="btn-submit" style="display:inline-block;text-decoration:none;padding:1rem 3rem;width:auto;">
+  <a href="/contact" class="btn-submit" style="display:inline-block;text-decoration:none;padding:1rem 3rem;width:auto;">
     Get a Free Consultation <i class="fas fa-arrow-right" style="margin-left:8px;"></i>
   </a>
 </section>

@@ -84,7 +84,7 @@
     }
     </script>
 
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
@@ -93,17 +93,17 @@
 <header class="header" id="header">
     <div class="header-inner">
         <div class="logo">
-            <a href="index.php"><img src="assets/image/logo.webp" alt="Travel World" class="nav-logo-img"></a>
+            <a href="/"><img src="/assets/image/logo.webp" alt="Travel World" class="nav-logo-img"></a>
         </div>
         <nav class="navbar-right-nav">
             <ul>
-                <li><a href="destinations/">Destinations</a></li>
-                <li><a href="services/">Services</a></li>
-                <li><a href="visa/">Visa</a></li>
-                <li><a href="about.php">About</a></li>
-                <li><a href="blog/">Blog</a></li>
+                <li><a href="/destinations">Destinations</a></li>
+                <li><a href="/services">Services</a></li>
+                <li><a href="/visa">Visa</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/blog">Blog</a></li>
             </ul>
-            <a href="contact.php" class="btn-contact">CONTACT</a>
+            <a href="/contact" class="btn-contact">CONTACT</a>
             <div class="hamburger" id="hamburger" aria-label="Menu">
                 <span></span>
                 <span></span>
@@ -115,13 +115,13 @@
     <div class="mobile-menu" id="mobileMenu">
         <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Close menu"></button>
         <ul>
-            <li><a href="index.php">Home</a></li>
-            <li><a href="destinations/">Destinations</a></li>
-            <li><a href="services/">Services</a></li>
-            <li><a href="visa/">Visa Services</a></li>
-            <li><a href="about.php">About</a></li>
-            <li><a href="blog/">Blog</a></li>
-            <li><a href="contact.php">Contact</a></li>
+            <li><a href="/">Home</a></li>
+                <li><a href="/destinations">Destinations</a></li>
+                <li><a href="/services">Services</a></li>
+                <li><a href="/visa">Visa Services</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/blog">Blog</a></li>
+                <li><a href="/contact">Contact</a></li>
         </ul>
     </div>
 </header>
