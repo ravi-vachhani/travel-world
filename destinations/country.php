@@ -188,8 +188,12 @@ include __DIR__ . '/../includes/page-header.php';
       <div class="exp-item reveal">
         <i class="<?php echo $expTabMeta[$key]['icon'] ?? 'fas fa-star'; ?>"></i>
         <div class="exp-item-text">
-          <h6><?php echo $item['title']; ?></h6>
-          <p><?php echo $item['desc']; ?></p>
+          <?php if (is_array($item)): ?>
+            <h6><?php echo $item['title'] ?? $item['name'] ?? ''; ?></h6>
+            <p><?php echo $item['desc'] ?? $item['note'] ?? ''; ?></p>
+          <?php else: ?>
+            <p><?php echo $item; ?></p>
+          <?php endif; ?>
         </div>
       </div>
       <?php endforeach; ?>
