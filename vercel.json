@@ -1,28 +1,21 @@
 {
   "functions": {
-    "index.php": { "runtime": "vercel-php@0.6.0" },
-    "about.php": { "runtime": "vercel-php@0.6.0" },
-    "contact.php": { "runtime": "vercel-php@0.6.0" },
-    "destinations/index.php": { "runtime": "vercel-php@0.6.0" },
-    "destinations/country.php": { "runtime": "vercel-php@0.6.0" },
-    "visa/index.php": { "runtime": "vercel-php@0.6.0" },
-    "visa/visa.php": { "runtime": "vercel-php@0.6.0" },
-    "services/index.php": { "runtime": "vercel-php@0.6.0" },
-    "services/service.php": { "runtime": "vercel-php@0.6.0" },
-    "blog/index.php": { "runtime": "vercel-php@0.6.0" },
-    "blog/post.php": { "runtime": "vercel-php@0.6.0" }
+    "api/**/*.php": {
+      "runtime": "vercel-php@0.6.0"
+    }
   },
   "routes": [
-    { "src": "/visa/([a-z0-9-]+)", "dest": "/visa/visa.php?slug=$1" },
-    { "src": "/destinations/([a-z0-9-]+)", "dest": "/destinations/country.php?slug=$1" },
-    { "src": "/services/([a-z0-9-]+)", "dest": "/services/service.php?slug=$1" },
-    { "src": "/blog/([a-z0-9-]+)", "dest": "/blog/post.php?slug=$1" },
-    { "src": "/about", "dest": "/about.php" },
-    { "src": "/contact", "dest": "/contact.php" },
-    { "src": "/destinations", "dest": "/destinations/index.php" },
-    { "src": "/visa", "dest": "/visa/index.php" },
-    { "src": "/services", "dest": "/services/index.php" },
-    { "src": "/blog", "dest": "/blog/index.php" },
-    { "src": "/(.*)", "dest": "/index.php" }
+    { "src": "/visa/([a-z0-9-]+)", "dest": "/api/visa-single.php?slug=$1" },
+    { "src": "/destinations/([a-z0-9-]+)", "dest": "/api/destination-single.php?slug=$1" },
+    { "src": "/services/([a-z0-9-]+)", "dest": "/api/service-single.php?slug=$1" },
+    { "src": "/blog/([a-z0-9-]+)", "dest": "/api/blog-single.php?slug=$1" },
+    { "src": "/about", "dest": "/api/about.php" },
+    { "src": "/contact", "dest": "/api/contact.php" },
+    { "src": "/destinations", "dest": "/api/destinations.php" },
+    { "src": "/visa", "dest": "/api/visa.php" },
+    { "src": "/services", "dest": "/api/services.php" },
+    { "src": "/blog", "dest": "/api/blog.php" },
+    { "src": "/(.*\\.(css|js|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot))", "dest": "/$1" },
+    { "src": "/(.*)", "dest": "/api/index.php" }
   ]
 }
