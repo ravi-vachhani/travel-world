@@ -59,7 +59,7 @@ include __DIR__ . '/includes/page-header.php';
         <i class="fas fa-phone"></i>
         <div>
           <h6>Phone</h6>
-          <a href="tel:+919876543210">+91 98765 43210</a>
+          <a href="tel:+919904040001">+91 98765 43210</a>
         </div>
       </div>
 
@@ -67,7 +67,7 @@ include __DIR__ . '/includes/page-header.php';
         <i class="fab fa-whatsapp"></i>
         <div>
           <h6>WhatsApp</h6>
-          <a href="https://wa.me/919876543210" target="_blank">+91 98765 43210</a>
+          <a href="https://wa.me/919904040001" target="_blank">+91 98765 43210</a>
         </div>
       </div>
 

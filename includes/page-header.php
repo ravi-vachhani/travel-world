@@ -4,6 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-S8DGBXB0JM"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-S8DGBXB0JM');
+  </script>
+
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="/assets/image/favicon.ico">
   <link rel="shortcut icon" type="image/x-icon" href="/assets/image/favicon.ico">

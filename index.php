@@ -733,7 +733,7 @@ document.querySelectorAll('.dest-card-new').forEach(function(card) {
         </div>
 
         <div class="visa-home-cta">
-            <a href="https://wa.me/919876543210?text=Hello%2C%20I%20need%20visa%20assistance!" target="_blank" class="btn-visa-wa">
+            <a href="https://wa.me/919904040001?text=Hello%2C%20I%20need%20visa%20assistance!" target="_blank" class="btn-visa-wa">
                 <i class="fab fa-whatsapp"></i> Get Free Visa Consultation
             </a>
             <a href="visa" class="btn-visa-all">View All Visa Services →</a>

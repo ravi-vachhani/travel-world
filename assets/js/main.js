@@ -45,18 +45,26 @@ function initMobileMenu() {
     const closeBtn  = document.getElementById('mobileMenuClose');
     if (!hamburger || !mobileMenu) return;
 
+    // Create backdrop element
+    let backdrop = document.querySelector('.mobile-menu-backdrop');
+    if (!backdrop) {
+        backdrop = document.createElement('div');
+        backdrop.className = 'mobile-menu-backdrop';
+        document.body.appendChild(backdrop);
+    }
+
     function closeMenu() {
         mobileMenu.classList.remove('open');
         hamburger.classList.remove('open');
+        backdrop.classList.remove('open');
         document.body.style.overflow = '';
-        document.documentElement.style.overflow = '';
     }
 
     hamburger.addEventListener('click', () => {
         const isOpen = mobileMenu.classList.toggle('open');
         hamburger.classList.toggle('open', isOpen);
+        backdrop.classList.toggle('open', isOpen);
         document.body.style.overflow = isOpen ? 'hidden' : '';
-        document.documentElement.style.overflow = isOpen ? 'hidden' : '';
     });
 
     // Close button inside menu
@@ -67,10 +75,8 @@ function initMobileMenu() {
         link.addEventListener('click', closeMenu);
     });
 
-    // Close on backdrop tap (tap outside the ul)
-    mobileMenu.addEventListener('click', (e) => {
-        if (e.target === mobileMenu) closeMenu();
-    });
+    // Close on backdrop click
+    backdrop.addEventListener('click', closeMenu);
 }
 
 /* ══════════════════════════════════════════

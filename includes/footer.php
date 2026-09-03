@@ -35,9 +35,9 @@
             <h5>Contact</h5>
             <ul>
                 <li><a href="/contact">Ghatlodia Road, CP Nagar 2, Ghatlodiya, Ahmedabad, Gujarat 380061</a></li>
-                <li><a href="tel:+919876543210">+91 98765 43210</a></li>
+                <li><a href="tel:+919904040001">+91 98765 43210</a></li>
                 <li><a href="mailto:travelworld012@gmail.com">travelworld012@gmail.com</a></li>
-                <li><a href="https://wa.me/919876543210" target="_blank">WhatsApp Us</a></li>
+                <li><a href="https://wa.me/919904040001" target="_blank">WhatsApp Us</a></li>
                 <li><span style="color:#666;">Mon–Sat: 9AM – 7PM</span></li>
             </ul>
         </div>

@@ -110,7 +110,7 @@ include __DIR__ . '/../includes/page-header.php';
             </div>
           </div>
           <?php endforeach; ?>
-          <a href="https://wa.me/919876543210?text=Hello%2C+I+need+<?php echo urlencode($d['name']); ?>+visa+assistance!" target="_blank" style="display:block;background:#25D366;color:#fff;text-align:center;font-family:'Inter',sans-serif;font-size:0.8rem;font-weight:600;padding:0.9rem;border-radius:6px;text-decoration:none;margin-top:1.5rem;">
+          <a href="https://wa.me/919904040001?text=Hello%2C+I+need+<?php echo urlencode($d['name']); ?>+visa+assistance!" target="_blank" style="display:block;background:#25D366;color:#fff;text-align:center;font-family:'Inter',sans-serif;font-size:0.8rem;font-weight:600;padding:0.9rem;border-radius:6px;text-decoration:none;margin-top:1.5rem;">
             <i class="fab fa-whatsapp"></i> Apply Now on WhatsApp
           </a>
         </div>
