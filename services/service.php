@@ -313,7 +313,7 @@ $relatedImages = [
       <div class="tip-card" style="margin:0;">
         <i class="fas fa-phone"></i>
         <h5>Free Consultation</h5>
-        <p>Call us on +91 98765 43210 or WhatsApp us to discuss your <?php echo strtolower($s['title']); ?> plans — free, no obligation.</p>
+        <p>Call us on +91 99040 40001 or WhatsApp us to discuss your <?php echo strtolower($s['title']); ?> plans — free, no obligation.</p>
       </div>
     </div>
   </div>

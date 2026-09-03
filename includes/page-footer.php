@@ -2,7 +2,7 @@
 <footer class="site-footer">
   <div class="footer-inner">
     <div class="footer-brand">
-      <div class="footer-logo"><span class="logo-travel">Travel</span><span class="logo-world">World</span></div>
+      <img src="/assets/image/logo.webp" alt="Travel World" style="height:48px;width:auto;display:block;margin-bottom:0.5rem;">
       <p class="footer-tagline">Crafting extraordinary journeys for the discerning traveller since 2010.</p>
       <div class="footer-socials">
         <a href="https://www.instagram.com/travelworld_2012" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
@@ -61,7 +61,7 @@
     <div class="footer-col">
       <h5>Contact</h5>
       <ul class="footer-contact">
-        <li><a href="tel:+919904040001"><i class="fas fa-phone"></i> +91 98765 43210</a></li>
+        <li><a href="tel:+919904040001"><i class="fas fa-phone"></i> +91 99040 40001</a></li>
         <li><a href="mailto:travelworld012@gmail.com"><i class="fas fa-envelope"></i> travelworld012@gmail.com</a></li>
         <li><a href="https://wa.me/919904040001?text=Hello%2C%20I%20want%20to%20enquire!" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp Us</a></li>
         <li><i class="fas fa-map-marker-alt"></i> Ghatlodia Road, CP Nagar 2, Ghatlodiya, Ahmedabad, Gujarat 380061</li>

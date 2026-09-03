@@ -1,7 +1,7 @@
 <footer class="footer">
     <div class="footer-inner">
         <div class="footer-brand">
-            <span class="logo-text">Travel World</span>
+            <img src="/assets/image/logo.webp" alt="Travel World" style="height:48px;width:auto;display:block;">
             <p>Your trusted travel partner for unforgettable journeys around the globe. We manage every detail so you can focus on what really matters.</p>
             <div class="footer-social">
                 <a href="https://www.facebook.com/share/19QcmM9xYV/?mibextid=wwXIfr" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
@@ -35,7 +35,7 @@
             <h5>Contact</h5>
             <ul>
                 <li><a href="/contact">Ghatlodia Road, CP Nagar 2, Ghatlodiya, Ahmedabad, Gujarat 380061</a></li>
-                <li><a href="tel:+919904040001">+91 98765 43210</a></li>
+                <li><a href="tel:+919904040001">+91 99040 40001</a></li>
                 <li><a href="mailto:travelworld012@gmail.com">travelworld012@gmail.com</a></li>
                 <li><a href="https://wa.me/919904040001" target="_blank">WhatsApp Us</a></li>
                 <li><span style="color:#666;">Mon–Sat: 9AM – 7PM</span></li>
