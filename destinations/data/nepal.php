@@ -1,0 +1,127 @@
+<?php
+return [
+    'name' => 'Nepal',
+    'country' => 'Nepal',
+    'continent' => 'Asia',
+    'slug' => 'nepal',
+    'tagline' => 'Roof of the World — Himalayas & Ancient Temples',
+    'hero_image' => 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1600&q=80',
+    'best_time' => 'Oct–Nov, Mar–May',
+    'duration' => '8–14 Days',
+    'currency' => 'Nepalese Rupee (NPR)',
+    'language' => 'Nepali',
+    'visa' => 'Visa on Arrival',
+    'flight_time' => '~3 hrs from Delhi',
+    'budget' => '₹60,000–₹1,50,000',
+    'overview' => 'Nepal is the ultimate destination for mountain lovers and spiritual seekers — a tiny Himalayan kingdom that contains eight of the world\'s ten highest peaks, including Everest. Beyond the mountains, Nepal enchants with its ancient Newari cities, living goddess traditions, and the spiritual energy of Kathmandu\'s UNESCO-listed temples and stupas. Whether you\'re trekking to Everest Base Camp, meditating at Boudhanath Stupa, or watching rhinos in Chitwan National Park, Nepal delivers experiences of extraordinary depth and beauty.',
+
+    'must_visit' => [
+        [
+            'name' => 'Everest Base Camp',
+            'category' => 'Iconic Trek',
+            'desc' => 'The world\'s most famous trek — a 14-day journey through Sherpa villages and glacial valleys to the foot of the world\'s highest mountain.',
+            'img' => 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=800&q=80',
+        ],
+        [
+            'name' => 'Kathmandu Valley',
+            'category' => 'UNESCO Heritage',
+            'desc' => 'Seven UNESCO World Heritage Sites in one valley — Pashupatinath, Boudhanath, Swayambhunath, and four ancient Newari cities.',
+            'img' => 'https://images.unsplash.com/photo-1605640840605-14ac1855827b?w=800&q=80',
+        ],
+        [
+            'name' => 'Pokhara',
+            'category' => 'Lake City',
+            'desc' => 'Nepal\'s most beautiful city — a lakeside paradise with stunning Annapurna views, adventure sports, and a relaxed café culture.',
+            'img' => 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80',
+        ],
+        [
+            'name' => 'Annapurna Circuit',
+            'category' => 'Trekking',
+            'desc' => 'One of the world\'s greatest treks — a 15–21 day circuit around the Annapurna massif through diverse landscapes and cultures.',
+            'img' => 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&q=80',
+        ],
+        [
+            'name' => 'Chitwan National Park',
+            'category' => 'Wildlife',
+            'desc' => 'UNESCO-listed national park in the Terai lowlands — home to one-horned rhinos, Bengal tigers, gharial crocodiles, and elephants.',
+            'img' => 'https://images.unsplash.com/photo-1549366021-9f761d450615?w=800&q=80',
+        ],
+        [
+            'name' => 'Boudhanath Stupa',
+            'category' => 'Spiritual Site',
+            'desc' => 'One of the largest stupas in the world and the center of Tibetan Buddhism in Nepal — circumambulate with monks at dawn.',
+            'img' => 'https://images.unsplash.com/photo-1582650625119-3a31f8fa2699?w=800&q=80',
+        ],
+        [
+            'name' => 'Poon Hill',
+            'category' => 'Viewpoint',
+            'desc' => 'The most accessible Himalayan sunrise viewpoint — a 3-day trek from Pokhara with panoramic views of Dhaulagiri and Annapurna.',
+            'img' => 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80',
+        ],
+    ],
+
+    'experiences' => [
+        'adventure' => [
+            ['title' => 'Everest Base Camp Trek', 'desc' => 'The world\'s most iconic trek — 14 days through Sherpa villages, glaciers, and high-altitude passes to 5,364m base camp.'],
+            ['title' => 'Paragliding over Pokhara', 'desc' => 'Tandem paraglide from Sarangkot over Phewa Lake with the Annapurna range as your backdrop — a breathtaking 30-minute flight.'],
+            ['title' => 'White Water Rafting', 'desc' => 'Raft the Trishuli, Bhote Koshi, or Sun Koshi rivers — Nepal has some of the world\'s best white water rafting.'],
+        ],
+        'culture' => [
+            ['title' => 'Kathmandu UNESCO Sites', 'desc' => 'Explore all seven UNESCO World Heritage Sites in the Kathmandu Valley — ancient temples, stupas, and medieval Newari cities.'],
+            ['title' => 'Buddhist Monastery Stay', 'desc' => 'Stay at a monastery in Kopan or Boudhanath for meditation retreats and teachings from Tibetan Buddhist monks.'],
+            ['title' => 'Newari Cultural Tour', 'desc' => 'Explore the medieval cities of Bhaktapur and Patan — living museums of Newari art, architecture, and festivals.'],
+        ],
+        'food' => [
+            ['title' => 'Dal Bhat', 'desc' => 'Nepal\'s national dish — lentil soup with rice, vegetable curry, and pickles. Trekkers eat it twice daily for its sustaining energy.'],
+            ['title' => 'Momo Dumplings', 'desc' => 'Nepal\'s beloved steamed or fried dumplings filled with buffalo, chicken, or vegetables — the ultimate Kathmandu street food.'],
+            ['title' => 'Newari Feast', 'desc' => 'Experience a traditional Newari feast — beaten rice, black lentils, buffalo meat, and local aila (rice wine) in Bhaktapur.'],
+        ],
+        'shopping' => [
+            ['title' => 'Thamel Market', 'desc' => 'Browse Kathmandu\'s famous Thamel district for trekking gear, pashmina shawls, singing bowls, and thangka paintings.'],
+            ['title' => 'Pashmina & Cashmere', 'desc' => 'Buy genuine Himalayan pashmina shawls and cashmere products — Nepal produces some of the world\'s finest quality.'],
+            ['title' => 'Singing Bowls', 'desc' => 'Find hand-hammered Tibetan singing bowls from artisan workshops in Kathmandu\'s Boudhanath and Thamel areas.'],
+        ],
+    ],
+
+    'itineraries' => [
+        '7days' => [
+            ['day' => 'Day 1', 'title' => 'Kathmandu Arrival', 'activities' => ['Arrive Kathmandu', 'Thamel walk', 'Pashupatinath at dusk', 'Welcome dinner']],
+            ['day' => 'Day 2', 'title' => 'Kathmandu Valley', 'activities' => ['Boudhanath Stupa', 'Swayambhunath (Monkey Temple)', 'Patan Durbar Square', 'Newari dinner']],
+            ['day' => 'Day 3', 'title' => 'Bhaktapur & Fly Pokhara', 'activities' => ['Bhaktapur Durbar Square', 'Pottery Square', 'Fly to Pokhara', 'Phewa Lake evening']],
+            ['day' => 'Day 4', 'title' => 'Pokhara', 'activities' => ['Sarangkot sunrise', 'Paragliding', 'Phewa Lake boating', 'Davis Falls']],
+            ['day' => 'Day 5', 'title' => 'Poon Hill Trek Start', 'activities' => ['Drive to Nayapul', 'Trek to Tikhedhunga', 'Birethanti village', 'Teahouse overnight']],
+            ['day' => 'Day 6', 'title' => 'Poon Hill Summit', 'activities' => ['Pre-dawn hike to Poon Hill', 'Himalayan sunrise panorama', 'Trek down to Ghorepani', 'Return to Pokhara']],
+            ['day' => 'Day 7', 'title' => 'Farewell', 'activities' => ['Pokhara morning', 'Fly to Kathmandu', 'Last momo lunch', 'Departure']],
+        ],
+        '10days' => [
+            ['day' => 'Day 1', 'title' => 'Kathmandu', 'activities' => ['Arrive, Thamel', 'Pashupatinath', 'Welcome dinner']],
+            ['day' => 'Day 2', 'title' => 'Kathmandu Valley', 'activities' => ['Boudhanath', 'Swayambhunath', 'Patan']],
+            ['day' => 'Day 3', 'title' => 'Bhaktapur', 'activities' => ['Bhaktapur Durbar Square', 'Pottery Square', 'Newari feast']],
+            ['day' => 'Day 4', 'title' => 'Chitwan', 'activities' => ['Drive to Chitwan', 'Elephant safari', 'Rhino spotting']],
+            ['day' => 'Day 5', 'title' => 'Chitwan', 'activities' => ['Jungle walk', 'Canoe ride', 'Bird watching', 'Cultural show']],
+            ['day' => 'Day 6', 'title' => 'Pokhara', 'activities' => ['Drive to Pokhara', 'Phewa Lake', 'Sarangkot sunset']],
+            ['day' => 'Day 7', 'title' => 'Pokhara', 'activities' => ['Paragliding', 'World Peace Pagoda', 'Lakeside evening']],
+            ['day' => 'Day 8', 'title' => 'Poon Hill Trek', 'activities' => ['Drive to Nayapul', 'Trek to Ghorepani', 'Teahouse overnight']],
+            ['day' => 'Day 9', 'title' => 'Poon Hill Sunrise', 'activities' => ['Poon Hill sunrise', 'Himalayan panorama', 'Return to Pokhara']],
+            ['day' => 'Day 10', 'title' => 'Farewell', 'activities' => ['Fly to Kathmandu', 'Last shopping', 'Departure']],
+        ],
+        '14days' => [
+            ['day' => 'Day 1', 'title' => 'Kathmandu', 'activities' => ['Arrive, Thamel', 'Pashupatinath']],
+            ['day' => 'Day 2', 'title' => 'Kathmandu', 'activities' => ['Boudhanath', 'Swayambhunath', 'Patan']],
+            ['day' => 'Day 3', 'title' => 'Bhaktapur', 'activities' => ['Bhaktapur', 'Pottery Square', 'Newari feast']],
+            ['day' => 'Day 4', 'title' => 'Fly Lukla', 'activities' => ['Fly to Lukla', 'Trek to Phakding', 'EBC trek start']],
+            ['day' => 'Day 5', 'title' => 'Namche Bazaar', 'activities' => ['Trek to Namche', 'Sherpa capital', 'Acclimatize']],
+            ['day' => 'Day 6', 'title' => 'Acclimatization', 'activities' => ['Namche hike', 'Everest View Hotel', 'Sherpa museum']],
+            ['day' => 'Day 7', 'title' => 'Tengboche', 'activities' => ['Trek to Tengboche', 'Monastery', 'Everest views']],
+            ['day' => 'Day 8', 'title' => 'Dingboche', 'activities' => ['Trek to Dingboche', 'Ama Dablam views', 'Acclimatize']],
+            ['day' => 'Day 9', 'title' => 'Lobuche', 'activities' => ['Trek to Lobuche', 'Khumbu Glacier', 'High camp']],
+            ['day' => 'Day 10', 'title' => 'EBC', 'activities' => ['Everest Base Camp 5,364m', 'Kala Patthar sunrise', 'Descent begins']],
+            ['day' => 'Day 11', 'title' => 'Descent', 'activities' => ['Trek down to Namche', 'Celebration dinner']],
+            ['day' => 'Day 12', 'title' => 'Lukla', 'activities' => ['Trek to Lukla', 'Farewell party']],
+            ['day' => 'Day 13', 'title' => 'Kathmandu', 'activities' => ['Fly to Kathmandu', 'Hot shower', 'Celebration dinner']],
+            ['day' => 'Day 14', 'title' => 'Departure', 'activities' => ['Last shopping Thamel', 'Departure']],
+        ],
+    ],
+
+    'related' => ['bhutan', 'india', 'tibet'],
+];

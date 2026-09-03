@@ -1,0 +1,60 @@
+# robots.txt — Travel World
+# https://www.travelworld.com/robots.txt
+
+User-agent: *
+Allow: /
+Disallow: /includes/
+Disallow: /assets/js/
+Disallow: /destinations/data/
+Disallow: /visa/data/
+Disallow: /services/data/
+Disallow: /blog/data/
+Disallow: /destinations/debug_tokyo.php
+
+# ── AI Search Crawlers ────────────────────────────────────────────
+# Allow all major AI crawlers for GEO (Generative Engine Optimization)
+
+# Google AI (Gemini, AI Overviews, SGE)
+User-agent: Google-Extended
+Allow: /
+
+# OpenAI / ChatGPT
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+# Perplexity AI
+User-agent: PerplexityBot
+Allow: /
+
+# Anthropic / Claude
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+# Apple AI
+User-agent: Applebot-Extended
+Allow: /
+
+# Meta AI
+User-agent: FacebookBot
+Allow: /
+
+# ByteDance / TikTok AI
+User-agent: Bytespider
+Allow: /
+
+# Common Crawl (used by many AI training datasets)
+User-agent: CCBot
+Allow: /
+
+# Cohere AI
+User-agent: cohere-ai
+Allow: /
+
+# ── Sitemaps ──────────────────────────────────────────────────────
+Sitemap: https://www.travelworld.com/sitemap.xml

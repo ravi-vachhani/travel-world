@@ -1,0 +1,120 @@
+<?php
+return [
+    'name' => 'Australia',
+    'country' => 'Australia',
+    'continent' => 'Oceania',
+    'slug' => 'australia',
+    'tagline' => 'The Land Down Under — Wild & Wonderful',
+    'hero_image' => 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=80',
+    'best_time' => 'Sep–Nov, Mar–May',
+    'duration' => '12–16 Days',
+    'currency' => 'Australian Dollar (AUD)',
+    'language' => 'English',
+    'visa' => 'ETA / e-Visa Required',
+    'flight_time' => '~12 hrs from India',
+    'budget' => '₹2,50,000–₹5,00,000',
+    'overview' => 'Australia is a continent of extraordinary contrasts — ancient red deserts, tropical rainforests, world-class cities, and the Great Barrier Reef, the largest living structure on Earth. From the iconic Sydney Opera House to the sacred Uluru rising from the outback, from the wildlife-rich Daintree Rainforest to the pristine beaches of the Whitsundays, Australia offers experiences of unparalleled diversity. The country\'s laid-back culture, exceptional food and wine scene, and the unique wildlife found nowhere else on Earth make it one of the world\'s most compelling destinations.',
+
+    'must_visit' => [
+        [
+            'name' => 'Great Barrier Reef',
+            'category' => 'UNESCO Wonder',
+            'desc' => 'The world\'s largest coral reef system — 2,300 km of coral, 1,500 fish species, and extraordinary marine biodiversity.',
+            'img' => 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80',
+        ],
+        [
+            'name' => 'Sydney Opera House',
+            'category' => 'Iconic Landmark',
+            'desc' => 'Australia\'s most iconic building — a UNESCO World Heritage masterpiece of 20th-century architecture on Sydney Harbour.',
+            'img' => 'https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=800&q=80',
+        ],
+        [
+            'name' => 'Uluru (Ayers Rock)',
+            'category' => 'Sacred Site',
+            'desc' => 'A massive sandstone monolith rising 348m from the outback — sacred to the Anangu people and a UNESCO World Heritage Site.',
+            'img' => 'https://images.unsplash.com/photo-1451337516015-6b6e9a44a8a3?w=800&q=80',
+        ],
+        [
+            'name' => 'Whitsunday Islands',
+            'category' => 'Island Paradise',
+            'desc' => '74 islands in the heart of the Great Barrier Reef, with the famous Whitehaven Beach — pure white silica sand and turquoise water.',
+            'img' => 'https://images.unsplash.com/photo-1559128010-7c1ad6e1b6a5?w=800&q=80',
+        ],
+        [
+            'name' => 'Melbourne',
+            'category' => 'Cultural Capital',
+            'desc' => 'Australia\'s cultural capital — world-class food, coffee, street art, galleries, and the most vibrant café culture in the country.',
+            'img' => 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80',
+        ],
+        [
+            'name' => 'Daintree Rainforest',
+            'category' => 'UNESCO Heritage',
+            'desc' => 'The world\'s oldest tropical rainforest at 135 million years old — where the rainforest meets the reef on the Queensland coast.',
+            'img' => 'https://images.unsplash.com/photo-1476610182048-b716b8518aae?w=800&q=80',
+        ],
+        [
+            'name' => 'Great Ocean Road',
+            'category' => 'Scenic Drive',
+            'desc' => 'One of the world\'s most spectacular coastal drives — 243 km of dramatic cliffs, the Twelve Apostles, and pristine beaches.',
+            'img' => 'https://images.unsplash.com/photo-1516550893923-42d28e5677af?w=800&q=80',
+        ],
+    ],
+
+    'experiences' => [
+        'adventure' => [
+            ['title' => 'Great Barrier Reef Diving', 'desc' => 'Scuba dive or snorkel the Great Barrier Reef from Cairns or the Whitsundays — the world\'s greatest underwater experience.'],
+            ['title' => 'Sydney Harbour Bridge Climb', 'desc' => 'Climb to the summit of the Sydney Harbour Bridge for panoramic views of the Opera House and harbour.'],
+            ['title' => 'Surfing Bondi Beach', 'desc' => 'Take a surf lesson at the world-famous Bondi Beach — Australia\'s most iconic stretch of sand.'],
+        ],
+        'culture' => [
+            ['title' => 'Aboriginal Culture', 'desc' => 'Experience the world\'s oldest living culture at Uluru — guided walks, dot painting workshops, and Dreamtime stories.'],
+            ['title' => 'Sydney Opera House', 'desc' => 'Attend a performance at the Sydney Opera House — from opera and ballet to contemporary music and theatre.'],
+            ['title' => 'Melbourne Street Art', 'desc' => 'Explore Melbourne\'s famous laneways — Hosier Lane and AC/DC Lane — for world-class street art and graffiti culture.'],
+        ],
+        'food' => [
+            ['title' => 'Sydney Seafood', 'desc' => 'Feast on Sydney rock oysters, Moreton Bay bugs, and barramundi at the Sydney Fish Market or harbour restaurants.'],
+            ['title' => 'Melbourne Coffee & Food', 'desc' => 'Experience Melbourne\'s legendary café culture — flat whites, smashed avo, and a multicultural food scene that rivals any city.'],
+            ['title' => 'Barossa Valley Wine', 'desc' => 'Taste world-famous Shiraz and Riesling at Barossa Valley wineries — Australia\'s most celebrated wine region.'],
+        ],
+        'shopping' => [
+            ['title' => 'Opal Jewelry', 'desc' => 'Buy authentic Australian opals — the world\'s finest — from reputable jewelers in Sydney and Melbourne.'],
+            ['title' => 'Aboriginal Art', 'desc' => 'Collect authentic Aboriginal dot paintings and artifacts from galleries in Alice Springs and Sydney.'],
+            ['title' => 'Ugg Boots & Merino', 'desc' => 'Shop for genuine Australian Ugg boots, merino wool products, and kangaroo leather goods.'],
+        ],
+    ],
+
+    'itineraries' => [
+        '12days' => [
+            ['day' => 'Day 1', 'title' => 'Sydney Arrival', 'activities' => ['Arrive Sydney', 'Opera House & Harbour Bridge', 'Circular Quay', 'Harbour dinner']],
+            ['day' => 'Day 2', 'title' => 'Sydney Icons', 'activities' => ['Bondi Beach', 'Coastal walk to Coogee', 'Darling Harbour', 'Bridge Climb']],
+            ['day' => 'Day 3', 'title' => 'Blue Mountains', 'activities' => ['Blue Mountains day trip', 'Three Sisters', 'Scenic World', 'Leura village']],
+            ['day' => 'Day 4', 'title' => 'Fly to Cairns', 'activities' => ['Fly to Cairns', 'Cairns Esplanade', 'Night market', 'Reef briefing']],
+            ['day' => 'Day 5', 'title' => 'Great Barrier Reef', 'activities' => ['Full day reef cruise', 'Snorkeling & diving', 'Outer reef', 'Marine biologist talk']],
+            ['day' => 'Day 6', 'title' => 'Daintree', 'activities' => ['Daintree Rainforest', 'Cape Tribulation', 'Crocodile cruise', 'Rainforest walk']],
+            ['day' => 'Day 7', 'title' => 'Whitsundays', 'activities' => ['Fly to Whitsundays', 'Whitehaven Beach', 'Hill Inlet lookout', 'Sailing']],
+            ['day' => 'Day 8', 'title' => 'Reef Sailing', 'activities' => ['Snorkeling Hardy Reef', 'Heart Reef flyover', 'Airlie Beach', 'Fly to Melbourne']],
+            ['day' => 'Day 9', 'title' => 'Melbourne', 'activities' => ['Federation Square', 'Laneways & street art', 'Queen Victoria Market', 'Rooftop bar']],
+            ['day' => 'Day 10', 'title' => 'Great Ocean Road', 'activities' => ['Twelve Apostles', 'Loch Ard Gorge', 'Otway Rainforest', 'Koala spotting']],
+            ['day' => 'Day 11', 'title' => 'Uluru', 'activities' => ['Fly to Uluru', 'Sunset at Uluru', 'Field of Light', 'Outback dinner']],
+            ['day' => 'Day 12', 'title' => 'Farewell', 'activities' => ['Uluru sunrise', 'Kata Tjuta domes', 'Aboriginal culture walk', 'Departure']],
+        ],
+        '14days' => [
+            ['day' => 'Day 1', 'title' => 'Sydney', 'activities' => ['Arrive, Opera House', 'Harbour Bridge']],
+            ['day' => 'Day 2', 'title' => 'Sydney', 'activities' => ['Bondi Beach', 'Bridge Climb', 'Darling Harbour']],
+            ['day' => 'Day 3', 'title' => 'Blue Mountains', 'activities' => ['Three Sisters', 'Scenic World', 'Leura']],
+            ['day' => 'Day 4', 'title' => 'Cairns', 'activities' => ['Fly to Cairns', 'Esplanade', 'Night market']],
+            ['day' => 'Day 5', 'title' => 'Great Barrier Reef', 'activities' => ['Full day reef', 'Snorkeling', 'Diving']],
+            ['day' => 'Day 6', 'title' => 'Daintree', 'activities' => ['Rainforest', 'Cape Tribulation', 'Crocodile cruise']],
+            ['day' => 'Day 7', 'title' => 'Whitsundays', 'activities' => ['Fly to Whitsundays', 'Whitehaven Beach']],
+            ['day' => 'Day 8', 'title' => 'Sailing', 'activities' => ['Hardy Reef snorkeling', 'Heart Reef', 'Airlie Beach']],
+            ['day' => 'Day 9', 'title' => 'Melbourne', 'activities' => ['Fly to Melbourne', 'Laneways', 'Queen Vic Market']],
+            ['day' => 'Day 10', 'title' => 'Great Ocean Road', 'activities' => ['Twelve Apostles', 'Otway koalas', 'Loch Ard Gorge']],
+            ['day' => 'Day 11', 'title' => 'Barossa Valley', 'activities' => ['Wine tasting', 'Shiraz', 'Gourmet lunch']],
+            ['day' => 'Day 12', 'title' => 'Uluru', 'activities' => ['Fly to Uluru', 'Sunset', 'Field of Light']],
+            ['day' => 'Day 13', 'title' => 'Uluru', 'activities' => ['Sunrise', 'Kata Tjuta', 'Aboriginal culture']],
+            ['day' => 'Day 14', 'title' => 'Departure', 'activities' => ['Fly to Sydney', 'Last opal shopping', 'Departure']],
+        ],
+    ],
+
+    'related' => ['new-zealand', 'fiji', 'bora-bora'],
+];
