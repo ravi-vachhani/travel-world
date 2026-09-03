@@ -17,4 +17,4 @@
     { "src": "/blog", "dest": "/blog/index.php" },
     { "src": "/", "dest": "/index.php" }
   ]
-} 
+}
