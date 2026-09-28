@@ -14,6 +14,8 @@ $route = rtrim($route, '/') ?: '/';
 
 // Map route → file inside api/crm/
 $map = [
+    '/debug'               => '/debug.php',
+    '/debug.php'           => '/debug.php',
     '/'                    => '/index.php',
     '/login'               => '/login.php',
     '/login.php'           => '/login.php',
