@@ -93,7 +93,8 @@ if ($file === null) {
     exit;
 }
 
-$fullPath = __DIR__ . '/crm' . $file;
+// Files live in /crm/ at project root (outside api/ so not treated as lambdas)
+$fullPath = dirname(__DIR__) . '/crm' . $file;
 
 if (!file_exists($fullPath)) {
     http_response_code(404);
