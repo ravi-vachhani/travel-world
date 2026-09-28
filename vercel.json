@@ -5,65 +5,21 @@
     }
   },
   "routes": [
-    { "src": "/assets/(.*)", "dest": "/assets/$1" },
+    { "src": "/assets/(.*)",     "dest": "/assets/$1" },
     { "src": "/crm/assets/(.*)", "dest": "/crm/assets/$1" },
 
-    { "src": "/crm/login\\.php",   "dest": "/api/crm/login.php" },
-    { "src": "/crm/logout\\.php",  "dest": "/api/crm/logout.php" },
-    { "src": "/crm/?$",            "dest": "/api/crm/index.php" },
+    { "src": "/crm(.*)", "dest": "/api/crm.php" },
 
-    { "src": "/crm/leads/?$",                  "dest": "/api/crm/leads/index.php" },
-    { "src": "/crm/leads/create\\.php",        "dest": "/api/crm/leads/create.php" },
-    { "src": "/crm/leads/view\\.php",          "dest": "/api/crm/leads/view.php" },
-    { "src": "/crm/leads/edit\\.php",          "dest": "/api/crm/leads/edit.php" },
-
-    { "src": "/crm/customers/?$",              "dest": "/api/crm/customers/index.php" },
-    { "src": "/crm/customers/create\\.php",    "dest": "/api/crm/customers/create.php" },
-    { "src": "/crm/customers/view\\.php",      "dest": "/api/crm/customers/view.php" },
-    { "src": "/crm/customers/edit\\.php",      "dest": "/api/crm/customers/edit.php" },
-
-    { "src": "/crm/enquiries/?$",              "dest": "/api/crm/enquiries/index.php" },
-    { "src": "/crm/enquiries/create\\.php",    "dest": "/api/crm/enquiries/create.php" },
-    { "src": "/crm/enquiries/view\\.php",      "dest": "/api/crm/enquiries/view.php" },
-    { "src": "/crm/enquiries/edit\\.php",      "dest": "/api/crm/enquiries/edit.php" },
-
-    { "src": "/crm/followups/?$",              "dest": "/api/crm/followups/index.php" },
-    { "src": "/crm/followups/create\\.php",    "dest": "/api/crm/followups/create.php" },
-    { "src": "/crm/followups/done\\.php",      "dest": "/api/crm/followups/done.php" },
-    { "src": "/crm/followups/edit\\.php",      "dest": "/api/crm/followups/edit.php" },
-
-    { "src": "/crm/quotations/?$",             "dest": "/api/crm/quotations/index.php" },
-    { "src": "/crm/quotations/create\\.php",   "dest": "/api/crm/quotations/create.php" },
-    { "src": "/crm/quotations/view\\.php",     "dest": "/api/crm/quotations/view.php" },
-    { "src": "/crm/quotations/edit\\.php",     "dest": "/api/crm/quotations/edit.php" },
-    { "src": "/crm/quotations/print\\.php",    "dest": "/api/crm/quotations/print.php" },
-
-    { "src": "/crm/bookings/?$",               "dest": "/api/crm/bookings/index.php" },
-    { "src": "/crm/bookings/create\\.php",     "dest": "/api/crm/bookings/create.php" },
-    { "src": "/crm/bookings/view\\.php",       "dest": "/api/crm/bookings/view.php" },
-    { "src": "/crm/bookings/edit\\.php",       "dest": "/api/crm/bookings/edit.php" },
-
-    { "src": "/crm/payments/?$",               "dest": "/api/crm/payments/index.php" },
-    { "src": "/crm/payments/create\\.php",     "dest": "/api/crm/payments/create.php" },
-
-    { "src": "/crm/documents/?$",              "dest": "/api/crm/documents/index.php" },
-    { "src": "/crm/documents/upload\\.php",    "dest": "/api/crm/documents/upload.php" },
-    { "src": "/crm/documents/verify\\.php",    "dest": "/api/crm/documents/verify.php" },
-
-    { "src": "/crm/travel/?$",                 "dest": "/api/crm/travel/index.php" },
-    { "src": "/crm/reports/?$",                "dest": "/api/crm/reports/index.php" },
-    { "src": "/crm/settings/?$",               "dest": "/api/crm/settings/index.php" },
-
-    { "src": "/visa/([a-z0-9-]+)", "dest": "/api/visa-single.php?slug=$1" },
+    { "src": "/visa/([a-z0-9-]+)",         "dest": "/api/visa-single.php?slug=$1" },
     { "src": "/destinations/([a-z0-9-]+)", "dest": "/api/destination-single.php?slug=$1" },
-    { "src": "/services/([a-z0-9-]+)", "dest": "/api/service-single.php?slug=$1" },
-    { "src": "/blog/([a-z0-9-]+)", "dest": "/api/blog-single.php?slug=$1" },
-    { "src": "/about", "dest": "/api/about.php" },
-    { "src": "/contact", "dest": "/api/contact.php" },
+    { "src": "/services/([a-z0-9-]+)",     "dest": "/api/service-single.php?slug=$1" },
+    { "src": "/blog/([a-z0-9-]+)",         "dest": "/api/blog-single.php?slug=$1" },
+    { "src": "/about",        "dest": "/api/about.php" },
+    { "src": "/contact",      "dest": "/api/contact.php" },
     { "src": "/destinations", "dest": "/api/destinations.php" },
-    { "src": "/visa", "dest": "/api/visa.php" },
-    { "src": "/services", "dest": "/api/services.php" },
-    { "src": "/blog", "dest": "/api/blog.php" },
-    { "src": "/", "dest": "/api/index.php" }
+    { "src": "/visa",         "dest": "/api/visa.php" },
+    { "src": "/services",     "dest": "/api/services.php" },
+    { "src": "/blog",         "dest": "/api/blog.php" },
+    { "src": "/",             "dest": "/api/index.php" }
   ]
 }
