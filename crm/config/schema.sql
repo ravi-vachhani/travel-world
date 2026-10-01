@@ -205,3 +205,84 @@ create index if not exists idx_quotations_enquiry_id  on public.quotations (enqu
 --   "Could not find the table 'public.<name>' in the schema cache"
 -- =============================================================================
 notify pgrst, 'reload schema';
+
+-- =============================================================================
+-- ADMIN / RBAC / ATTENDANCE  (Phase 1+ enhancement)
+-- Prefix crm_ to avoid clashing with any existing tables.
+-- =============================================================================
+
+-- ── crm_roles ────────────────────────────────────────────────────────────────
+create table if not exists public.crm_roles (
+    id          text primary key,
+    name        text not null,          -- machine key, e.g. super_admin
+    label       text,                   -- display name, e.g. "Super Admin"
+    scope       text default 'OWN',     -- default record scope: OWN | TEAM | ALL
+    is_system   boolean default false,  -- system roles cannot be deleted
+    description text,
+    created_at  timestamptz default now()
+);
+
+-- ── crm_role_permissions ──────────────────────────────────────────────────────
+-- One row per (role, permission). permission is a string like "customers.view".
+create table if not exists public.crm_role_permissions (
+    id          text primary key,
+    role_id     text not null,
+    permission  text not null,
+    created_at  timestamptz default now()
+);
+create index if not exists idx_role_perms_role on public.crm_role_permissions (role_id);
+
+-- ── crm_users ──────────────────────────────────────────────────────────────────
+create table if not exists public.crm_users (
+    id            text primary key,
+    name          text,
+    email         text unique,
+    mobile        text,
+    employee_id   text,
+    photo_url     text,
+    role          text,                 -- crm_roles.name
+    team_id       text,                 -- for TEAM scope (manager groups)
+    manager_id    text,                 -- reports-to (defines a team)
+    status        text default 'active',-- active | inactive | suspended
+    password_hash text,
+    last_login    timestamptz,
+    created_at    timestamptz default now()
+);
+create index if not exists idx_users_email  on public.crm_users (email);
+create index if not exists idx_users_mobile on public.crm_users (mobile);
+
+-- ── crm_audit_logs ────────────────────────────────────────────────────────────
+create table if not exists public.crm_audit_logs (
+    id          text primary key,
+    actor_id    text,                   -- who did it
+    actor_name  text,
+    action      text,                   -- user.created, role.changed, etc.
+    module      text,                   -- users | roles | permissions | ...
+    record_id   text,
+    old_value   text,                   -- JSON string where relevant
+    new_value   text,                   -- JSON string where relevant
+    created_at  timestamptz default now()
+);
+create index if not exists idx_audit_created on public.crm_audit_logs (created_at desc);
+
+-- ── crm_attendance ─────────────────────────────────────────────────────────────
+-- One row per punch session. punch_out/worked_minutes filled on punch-out.
+create table if not exists public.crm_attendance (
+    id             text primary key,
+    user_id        text not null,
+    user_name      text,
+    work_date      date default (now() at time zone 'utc')::date,
+    punch_in       timestamptz,
+    punch_out      timestamptz,
+    worked_minutes integer,
+    note           text,
+    created_at     timestamptz default now()
+);
+create index if not exists idx_attendance_user on public.crm_attendance (user_id);
+create index if not exists idx_attendance_date on public.crm_attendance (work_date desc);
+
+-- Normalised mobile column on customers for fast, duplicate-proof lookup.
+alter table public.customers add column if not exists mobile_normalized text;
+create index if not exists idx_customers_mobile_norm on public.customers (mobile_normalized);
+
+notify pgrst, 'reload schema';

@@ -159,10 +159,30 @@ a:hover { text-decoration: underline; }
 .topbar-title {
   font-size: 1rem;
   font-weight: 600;
-  flex: 1;
 }
 
-.topbar-right { display: flex; align-items: center; gap: 1rem; }
+.topbar-search {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  max-width: 420px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.4rem 0.75rem;
+  color: var(--muted);
+}
+.topbar-search input {
+  flex: 1; background: none; border: none; outline: none;
+  color: var(--text); font-size: 0.85rem; font-family: inherit;
+}
+
+.topbar-right { display: flex; align-items: center; gap: 1rem; margin-left: auto; }
+
+@media (max-width: 768px) {
+  .topbar-search { display: none; }
+}
 
 .topbar-user { display: flex; align-items: center; gap: 0.6rem; }
 .user-avatar {
@@ -175,9 +195,21 @@ a:hover { text-decoration: underline; }
   font-size: 0.8rem;
   flex-shrink: 0;
 }
+.user-avatar-img { object-fit: cover; }
 .user-info { display: flex; flex-direction: column; line-height: 1.2; }
 .user-name { font-size: 0.8rem; font-weight: 600; }
 .user-role { font-size: 0.7rem; color: var(--muted); text-transform: capitalize; }
+
+/* ── Punch in/out widget ────────────────────────────────── */
+.punch-widget { display: flex; align-items: center; gap: 0.5rem; }
+.punch-btn { border: 1px solid var(--border); }
+.punch-btn.punch-in  { background: rgba(5,150,105,0.12);  color: var(--c-confirmed); border-color: rgba(5,150,105,0.3); }
+.punch-btn.punch-out { background: rgba(217,119,6,0.12);  color: var(--c-quoted);    border-color: rgba(217,119,6,0.3); }
+.punch-timer { font-size: 0.8rem; font-weight: 700; color: var(--text); font-variant-numeric: tabular-nums; }
+@media (max-width: 560px) {
+  .punch-timer { display: none; }
+  .punch-btn span { display: none; }
+}
 
 /* ── Content ────────────────────────────────────────────── */
 
@@ -631,3 +663,52 @@ textarea { resize: vertical; min-height: 80px; }
 }
 .pagination a:hover { background: var(--surface2); color: var(--text); }
 .pagination .active { background: var(--gold); color: var(--gold-ink); border-color: var(--gold); }
+
+/* ── Smart fields: autocomplete + mobile lookup ─────────────── */
+.ac-box {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0; right: 0;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  box-shadow: var(--shadow-md);
+  z-index: 500;
+  max-height: 280px;
+  overflow-y: auto;
+}
+.ac-item { padding: 0.55rem 0.75rem; cursor: pointer; border-bottom: 1px solid var(--border); }
+.ac-item:last-child { border-bottom: none; }
+.ac-item:hover, .ac-item.active { background: var(--gold-light); }
+.ac-label { font-size: 0.85rem; font-weight: 600; color: var(--text); }
+.ac-sub { font-size: 0.72rem; color: var(--muted); margin-top: 1px; }
+
+.lookup-card {
+  margin-top: 0.6rem;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 0.9rem 1rem;
+  background: var(--surface2);
+}
+.lookup-card.found { border-color: rgba(5,150,105,0.35); background: rgba(5,150,105,0.06); }
+.lookup-card.none  { display: flex; align-items: center; justify-content: space-between; gap: 1rem; color: var(--muted); font-size: 0.85rem; }
+.lookup-card.used  { outline: 2px solid var(--c-confirmed); }
+.lookup-head { margin-bottom: 0.35rem; }
+.lookup-name { font-size: 1rem; font-weight: 700; }
+.lookup-mobile { font-size: 0.85rem; color: var(--muted); }
+.lookup-counts { font-size: 0.78rem; color: var(--text); margin: 0.5rem 0 0.75rem; }
+.lookup-actions { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+
+/* Customer context mini-panel inside forms */
+.ctx-panel {
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  border-radius: 10px;
+  padding: 0.85rem 1rem;
+  background: var(--surface2);
+  margin-bottom: 1.25rem;
+}
+.ctx-panel h4 { font-size: 0.9rem; margin-bottom: 0.25rem; }
+.ctx-row { font-size: 0.8rem; color: var(--muted); }
+.ctx-links { display: flex; gap: 0.75rem; margin-top: 0.5rem; flex-wrap: wrap; }
+.ctx-links a { font-size: 0.78rem; }

@@ -3,7 +3,10 @@ require_once __DIR__ . '/../config/supabase.php';
 require_once __DIR__ . '/../config/auth.php';
 require_once __DIR__ . '/../config/supabase-client.php';
 
+require_once __DIR__ . '/../config/rbac.php';
+
 crm_require_auth();
+crm_require_permission('documents.edit');
 
 $id     = $_GET['id']     ?? '';
 $status = $_GET['status'] ?? 'verified';

@@ -2,8 +2,11 @@
 require_once __DIR__ . '/../config/supabase.php';
 require_once __DIR__ . '/../config/auth.php';
 require_once __DIR__ . '/../config/supabase-client.php';
+require_once __DIR__ . '/../config/rbac.php';
+require_once __DIR__ . '/../config/helpers.php';
 
 crm_require_auth();
+crm_require_permission('customers.create');
 
 $pageTitle = 'New Customer';
 $activeNav = 'Customers';
@@ -19,11 +22,26 @@ if ($leadId) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $db   = appwrite();
+    $db    = appwrite();
+    $phone = trim($_POST['phone'] ?? '');
+    $norm  = crm_normalize_mobile($phone);
+
+    // ── Duplicate prevention: never silently create a second customer with the
+    //    same normalised mobile. If one exists and the user did not explicitly
+    //    confirm, send them to the existing record.
+    if ($norm !== '' && empty($_POST['allow_duplicate'])) {
+        $existing = crm_find_customer_by_mobile($phone);
+        if ($existing) {
+            header('Location: /crm/customers/view.php?id=' . $existing['$id'] . '&existing=1');
+            exit;
+        }
+    }
+
     $data = [
         'name'          => trim($_POST['name'] ?? ''),
         'email'         => trim($_POST['email'] ?? ''),
-        'phone'         => trim($_POST['phone'] ?? ''),
+        'phone'         => $phone,
+        'mobile_normalized' => $norm,
         'alt_phone'     => trim($_POST['alt_phone'] ?? ''),
         'dob'           => $_POST['dob'] ?? '',
         'anniversary'   => $_POST['anniversary'] ?? '',
@@ -78,7 +96,8 @@ require_once __DIR__ . '/../includes/layout.php';
     </div>
     <div class="form-group">
       <label>Phone *</label>
-      <input type="tel" name="phone" value="<?= htmlspecialchars($_POST['phone']??$lead['phone']??'') ?>" required>
+      <input type="tel" name="phone" value="<?= htmlspecialchars($_POST['phone']??$lead['phone']??'') ?>" required data-mobile-lookup autocomplete="off">
+      <div data-mobile-result></div>
     </div>
     <div class="form-group">
       <label>Alternate Phone</label>

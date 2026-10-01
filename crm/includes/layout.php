@@ -8,20 +8,30 @@ $user = crm_current_user();
 $pageTitle = $pageTitle ?? 'CRM';
 $activeNav = $activeNav ?? '';
 
-$navItems = [
-    ['href' => '/crm/',                  'icon' => 'grid',         'label' => 'Dashboard'],
-    ['href' => '/crm/leads/',            'icon' => 'users',        'label' => 'Leads'],
-    ['href' => '/crm/customers/',        'icon' => 'user-check',   'label' => 'Customers'],
-    ['href' => '/crm/enquiries/',        'icon' => 'message-square','label' => 'Enquiries'],
-    ['href' => '/crm/followups/',        'icon' => 'phone',        'label' => 'Follow-ups'],
-    ['href' => '/crm/quotations/',       'icon' => 'file-text',    'label' => 'Quotations'],
-    ['href' => '/crm/bookings/',         'icon' => 'bookmark',     'label' => 'Bookings'],
-    ['href' => '/crm/payments/',         'icon' => 'credit-card',  'label' => 'Payments'],
-    ['href' => '/crm/documents/',        'icon' => 'folder',       'label' => 'Documents'],
-    ['href' => '/crm/travel/',           'icon' => 'map',          'label' => 'Upcoming Travel'],
-    ['href' => '/crm/reports/',          'icon' => 'bar-chart-2',  'label' => 'Reports'],
-    ['href' => '/crm/settings/',         'icon' => 'settings',     'label' => 'Settings'],
+// RBAC helpers are optional-safe: if not loaded, show everything (super admin).
+$__can = function (string $perm): bool {
+    return function_exists('crm_can') ? crm_can($perm) : true;
+};
+
+// Each item may declare a 'perm'; items the user can't access are hidden.
+$allNav = [
+    ['href' => '/crm/',            'icon' => 'grid',          'label' => 'Dashboard',        'perm' => null],
+    ['href' => '/crm/leads/',      'icon' => 'users',         'label' => 'Leads',            'perm' => 'leads.view'],
+    ['href' => '/crm/customers/',  'icon' => 'user-check',    'label' => 'Customers',        'perm' => 'customers.view'],
+    ['href' => '/crm/enquiries/',  'icon' => 'message-square','label' => 'Enquiries',        'perm' => 'enquiries.view'],
+    ['href' => '/crm/followups/',  'icon' => 'phone',         'label' => 'Follow-ups',       'perm' => 'followups.view'],
+    ['href' => '/crm/quotations/', 'icon' => 'file-text',     'label' => 'Quotations',       'perm' => 'quotations.view'],
+    ['href' => '/crm/bookings/',   'icon' => 'bookmark',      'label' => 'Bookings',         'perm' => 'bookings.view'],
+    ['href' => '/crm/payments/',   'icon' => 'credit-card',   'label' => 'Payments',         'perm' => 'payments.view'],
+    ['href' => '/crm/documents/',  'icon' => 'folder',        'label' => 'Documents',        'perm' => 'documents.view'],
+    ['href' => '/crm/travel/',     'icon' => 'map',           'label' => 'Upcoming Travel',  'perm' => 'bookings.view'],
+    ['href' => '/crm/attendance/', 'icon' => 'clock',         'label' => 'Attendance',       'perm' => null],
+    ['href' => '/crm/reports/',    'icon' => 'bar-chart-2',   'label' => 'Reports',          'perm' => 'reports.view'],
+    ['href' => '/crm/users/',      'icon' => 'shield',        'label' => 'Users',            'perm' => 'users.view'],
+    ['href' => '/crm/roles/',      'icon' => 'key',           'label' => 'Roles',            'perm' => 'roles.view'],
+    ['href' => '/crm/settings/',   'icon' => 'settings',      'label' => 'Settings',         'perm' => null],
 ];
+$navItems = array_values(array_filter($allNav, fn($i) => $i['perm'] === null || $__can($i['perm'])));
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -76,13 +86,27 @@ $navItems = [
     <button class="topbar-menu-btn" id="sidebarToggle" aria-label="Toggle menu">
       <?= crm_icon('menu') ?>
     </button>
-    <div class="topbar-title"><?= htmlspecialchars($pageTitle) ?></div>
+    <form class="topbar-search" method="GET" action="/crm/search.php">
+      <?= crm_icon('search') ?>
+      <input type="text" name="q" placeholder="Search customers, mobile, bookings…" value="<?= htmlspecialchars($_GET['q'] ?? '') ?>">
+    </form>
     <div class="topbar-right">
+      <!-- Punch in/out widget -->
+      <div id="punchWidget" class="punch-widget" data-state="loading">
+        <button type="button" id="punchBtn" class="btn btn-sm punch-btn">
+          <?= crm_icon('clock') ?> <span id="punchLabel">…</span>
+        </button>
+        <span id="punchTimer" class="punch-timer"></span>
+      </div>
       <div class="topbar-user">
-        <div class="user-avatar"><?= strtoupper(substr($user['name'] ?? 'A', 0, 1)) ?></div>
+        <?php if (!empty($user['photo_url'])): ?>
+          <img class="user-avatar user-avatar-img" src="<?= htmlspecialchars($user['photo_url']) ?>" alt="">
+        <?php else: ?>
+          <div class="user-avatar"><?= strtoupper(substr($user['name'] ?? 'A', 0, 1)) ?></div>
+        <?php endif; ?>
         <div class="user-info">
           <span class="user-name"><?= htmlspecialchars($user['name'] ?? 'Admin') ?></span>
-          <span class="user-role"><?= htmlspecialchars(ucfirst($user['role'] ?? 'admin')) ?></span>
+          <span class="user-role"><?= htmlspecialchars(ucwords(str_replace('_',' ', $user['role'] ?? 'admin'))) ?></span>
         </div>
       </div>
     </div>
@@ -127,6 +151,9 @@ function crm_icon(string $name): string {
         'clock'         => '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>',
         'dollar-sign'   => '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>',
         'plane'         => '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2L16 11l3.5-3.5C21 6 21 4 19 2c-2-2-4-2-5.5-.5L10 5 1.8 6.2c-.5.1-.9.5-.9 1 0 .3.1.6.3.8l7.1 7.1-1.5 4.5c-.1.4 0 .8.3 1.1.3.3.7.4 1.1.3l4.5-1.5 7.1 7.1c.2.2.5.3.8.3.5 0 .9-.4 1-.9L22 17.8l-4.2-4.2z"/></svg>',
+        'shield'        => '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>',
+        'key'           => '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>',
+        'log-in'        => '<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>',
     ];
     return $icons[$name] ?? '';
 }

@@ -85,6 +85,35 @@ $map = [
     '/travel'              => '/travel/index.php',
     '/reports'             => '/reports/index.php',
     '/settings'            => '/settings/index.php',
+
+    // Global search
+    '/search'              => '/search.php',
+    '/search.php'          => '/search.php',
+
+    // Smart-field APIs
+    '/api/search'          => '/api/search.php',
+    '/api/search.php'      => '/api/search.php',
+    '/api/lookup'          => '/api/lookup.php',
+    '/api/lookup.php'      => '/api/lookup.php',
+
+    // Attendance
+    '/attendance'          => '/attendance/index.php',
+    '/attendance/status'   => '/attendance/status.php',
+    '/attendance/status.php'=> '/attendance/status.php',
+    '/attendance/punch'    => '/attendance/punch.php',
+    '/attendance/punch.php'=> '/attendance/punch.php',
+
+    // Users management
+    '/users'               => '/users/index.php',
+    '/users/create'        => '/users/create.php',
+    '/users/create.php'    => '/users/create.php',
+    '/users/edit'          => '/users/edit.php',
+    '/users/edit.php'      => '/users/edit.php',
+
+    // Roles & permissions
+    '/roles'               => '/roles/index.php',
+    '/roles/edit'          => '/roles/edit.php',
+    '/roles/edit.php'      => '/roles/edit.php',
 ];
 
 $file = $map[$route] ?? null;

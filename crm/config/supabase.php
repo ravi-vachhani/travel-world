@@ -32,6 +32,12 @@ define('CRM_ADMIN_PASSWORD', getenv('CRM_ADMIN_PASSWORD') ?: 'TravelWorld@2024')
 define('CRM_SESSION_NAME', 'tw_crm_session');
 define('CRM_SESSION_LIFETIME', 86400); // 24 hours
 
+// Secret used to HMAC-sign the stateless auth cookie. We reuse the Supabase
+// JWT secret when available (it is already a strong server-side secret), with a
+// fallback so local/dev still works. CHANGE THIS via env in production.
+define('CRM_AUTH_SECRET', getenv('SUPABASE_JWT_SECRET')
+    ?: 'CzQkafGLsu9dQw9aXNwipb6XTFmF8PE7G+qnJdfdcsNUETYA2CBG+CfKl9E8eRAjRxZys8fHntixXYxQFAqnbQ==');
+
 // Table names (Postgres tables in the `public` schema)
 define('COL_CUSTOMERS',  'customers');
 define('COL_LEADS',      'leads');
@@ -42,3 +48,10 @@ define('COL_BOOKINGS',   'bookings');
 define('COL_PAYMENTS',   'payments');
 define('COL_DOCUMENTS',  'documents');
 define('COL_FEEDBACK',   'feedback');
+
+// Admin / RBAC / attendance tables
+define('COL_USERS',       'crm_users');
+define('COL_ROLES',       'crm_roles');
+define('COL_ROLE_PERMS',  'crm_role_permissions');
+define('COL_AUDIT',       'crm_audit_logs');
+define('COL_ATTENDANCE',  'crm_attendance');

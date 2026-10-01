@@ -2,8 +2,11 @@
 require_once __DIR__ . '/../config/supabase.php';
 require_once __DIR__ . '/../config/auth.php';
 require_once __DIR__ . '/../config/supabase-client.php';
+require_once __DIR__ . '/../config/rbac.php';
+require_once __DIR__ . '/../config/helpers.php';
 
 crm_require_auth();
+crm_require_permission('enquiries.create');
 
 $pageTitle = 'New Enquiry';
 $activeNav = 'Enquiries';
@@ -17,6 +20,9 @@ $customerId = $_GET['customer_id'] ?? '';
 $prefill = [];
 if ($leadId)     $prefill = $db->getDocument(COL_LEADS,     $leadId);
 if ($customerId) $prefill = $db->getDocument(COL_CUSTOMERS, $customerId);
+
+// Customer context (shown when creating against an existing customer)
+$ctxCounts = ($customerId && !empty($prefill['$id'])) ? crm_customer_counts($customerId) : null;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $serviceType = $_POST['service_type'] ?? 'other';
@@ -87,6 +93,16 @@ $serviceType = $_POST['service_type'] ?? 'package';
   <div class="flash flash-error"><?= crm_icon('alert-circle') ?> <?= htmlspecialchars($error) ?></div>
 <?php endif; ?>
 
+<?php if ($ctxCounts): ?>
+<div class="ctx-panel">
+  <h4><?= htmlspecialchars($prefill['name'] ?? 'Customer') ?> <span class="text-muted" style="font-weight:400">· <?= htmlspecialchars(crm_format_mobile($prefill['phone'] ?? '')) ?></span></h4>
+  <div class="ctx-row">Existing Records: <?= $ctxCounts['enquiries'] ?> Enquiries · <?= $ctxCounts['quotations'] ?> Quotations · <?= $ctxCounts['bookings'] ?> Bookings · <?= $ctxCounts['followups'] ?> Follow-ups</div>
+  <div class="ctx-links">
+    <a href="/crm/customers/view.php?id=<?= $customerId ?>"><?= crm_icon('user-check') ?> View Customer</a>
+  </div>
+</div>
+<?php endif; ?>
+
 <form method="POST" id="enquiryForm">
 <input type="hidden" name="lead_id"     value="<?= htmlspecialchars($leadId) ?>">
 <input type="hidden" name="customer_id" value="<?= htmlspecialchars($customerId) ?>">
@@ -96,11 +112,14 @@ $serviceType = $_POST['service_type'] ?? 'package';
   <div class="form-grid">
     <div class="form-group">
       <label>Customer Name *</label>
-      <input type="text" name="customer_name" value="<?= htmlspecialchars($_POST['customer_name']??$prefill['name']??'') ?>" required>
+      <input type="text" name="customer_name" value="<?= htmlspecialchars($_POST['customer_name']??$prefill['name']??'') ?>" required
+             autocomplete="off" data-autocomplete="customer" data-fill-prefix="customer_">
     </div>
     <div class="form-group">
       <label>Phone *</label>
-      <input type="tel" name="customer_phone" value="<?= htmlspecialchars($_POST['customer_phone']??$prefill['phone']??'') ?>" required>
+      <input type="tel" name="customer_phone" value="<?= htmlspecialchars($_POST['customer_phone']??$prefill['phone']??'') ?>" required
+             data-mobile-lookup autocomplete="off">
+      <div data-mobile-result></div>
     </div>
     <div class="form-group">
       <label>Email</label>
@@ -108,7 +127,8 @@ $serviceType = $_POST['service_type'] ?? 'package';
     </div>
     <div class="form-group">
       <label>Assigned To</label>
-      <input type="text" name="assigned_to" value="<?= htmlspecialchars($_POST['assigned_to']??'') ?>">
+      <input type="text" name="assigned_to" value="<?= htmlspecialchars($_POST['assigned_to']??crm_current_user()['id']??'') ?>"
+             autocomplete="off" data-autocomplete="user">
     </div>
   </div>
 </div>
@@ -126,7 +146,8 @@ $serviceType = $_POST['service_type'] ?? 'package';
     </div>
     <div class="form-group">
       <label>Destination</label>
-      <input type="text" name="destination" value="<?= htmlspecialchars($_POST['destination']??$prefill['destination']??'') ?>" placeholder="Dubai, Bali, Europe…">
+      <input type="text" name="destination" value="<?= htmlspecialchars($_POST['destination']??$prefill['destination']??'') ?>" placeholder="Dubai, Bali, Europe…"
+             autocomplete="off" data-autocomplete="destination" data-fill-prefix="">
     </div>
     <div class="form-group">
       <label>Travel Date</label>
@@ -243,6 +264,16 @@ function showServiceFields() {
     });
 }
 showServiceFields();
+
+// When a customer is picked from the name autocomplete, capture its id so the
+// enquiry links to the existing customer (no duplicate typing).
+document.addEventListener('crm:select', function (e) {
+    const input = e.target;
+    if (input && input.getAttribute('data-autocomplete') === 'customer') {
+        const hidden = document.querySelector('input[name="customer_id"]');
+        if (hidden && e.detail && e.detail.id) hidden.value = e.detail.id;
+    }
+});
 </script>
 
 <?php require_once __DIR__ . '/../includes/layout-end.php'; ?>
