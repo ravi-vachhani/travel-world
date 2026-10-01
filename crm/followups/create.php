@@ -68,7 +68,8 @@ require_once __DIR__ . '/../includes/layout.php';
   <div class="form-grid">
     <div class="form-group">
       <label>Customer Name *</label>
-      <input type="text" name="customer_name" value="<?= htmlspecialchars($_POST['customer_name']??$prefill['name']??$prefill['customer_name']??'') ?>" required>
+      <input type="text" name="customer_name" value="<?= htmlspecialchars($_POST['customer_name']??$prefill['name']??$prefill['customer_name']??'') ?>" required
+             autocomplete="off" data-autocomplete="customer" data-fill-prefix="customer_">
     </div>
     <div class="form-group">
       <label>Follow-up Type</label>

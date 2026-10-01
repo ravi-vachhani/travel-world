@@ -94,17 +94,20 @@ require_once __DIR__ . '/../includes/layout.php';
 
 <form method="POST" id="quotationForm">
 <input type="hidden" name="enquiry_id" value="<?= htmlspecialchars($enquiryId) ?>">
+<input type="hidden" name="customer_id" value="<?= htmlspecialchars($_POST['customer_id'] ?? $prefill['customer_id'] ?? '') ?>">
 
 <div class="card">
   <div class="card-title">Customer & Trip Details</div>
   <div class="form-grid">
     <div class="form-group">
       <label>Customer Name *</label>
-      <input type="text" name="customer_name" value="<?= htmlspecialchars($_POST['customer_name']??$prefill['customer_name']??'') ?>" required>
+      <input type="text" name="customer_name" value="<?= htmlspecialchars($_POST['customer_name']??$prefill['customer_name']??'') ?>" required
+             autocomplete="off" data-autocomplete="customer" data-fill-prefix="customer_">
     </div>
     <div class="form-group">
       <label>Phone</label>
-      <input type="tel" name="customer_phone" value="<?= htmlspecialchars($_POST['customer_phone']??$prefill['customer_phone']??'') ?>">
+      <input type="tel" name="customer_phone" value="<?= htmlspecialchars($_POST['customer_phone']??$prefill['customer_phone']??'') ?>" data-mobile-lookup autocomplete="off">
+      <div data-mobile-result></div>
     </div>
     <div class="form-group">
       <label>Email</label>
@@ -112,7 +115,7 @@ require_once __DIR__ . '/../includes/layout.php';
     </div>
     <div class="form-group">
       <label>Destination</label>
-      <input type="text" name="destination" value="<?= htmlspecialchars($_POST['destination']??$prefill['destination']??'') ?>">
+      <input type="text" name="destination" value="<?= htmlspecialchars($_POST['destination']??$prefill['destination']??'') ?>" autocomplete="off" data-autocomplete="destination" data-fill-prefix="">
     </div>
     <div class="form-group">
       <label>Travel Date</label>

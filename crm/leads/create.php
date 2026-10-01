@@ -30,6 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'notes'        => trim($_POST['notes'] ?? ''),
         'status'       => 'new',
         'assigned_to'  => trim($_POST['assigned_to'] ?? ''),
+        'customer_id'  => trim($_POST['customer_id'] ?? ''),
     ];
 
     if (empty($data['name']) || empty($data['phone'])) {
@@ -68,16 +69,19 @@ require_once __DIR__ . '/../includes/layout.php';
 <?php endif; ?>
 
 <form method="POST" action="/crm/leads/create.php">
+<input type="hidden" name="customer_id" value="<?= htmlspecialchars($_POST['customer_id'] ?? '') ?>">
 <div class="card">
   <div class="card-title">Customer Information</div>
   <div class="form-grid">
     <div class="form-group">
       <label>Full Name *</label>
-      <input type="text" name="name" value="<?= htmlspecialchars($_POST['name']??'') ?>" placeholder="John Doe" required>
+      <input type="text" name="name" value="<?= htmlspecialchars($_POST['name']??'') ?>" placeholder="John Doe" required
+             autocomplete="off" data-autocomplete="customer" data-fill-prefix="">
     </div>
     <div class="form-group">
       <label>Phone *</label>
-      <input type="tel" name="phone" value="<?= htmlspecialchars($_POST['phone']??'') ?>" placeholder="+91 98765 43210" required>
+      <input type="tel" name="phone" value="<?= htmlspecialchars($_POST['phone']??'') ?>" placeholder="+91 98765 43210" required data-mobile-lookup autocomplete="off">
+      <div data-mobile-result></div>
     </div>
     <div class="form-group">
       <label>Email</label>

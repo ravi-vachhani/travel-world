@@ -60,11 +60,12 @@ require_once __DIR__ . '/../includes/layout.php';
 <?php endif; ?>
 
 <form method="POST">
+<input type="hidden" name="customer_id" value="<?= htmlspecialchars($cur('customer_id')) ?>">
 <div class="card">
   <div class="card-title">Customer</div>
   <div class="form-grid">
-    <div class="form-group"><label>Customer Name *</label><input type="text" name="customer_name" value="<?= htmlspecialchars($_POST['customer_name'] ?? $cur('customer_name')) ?>" required></div>
-    <div class="form-group"><label>Phone</label><input type="tel" name="customer_phone" value="<?= htmlspecialchars($_POST['customer_phone'] ?? $cur('customer_phone')) ?>"></div>
+    <div class="form-group"><label>Customer Name *</label><input type="text" name="customer_name" value="<?= htmlspecialchars($_POST['customer_name'] ?? $cur('customer_name')) ?>" required autocomplete="off" data-autocomplete="customer" data-fill-prefix="customer_"></div>
+    <div class="form-group"><label>Phone</label><input type="tel" name="customer_phone" value="<?= htmlspecialchars($_POST['customer_phone'] ?? $cur('customer_phone')) ?>" data-mobile-lookup autocomplete="off"><div data-mobile-result></div></div>
     <div class="form-group"><label>Email</label><input type="email" name="customer_email" value="<?= htmlspecialchars($_POST['customer_email'] ?? $cur('customer_email')) ?>"></div>
   </div>
 </div>

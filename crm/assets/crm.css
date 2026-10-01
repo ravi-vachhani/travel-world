@@ -665,38 +665,96 @@ textarea { resize: vertical; min-height: 80px; }
 .pagination .active { background: var(--gold); color: var(--gold-ink); border-color: var(--gold); }
 
 /* ── Smart fields: autocomplete + mobile lookup ─────────────── */
+
+/* Inline spinner shown at the right edge of a searching field */
+.field-spinner {
+  position: absolute;
+  top: 50%; right: 0.7rem;
+  width: 15px; height: 15px;
+  margin-top: -7px;
+  border: 2px solid var(--border);
+  border-top-color: var(--gold);
+  border-radius: 50%;
+  animation: ac-spin 0.7s linear infinite;
+  pointer-events: none;
+}
+.ac-spin {
+  display: inline-block;
+  width: 13px; height: 13px;
+  border: 2px solid var(--border);
+  border-top-color: var(--gold);
+  border-radius: 50%;
+  animation: ac-spin 0.7s linear infinite;
+  vertical-align: -2px;
+  margin-right: 4px;
+}
+@keyframes ac-spin { to { transform: rotate(360deg); } }
+
 .ac-box {
   position: absolute;
-  top: calc(100% + 4px);
+  top: calc(100% + 6px);
   left: 0; right: 0;
   background: #fff;
   border: 1px solid var(--border);
-  border-radius: 10px;
-  box-shadow: var(--shadow-md);
-  z-index: 500;
-  max-height: 280px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(16,24,40,0.14);
+  z-index: 600;
+  max-height: 320px;
   overflow-y: auto;
+  padding: 4px;
+  animation: ac-pop 0.12s ease-out;
 }
-.ac-item { padding: 0.55rem 0.75rem; cursor: pointer; border-bottom: 1px solid var(--border); }
-.ac-item:last-child { border-bottom: none; }
-.ac-item:hover, .ac-item.active { background: var(--gold-light); }
-.ac-label { font-size: 0.85rem; font-weight: 600; color: var(--text); }
-.ac-sub { font-size: 0.72rem; color: var(--muted); margin-top: 1px; }
+@keyframes ac-pop { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
 
+.ac-item {
+  display: flex; align-items: center; gap: 0.65rem;
+  padding: 0.55rem 0.65rem;
+  cursor: pointer;
+  border-radius: 8px;
+}
+.ac-item:hover, .ac-item.active { background: var(--gold-light); }
+.ac-text { min-width: 0; }
+.ac-label { font-size: 0.88rem; font-weight: 600; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ac-sub { font-size: 0.73rem; color: var(--muted); margin-top: 1px; }
+
+.ac-avatar {
+  flex-shrink: 0;
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  background: var(--gold-light);
+  color: var(--gold-dark);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.72rem; font-weight: 700;
+}
+.ac-avatar.lg { width: 42px; height: 42px; font-size: 0.95rem; }
+
+.ac-state { padding: 0.75rem; font-size: 0.82rem; color: var(--muted); text-align: center; }
+.ac-empty { color: var(--muted); }
+.ac-create {
+  padding: 0.6rem 0.65rem; margin-top: 2px;
+  border-top: 1px solid var(--border);
+  color: var(--gold-dark); font-weight: 600; font-size: 0.82rem;
+  cursor: pointer; border-radius: 8px;
+}
+.ac-create:hover { background: var(--gold-light); }
+
+/* Mobile lookup result card */
+.lookup-loading { margin-top: 0.6rem; font-size: 0.82rem; color: var(--muted); }
 .lookup-card {
   margin-top: 0.6rem;
   border: 1px solid var(--border);
   border-radius: 12px;
   padding: 0.9rem 1rem;
   background: var(--surface2);
+  animation: ac-pop 0.15s ease-out;
 }
 .lookup-card.found { border-color: rgba(5,150,105,0.35); background: rgba(5,150,105,0.06); }
-.lookup-card.none  { display: flex; align-items: center; justify-content: space-between; gap: 1rem; color: var(--muted); font-size: 0.85rem; }
-.lookup-card.used  { outline: 2px solid var(--c-confirmed); }
-.lookup-head { margin-bottom: 0.35rem; }
-.lookup-name { font-size: 1rem; font-weight: 700; }
+.lookup-card.none  { color: var(--muted); font-size: 0.85rem; }
+.lookup-card.used  { outline: 2px solid var(--c-confirmed); outline-offset: 1px; }
+.lookup-top { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.6rem; }
+.lookup-name { font-size: 1rem; font-weight: 700; display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
 .lookup-mobile { font-size: 0.85rem; color: var(--muted); }
-.lookup-counts { font-size: 0.78rem; color: var(--text); margin: 0.5rem 0 0.75rem; }
+.lookup-counts { display: flex; flex-wrap: wrap; gap: 0.4rem 1rem; font-size: 0.78rem; color: var(--text); margin: 0 0 0.75rem; }
 .lookup-actions { display: flex; gap: 0.5rem; flex-wrap: wrap; }
 
 /* Customer context mini-panel inside forms */
