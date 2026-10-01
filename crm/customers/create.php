@@ -9,6 +9,7 @@ $pageTitle = 'New Customer';
 $activeNav = 'Customers';
 $error = '';
 
+
 // Pre-fill from lead if converting
 $leadId = $_GET['lead_id'] ?? '';
 $lead   = [];
