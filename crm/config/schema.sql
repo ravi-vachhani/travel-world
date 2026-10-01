@@ -198,3 +198,10 @@ create index if not exists idx_quotations_enquiry_id  on public.quotations (enqu
 --   values ('crm-documents', 'crm-documents', true)
 --   on conflict (id) do nothing;
 -- =============================================================================
+
+-- =============================================================================
+-- Reload the PostgREST schema cache so the REST API sees the new tables
+-- immediately. Without this you may briefly get:
+--   "Could not find the table 'public.<name>' in the schema cache"
+-- =============================================================================
+notify pgrst, 'reload schema';
