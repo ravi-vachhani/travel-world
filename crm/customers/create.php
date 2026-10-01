@@ -4,6 +4,7 @@ require_once __DIR__ . '/../config/auth.php';
 require_once __DIR__ . '/../config/supabase-client.php';
 require_once __DIR__ . '/../config/rbac.php';
 require_once __DIR__ . '/../config/helpers.php';
+require_once __DIR__ . '/../config/india.php';
 
 crm_require_auth();
 crm_require_permission('customers.create');
@@ -131,19 +132,20 @@ require_once __DIR__ . '/../includes/layout.php';
       <input type="text" name="address" value="<?= htmlspecialchars($_POST['address']??'') ?>">
     </div>
     <div class="form-group">
-      <label>City</label>
-      <input type="text" name="city" value="<?= htmlspecialchars($_POST['city']??'') ?>">
+      <label>State</label>
+      <?= crm_state_select('state', $_POST['state'] ?? '') ?>
     </div>
     <div class="form-group">
-      <label>State</label>
-      <input type="text" name="state" value="<?= htmlspecialchars($_POST['state']??'') ?>">
+      <label>City</label>
+      <?= crm_city_input('city', $_POST['city'] ?? '') ?>
     </div>
     <div class="form-group">
       <label>Country</label>
-      <input type="text" name="country" value="<?= htmlspecialchars($_POST['country']??'India') ?>">
+      <?= crm_country_select('country', $_POST['country'] ?? 'India') ?>
     </div>
   </div>
 </div>
+<script>window.CRM_CITIES = <?= crm_cities_json() ?>;</script>
 
 <div class="card">
   <div class="card-title">Travel Documents</div>

@@ -8,6 +8,13 @@
  * PHP host without env configuration.
  */
 
+// ── Timezone ─────────────────────────────────────────────────────────────────
+// The server (Vercel) runs in UTC, which made punch in/out and booking times
+// look wrong. Force India Standard Time for every date()/strtotime() call so
+// all timestamps the CRM shows and stores are IST-based.
+define('CRM_TZ', 'Asia/Kolkata');
+date_default_timezone_set(CRM_TZ);
+
 define('SUPABASE_URL', getenv('NEXT_PUBLIC_SUPABASE_URL') ?: (getenv('SUPABASE_URL') ?: 'https://pxrtabaeqnghotaowytx.supabase.co'));
 
 // REST (PostgREST) base endpoint

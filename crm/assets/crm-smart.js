@@ -281,11 +281,38 @@
     });
   }
 
+  // ── State → City narrowing ────────────────────────────────────────────────
+  // window.CRM_CITIES is injected by pages that render the city field. When the
+  // state changes we repopulate the city datalist with that state's cities
+  // (free text is still allowed, so unlisted cities work too).
+  function initStateCity() {
+    const stateSel = document.querySelector('[data-state]');
+    const cityList = document.getElementById('crmCityList');
+    const cityInput = document.querySelector('[data-city]');
+    if (!stateSel || !cityList || !window.CRM_CITIES) return;
+
+    function fill(stateName) {
+      const cities = window.CRM_CITIES[stateName] || [];
+      if (!cities.length) return; // keep the full list if state has none
+      cityList.innerHTML = cities.map(c => '<option value="' + c.replace(/"/g, '&quot;') + '"></option>').join('');
+    }
+    stateSel.addEventListener('change', () => {
+      fill(stateSel.value);
+      // clear a city that doesn't belong to the newly chosen state
+      if (cityInput && cityInput.value) {
+        const ok = (window.CRM_CITIES[stateSel.value] || []).includes(cityInput.value);
+        if (!ok) cityInput.value = '';
+      }
+    });
+    if (stateSel.value) fill(stateSel.value);
+  }
+
   document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('[data-autocomplete]').forEach(initAutocomplete);
     document.querySelectorAll('[data-mobile-lookup]').forEach(initMobileLookup);
     document.querySelectorAll('input[type="date"]').forEach(initDate);
     document.querySelectorAll('form').forEach(guardForm);
+    initStateCity();
   });
 
   window.CRMSmart = { fillCustomer };
