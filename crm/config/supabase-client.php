@@ -199,13 +199,36 @@ class SupabaseClient {
     }
 
     /** Convert a Postgres row into an Appwrite-style document. */
-    private function toDocument(?array $row): array {
-        if (!$row) return [];
+    private function toDocument($row): array {
+        if (!is_array($row) || !$row) return [];
         $doc = $row;
         $doc['$id']        = $row['id'] ?? null;
         $doc['$createdAt'] = $row['created_at'] ?? null;
         $doc['$updatedAt'] = $row['updated_at'] ?? ($row['created_at'] ?? null);
         return $doc;
+    }
+
+    /**
+     * Normalise a response body into a list of row arrays.
+     *
+     * PostgREST returns a JSON array of rows on success, but a JSON object
+     * (e.g. {"code":"PGRST205","message":...}) on error. Only a true list of
+     * row objects should be iterated; anything else is logged and treated as
+     * an empty result so the CRM degrades gracefully instead of fataling.
+     */
+    private function rowsFrom($body): array {
+        if (!is_array($body)) {
+            return [];
+        }
+        // Associative array => PostgREST error object, not a row list.
+        if (array_keys($body) !== range(0, count($body) - 1)) {
+            if (isset($body['message']) || isset($body['code'])) {
+                error_log('Supabase response error: ' . json_encode($body));
+            }
+            return [];
+        }
+        // Keep only genuine row objects.
+        return array_values(array_filter($body, 'is_array'));
     }
 
     // ── Documents (Appwrite-compatible API) ──────────────────────────────────
@@ -218,7 +241,7 @@ class SupabaseClient {
             'Prefer: count=exact',
         ]);
 
-        $rows = is_array($res['body']) ? $res['body'] : [];
+        $rows = $this->rowsFrom($res['body']);
         $docs = array_map([$this, 'toDocument'], $rows);
 
         // Extract total from Content-Range header: "0-24/137"
@@ -240,7 +263,7 @@ class SupabaseClient {
     public function getDocument(string $table, string $documentId): array {
         $path = "/{$table}?select=*&id=eq." . rawurlencode($documentId) . "&limit=1";
         $res  = $this->request('GET', $path);
-        $rows = is_array($res['body']) ? $res['body'] : [];
+        $rows = $this->rowsFrom($res['body']);
         return $this->toDocument($rows[0] ?? null);
     }
 
@@ -259,7 +282,7 @@ class SupabaseClient {
         ]);
 
         // PostgREST returns an array of the inserted rows.
-        $rows = is_array($res['body']) ? $res['body'] : [];
+        $rows = $this->rowsFrom($res['body']);
         return $this->toDocument($rows[0] ?? null);
     }
 
@@ -271,7 +294,7 @@ class SupabaseClient {
             'Prefer: return=representation',
         ]);
 
-        $rows = is_array($res['body']) ? $res['body'] : [];
+        $rows = $this->rowsFrom($res['body']);
         return $this->toDocument($rows[0] ?? null);
     }
 
