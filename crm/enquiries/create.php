@@ -67,16 +67,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($data['customer_name']) || empty($data['customer_phone'])) {
         $error = 'Customer name and phone are required.';
     } else {
-        $res = $db->createDocument(COL_ENQUIRIES, $data);
-        if (!empty($res['$id'])) {
-            // Update lead status
-            if (!empty($data['lead_id'])) {
-                $db->updateDocument(COL_LEADS, $data['lead_id'], ['status' => 'requirement']);
+        // Reuse the existing customer for this mobile, or create one — so the
+        // enquiry always links to a single, clean customer record (no dupes).
+        if (empty($data['customer_id'])) {
+            $cust = crm_get_or_create_customer([
+                'name'  => $data['customer_name'],
+                'phone' => $data['customer_phone'],
+                'email' => $data['customer_email'],
+            ]);
+            if (!empty($cust['id'])) {
+                $data['customer_id'] = $cust['id'];
+            } elseif (!empty($cust['error'])) {
+                $error = $cust['error'];
             }
-            header('Location: /crm/enquiries/view.php?id=' . $res['$id'] . '&created=1');
-            exit;
         }
-        $error = 'Failed to create enquiry.';
+
+        if (!$error) {
+            $res = $db->createDocument(COL_ENQUIRIES, $data);
+            if (!empty($res['$id'])) {
+                // Update lead status
+                if (!empty($data['lead_id'])) {
+                    $db->updateDocument(COL_LEADS, $data['lead_id'], ['status' => 'requirement']);
+                }
+                // Keep the customer's enquiry count roughly in sync.
+                if (!empty($data['customer_id'])) {
+                    $c = $db->getDocument(COL_CUSTOMERS, $data['customer_id']);
+                    $db->updateDocument(COL_CUSTOMERS, $data['customer_id'],
+                        ['enquiry_count' => (int)($c['enquiry_count'] ?? 0) + 1]);
+                }
+                header('Location: /crm/enquiries/view.php?id=' . $res['$id'] . '&created=1');
+                exit;
+            }
+            $error = 'Failed to create enquiry.';
+        }
     }
 }
 

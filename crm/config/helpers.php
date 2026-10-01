@@ -63,6 +63,57 @@ function crm_find_customer_by_mobile(string $raw): ?array {
     return null;
 }
 
+/**
+ * Get an existing customer by mobile, or create one if none exists. This is the
+ * single entry point every module should use so a customer is never duplicated
+ * and the customer database stays clean.
+ *
+ * @param array $info  ['name'=>, 'phone'=>, 'email'=>, 'alt_phone'=>, 'city'=>, ...]
+ * @return array ['id'=>customerId, 'customer'=>row, 'created'=>bool] or
+ *               ['id'=>'', 'error'=>msg] when phone/name missing.
+ */
+function crm_get_or_create_customer(array $info): array {
+    $phone = trim($info['phone'] ?? '');
+    $name  = trim($info['name'] ?? '');
+    $norm  = crm_normalize_mobile($phone);
+
+    if ($norm === '') {
+        return ['id' => '', 'created' => false, 'error' => 'A valid mobile number is required.'];
+    }
+
+    // 1) Reuse an existing customer with the same normalised mobile.
+    $existing = crm_find_customer_by_mobile($phone);
+    if ($existing) {
+        // Backfill a missing normalised value / name on the legacy record.
+        $patch = [];
+        if (empty($existing['mobile_normalized'])) $patch['mobile_normalized'] = $norm;
+        if (empty($existing['name']) && $name !== '') $patch['name'] = $name;
+        if ($patch) supabase()->updateDocument(COL_CUSTOMERS, $existing['$id'], $patch);
+        return ['id' => $existing['$id'], 'customer' => $existing, 'created' => false];
+    }
+
+    // 2) Create a new, clean customer record.
+    if ($name === '') $name = 'Customer ' . $norm;   // never create nameless rows
+    $data = [
+        'name'              => $name,
+        'phone'             => $phone,
+        'mobile_normalized' => $norm,
+        'email'             => trim($info['email'] ?? ''),
+        'alt_phone'         => trim($info['alt_phone'] ?? ''),
+        'city'              => trim($info['city'] ?? ''),
+        'state'             => trim($info['state'] ?? ''),
+        'country'           => trim($info['country'] ?? 'India'),
+        'address'           => trim($info['address'] ?? ''),
+        'enquiry_count'     => 0,
+        'booking_count'     => 0,
+    ];
+    $res = supabase()->createDocument(COL_CUSTOMERS, $data);
+    if (!empty($res['$id'])) {
+        return ['id' => $res['$id'], 'customer' => $res, 'created' => true];
+    }
+    return ['id' => '', 'created' => false, 'error' => 'Could not create customer.'];
+}
+
 /** Count related records for a customer (used by lookup + context panels). */
 function crm_customer_counts(string $customerId): array {
     $count = function (string $table, string $field) use ($customerId): int {

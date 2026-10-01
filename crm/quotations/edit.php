@@ -6,19 +6,19 @@ require_once __DIR__ . '/../config/rbac.php';
 require_once __DIR__ . '/../config/helpers.php';
 
 crm_require_auth();
-crm_require_permission('quotations.create');
+crm_require_permission('quotations.edit');
 
-$pageTitle  = 'New Quotation';
-$activeNav  = 'Quotations';
-$error      = '';
-$enquiryId  = $_GET['enquiry_id'] ?? '';
+$pageTitle = 'Edit Quotation';
+$activeNav = 'Quotations';
+$error     = '';
 
-$db      = appwrite();
-$prefill = [];
-if ($enquiryId) $prefill = $db->getDocument(COL_ENQUIRIES, $enquiryId);
+$db = appwrite();
+$id = $_GET['id'] ?? '';
+$q  = $db->getDocument(COL_QUOTATIONS, $id);
+if (empty($q['$id'])) { header('Location: /crm/quotations/'); exit; }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Build line items from dynamic rows
+    // Rebuild line items from the dynamic rows
     $items = [];
     $itemNames  = $_POST['item_name']  ?? [];
     $itemDescs  = $_POST['item_desc']  ?? [];
@@ -36,9 +36,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $total    = $subtotal - $discount + ($subtotal * $tax / 100);
 
     $data = [
-        'quotation_id'  => 'TW-Q-' . strtoupper(substr(uniqid(), -5)),
-        'enquiry_id'    => $_POST['enquiry_id'] ?? '',
-        'customer_id'   => $_POST['customer_id'] ?? ($prefill['customer_id'] ?? ''),
         'customer_name' => trim($_POST['customer_name'] ?? ''),
         'customer_phone'=> trim($_POST['customer_phone'] ?? ''),
         'customer_email'=> trim($_POST['customer_email'] ?? ''),
@@ -53,39 +50,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'total'         => $total,
         'notes'         => trim($_POST['notes'] ?? ''),
         'terms'         => trim($_POST['terms'] ?? ''),
-        'status'        => 'draft',
-        'version'       => 1,
         'valid_until'   => $_POST['valid_until'] ?? '',
+        // Bump the version on each edit so revisions are traceable.
+        'version'       => (int)($q['version'] ?? 1) + 1,
     ];
 
     if (empty($data['customer_name'])) {
         $error = 'Customer name is required.';
     } else {
-        // Link to a single clean customer (reuse by mobile or create).
-        if (empty($data['customer_id']) && !empty($data['customer_phone'])) {
-            $cust = crm_get_or_create_customer([
-                'name'  => $data['customer_name'],
-                'phone' => $data['customer_phone'],
-                'email' => $data['customer_email'],
-            ]);
-            if (!empty($cust['id'])) $data['customer_id'] = $cust['id'];
-        }
-        $res = $db->createDocument(COL_QUOTATIONS, $data);
-        if (!empty($res['$id'])) {
-            if ($enquiryId) $db->updateDocument(COL_ENQUIRIES, $enquiryId, ['status' => 'quoted']);
-            header('Location: /crm/quotations/view.php?id=' . $res['$id'] . '&created=1');
-            exit;
-        }
-        $error = 'Failed to create quotation.';
+        $db->updateDocument(COL_QUOTATIONS, $id, $data);
+        header('Location: /crm/quotations/view.php?id=' . $id . '&updated=1');
+        exit;
     }
 }
+
+// Values to render: posted (on validation error) else the stored quotation.
+$cur = function (string $k, $default = '') use ($q) { return $q[$k] ?? $default; };
+$items = json_decode($q['items'] ?? '[]', true) ?: [];
+if (!$items) $items = [['name'=>'','desc'=>'','qty'=>1,'price'=>0]];
 
 require_once __DIR__ . '/../includes/layout.php';
 ?>
 
 <div class="page-header">
-  <div><h1>New Quotation</h1></div>
-  <a href="/crm/quotations/" class="btn btn-secondary">&larr; Back</a>
+  <div><h1>Edit Quotation</h1><p><?= htmlspecialchars($q['quotation_id'] ?? '') ?> · v<?= (int)($q['version'] ?? 1) ?></p></div>
+  <a href="/crm/quotations/view.php?id=<?= $id ?>" class="btn btn-secondary">&larr; Back</a>
 </div>
 
 <?php if ($error): ?>
@@ -93,42 +82,41 @@ require_once __DIR__ . '/../includes/layout.php';
 <?php endif; ?>
 
 <form method="POST" id="quotationForm">
-<input type="hidden" name="enquiry_id" value="<?= htmlspecialchars($enquiryId) ?>">
 
 <div class="card">
-  <div class="card-title">Customer & Trip Details</div>
+  <div class="card-title">Customer &amp; Trip Details</div>
   <div class="form-grid">
     <div class="form-group">
       <label>Customer Name *</label>
-      <input type="text" name="customer_name" value="<?= htmlspecialchars($_POST['customer_name']??$prefill['customer_name']??'') ?>" required>
+      <input type="text" name="customer_name" value="<?= htmlspecialchars($_POST['customer_name'] ?? $cur('customer_name')) ?>" required>
     </div>
     <div class="form-group">
       <label>Phone</label>
-      <input type="tel" name="customer_phone" value="<?= htmlspecialchars($_POST['customer_phone']??$prefill['customer_phone']??'') ?>">
+      <input type="tel" name="customer_phone" value="<?= htmlspecialchars($_POST['customer_phone'] ?? $cur('customer_phone')) ?>">
     </div>
     <div class="form-group">
       <label>Email</label>
-      <input type="email" name="customer_email" value="<?= htmlspecialchars($_POST['customer_email']??$prefill['customer_email']??'') ?>">
+      <input type="email" name="customer_email" value="<?= htmlspecialchars($_POST['customer_email'] ?? $cur('customer_email')) ?>">
     </div>
     <div class="form-group">
       <label>Destination</label>
-      <input type="text" name="destination" value="<?= htmlspecialchars($_POST['destination']??$prefill['destination']??'') ?>">
+      <input type="text" name="destination" value="<?= htmlspecialchars($_POST['destination'] ?? $cur('destination')) ?>">
     </div>
     <div class="form-group">
       <label>Travel Date</label>
-      <input type="date" name="travel_date" value="<?= htmlspecialchars($_POST['travel_date']??$prefill['travel_date']??'') ?>">
+      <input type="date" name="travel_date" value="<?= htmlspecialchars($_POST['travel_date'] ?? $cur('travel_date')) ?>">
     </div>
     <div class="form-group">
       <label>Adults</label>
-      <input type="number" name="adults" value="<?= (int)($_POST['adults']??$prefill['adults']??1) ?>" min="1">
+      <input type="number" name="adults" value="<?= (int)($_POST['adults'] ?? $cur('adults', 1)) ?>" min="1">
     </div>
     <div class="form-group">
       <label>Children</label>
-      <input type="number" name="children" value="<?= (int)($_POST['children']??$prefill['children']??0) ?>" min="0">
+      <input type="number" name="children" value="<?= (int)($_POST['children'] ?? $cur('children', 0)) ?>" min="0">
     </div>
     <div class="form-group">
       <label>Valid Until</label>
-      <input type="date" name="valid_until" value="<?= htmlspecialchars($_POST['valid_until']??date('Y-m-d', strtotime('+7 days'))) ?>">
+      <input type="date" name="valid_until" value="<?= htmlspecialchars($_POST['valid_until'] ?? $cur('valid_until')) ?>">
     </div>
   </div>
 </div>
@@ -145,14 +133,16 @@ require_once __DIR__ . '/../includes/layout.php';
         <tr><th style="width:30%">Item</th><th style="width:30%">Description</th><th style="width:10%">Qty</th><th style="width:15%">Price (₹)</th><th style="width:10%">Total</th><th style="width:5%"></th></tr>
       </thead>
       <tbody id="itemsBody">
+        <?php foreach ($items as $it): ?>
         <tr>
-          <td><input type="text" name="item_name[]" placeholder="Flight tickets" class="item-name"></td>
-          <td><input type="text" name="item_desc[]" placeholder="Return, Economy"></td>
-          <td><input type="number" name="item_qty[]" value="1" min="1" class="item-qty" onchange="calcTotal(this)"></td>
-          <td><input type="number" name="item_price[]" value="0" min="0" class="item-price" onchange="calcTotal(this)"></td>
-          <td class="item-total fw-600">₹0</td>
+          <td><input type="text" name="item_name[]" class="item-name" value="<?= htmlspecialchars($it['name'] ?? '') ?>" placeholder="Item name"></td>
+          <td><input type="text" name="item_desc[]" value="<?= htmlspecialchars($it['desc'] ?? '') ?>" placeholder="Description"></td>
+          <td><input type="number" name="item_qty[]" value="<?= (float)($it['qty'] ?? 1) ?>" min="1" class="item-qty" onchange="calcTotal(this)"></td>
+          <td><input type="number" name="item_price[]" value="<?= (float)($it['price'] ?? 0) ?>" min="0" class="item-price" onchange="calcTotal(this)"></td>
+          <td class="item-total fw-600">₹<?= number_format((float)($it['total'] ?? 0)) ?></td>
           <td><button type="button" class="btn btn-danger btn-sm btn-icon" onclick="removeRow(this)"><?= crm_icon('x') ?></button></td>
         </tr>
+        <?php endforeach; ?>
       </tbody>
     </table>
   </div>
@@ -162,11 +152,11 @@ require_once __DIR__ . '/../includes/layout.php';
       <tr><td class="text-muted" style="padding:0.3rem 0">Subtotal</td><td class="fw-600" id="subtotalDisplay" style="text-align:right">₹0</td></tr>
       <tr>
         <td class="text-muted" style="padding:0.3rem 0">Discount (₹)</td>
-        <td style="text-align:right"><input type="number" name="discount" id="discount" value="<?= (float)($_POST['discount']??0) ?>" min="0" style="width:100px;text-align:right" onchange="updateSummary()"></td>
+        <td style="text-align:right"><input type="number" name="discount" id="discount" value="<?= (float)($_POST['discount'] ?? $cur('discount', 0)) ?>" min="0" style="width:100px;text-align:right" onchange="updateSummary()"></td>
       </tr>
       <tr>
         <td class="text-muted" style="padding:0.3rem 0">Tax (%)</td>
-        <td style="text-align:right"><input type="number" name="tax" id="tax" value="<?= (float)($_POST['tax']??0) ?>" min="0" max="100" style="width:100px;text-align:right" onchange="updateSummary()"></td>
+        <td style="text-align:right"><input type="number" name="tax" id="tax" value="<?= (float)($_POST['tax'] ?? $cur('tax', 0)) ?>" min="0" max="100" style="width:100px;text-align:right" onchange="updateSummary()"></td>
       </tr>
       <tr style="border-top:1px solid var(--border)">
         <td class="fw-700" style="padding:0.5rem 0">Total</td>
@@ -180,18 +170,18 @@ require_once __DIR__ . '/../includes/layout.php';
   <div class="form-grid">
     <div class="form-group full">
       <label>Notes for Customer</label>
-      <textarea name="notes" rows="3" placeholder="Inclusions, exclusions, highlights…"><?= htmlspecialchars($_POST['notes']??'') ?></textarea>
+      <textarea name="notes" rows="3"><?= htmlspecialchars($_POST['notes'] ?? $cur('notes')) ?></textarea>
     </div>
     <div class="form-group full">
-      <label>Terms & Conditions</label>
-      <textarea name="terms" rows="3" placeholder="Payment terms, cancellation policy…"><?= htmlspecialchars($_POST['terms']??'50% advance required. Balance before departure. No refund on cancellation within 7 days.') ?></textarea>
+      <label>Terms &amp; Conditions</label>
+      <textarea name="terms" rows="3"><?= htmlspecialchars($_POST['terms'] ?? $cur('terms')) ?></textarea>
     </div>
   </div>
 </div>
 
 <div style="display:flex;gap:0.75rem;justify-content:flex-end;margin-bottom:1.5rem;">
-  <a href="/crm/quotations/" class="btn btn-secondary">Cancel</a>
-  <button type="submit" class="btn btn-primary"><?= crm_icon('check') ?> Save Quotation</button>
+  <a href="/crm/quotations/view.php?id=<?= $id ?>" class="btn btn-secondary">Cancel</a>
+  <button type="submit" class="btn btn-primary"><?= crm_icon('check') ?> Save Changes</button>
 </div>
 </form>
 
@@ -203,7 +193,6 @@ function calcTotal(el) {
     row.querySelector('.item-total').textContent = '₹' + (qty * price).toLocaleString('en-IN');
     updateSummary();
 }
-
 function updateSummary() {
     let subtotal = 0;
     document.querySelectorAll('#itemsBody tr').forEach(row => {
@@ -217,7 +206,6 @@ function updateSummary() {
     document.getElementById('subtotalDisplay').textContent = '₹' + subtotal.toLocaleString('en-IN');
     document.getElementById('totalDisplay').textContent    = '₹' + Math.round(total).toLocaleString('en-IN');
 }
-
 function addItem() {
     const tbody = document.getElementById('itemsBody');
     const row   = document.createElement('tr');
@@ -230,11 +218,9 @@ function addItem() {
       <td><button type="button" class="btn btn-danger btn-sm btn-icon" onclick="removeRow(this)"><?= crm_icon('x') ?></button></td>`;
     tbody.appendChild(row);
 }
-
-function removeRow(btn) {
-    btn.closest('tr').remove();
-    updateSummary();
-}
+function removeRow(btn) { btn.closest('tr').remove(); updateSummary(); }
+// Initialise the totals on load.
+updateSummary();
 </script>
 
 <?php require_once __DIR__ . '/../includes/layout-end.php'; ?>

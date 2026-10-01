@@ -11,6 +11,7 @@ crm_require_permission('customers.create');
 $pageTitle = 'New Customer';
 $activeNav = 'Customers';
 $error = '';
+$dupeError = '';
 
 
 // Pre-fill from lead if converting
@@ -26,15 +27,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $phone = trim($_POST['phone'] ?? '');
     $norm  = crm_normalize_mobile($phone);
 
-    // ── Duplicate prevention: never silently create a second customer with the
-    //    same normalised mobile. If one exists and the user did not explicitly
-    //    confirm, send them to the existing record.
-    if ($norm !== '' && empty($_POST['allow_duplicate'])) {
-        $existing = crm_find_customer_by_mobile($phone);
-        if ($existing) {
-            header('Location: /crm/customers/view.php?id=' . $existing['$id'] . '&existing=1');
-            exit;
-        }
+    // ── Duplicate prevention: a customer with this mobile already exists → show
+    //    a clear error (with a link to the existing record) and do NOT create a
+    //    duplicate. This keeps the customer database clean.
+    $existing = $norm !== '' ? crm_find_customer_by_mobile($phone) : null;
+    if ($existing) {
+        $dupeError = 'This mobile number already exists for customer "'
+            . htmlspecialchars($existing['name'] ?? '')
+            . '". <a href="/crm/customers/view.php?id=' . $existing['$id'] . '">Open existing customer</a>.';
     }
 
     $data = [
@@ -58,6 +58,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     ];
     if (empty($data['name']) || empty($data['phone'])) {
         $error = 'Name and phone are required.';
+    } elseif (!empty($dupeError)) {
+        $error = $dupeError;        // mobile already exists — block creation
     } else {
         $res = $db->createDocument(COL_CUSTOMERS, $data);
         if (!empty($res['$id'])) {
@@ -81,7 +83,9 @@ require_once __DIR__ . '/../includes/layout.php';
 </div>
 
 <?php if ($error): ?>
-  <div class="flash flash-error"><?= crm_icon('alert-circle') ?> <?= htmlspecialchars($error) ?></div>
+  <div class="flash flash-error"><?= crm_icon('alert-circle') ?>
+    <span><?= !empty($dupeError) && $error === $dupeError ? $error : htmlspecialchars($error) ?></span>
+  </div>
 <?php endif; ?>
 
 <form method="POST">

@@ -2,8 +2,8 @@
 require_once __DIR__ . '/../config/supabase.php';
 require_once __DIR__ . '/../config/auth.php';
 require_once __DIR__ . '/../config/supabase-client.php';
-
 require_once __DIR__ . '/../config/rbac.php';
+require_once __DIR__ . '/../config/helpers.php';
 
 crm_require_auth();
 crm_require_permission('bookings.create');
@@ -50,11 +50,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($data['customer_name'])) {
         $error = 'Customer name is required.';
     } else {
+        // Link to a single clean customer (reuse by mobile or create).
+        if (empty($data['customer_id']) && !empty($data['customer_phone'])) {
+            $cust = crm_get_or_create_customer([
+                'name'  => $data['customer_name'],
+                'phone' => $data['customer_phone'],
+                'email' => $data['customer_email'],
+            ]);
+            if (!empty($cust['id'])) $data['customer_id'] = $cust['id'];
+        }
         $res = $db->createDocument(COL_BOOKINGS, $data);
         if (!empty($res['$id'])) {
             // Update enquiry status
             if (!empty($data['enquiry_id'])) {
                 $db->updateDocument(COL_ENQUIRIES, $data['enquiry_id'], ['status' => 'booking']);
+            }
+            // Keep the customer's booking count in sync.
+            if (!empty($data['customer_id'])) {
+                $c = $db->getDocument(COL_CUSTOMERS, $data['customer_id']);
+                $db->updateDocument(COL_CUSTOMERS, $data['customer_id'],
+                    ['booking_count' => (int)($c['booking_count'] ?? 0) + 1]);
             }
             // Record advance payment if any
             if ($paidAmount > 0) {

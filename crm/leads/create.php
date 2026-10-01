@@ -2,8 +2,8 @@
 require_once __DIR__ . '/../config/supabase.php';
 require_once __DIR__ . '/../config/auth.php';
 require_once __DIR__ . '/../config/supabase-client.php';
-
 require_once __DIR__ . '/../config/rbac.php';
+require_once __DIR__ . '/../config/helpers.php';
 
 crm_require_auth();
 crm_require_permission('leads.create');
@@ -35,6 +35,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($data['name']) || empty($data['phone'])) {
         $error = 'Name and phone are required.';
     } else {
+        // If this mobile already belongs to a customer, link the lead to them
+        // so repeat callers connect to their existing history (no duplicate
+        // customer is created here — cold leads stay as leads until converted).
+        $existingCust = crm_find_customer_by_mobile($data['phone']);
+        if ($existingCust) {
+            $data['customer_id'] = $existingCust['$id'];
+        }
         $res = $db->createDocument(COL_LEADS, $data);
         if (!empty($res['$id'])) {
             header('Location: /crm/leads/view.php?id=' . $res['$id'] . '&created=1');
