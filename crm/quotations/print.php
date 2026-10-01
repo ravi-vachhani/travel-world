@@ -48,7 +48,9 @@ $items = json_decode($q['items'] ?? '[]', true) ?: [];
   .terms { background: #f9f9f9; border-radius: 6px; padding: 0.75rem; font-size: 0.75rem; color: #666; margin-top: 1rem; }
   @media print {
     body { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+    img  { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
     .no-print { display: none; }
+    @page { margin: 14mm; }
   }
 </style>
 </head>
@@ -64,11 +66,11 @@ $items = json_decode($q['items'] ?? '[]', true) ?: [];
   <div class="header">
     <div>
       <img src="/assets/image/logo-horizontal.png" alt="Travel World"
-           style="height:56px;width:auto;max-width:260px;object-fit:contain;margin-bottom:0.35rem"
-           onerror="this.onerror=null;this.style.display='none';document.getElementById('qLogoText').style.display='block';">
-      <div class="logo" id="qLogoText" style="display:none">Travel World<small>Your Dream, Our Journey</small></div>
-      <div style="margin-top:0.5rem;font-size:0.75rem;color:#666">
-        📧 info@travelworld.com &nbsp;|&nbsp; 📞 +91 98765 43210
+           style="height:70px;width:auto;max-width:280px;object-fit:contain;margin-bottom:0.5rem"
+           onerror="this.onerror=null;this.src='/assets/image/logo.png';this.style.height='74px';this.style.maxWidth='74px';">
+      <div style="margin-top:0.35rem;font-size:0.78rem;color:#555;line-height:1.6">
+        📧 travelworld012@gmail.com<br>
+        📞 +91 99040 40001
       </div>
     </div>
     <div class="q-meta">
@@ -144,7 +146,7 @@ $items = json_decode($q['items'] ?? '[]', true) ?: [];
 
   <div class="footer">
     <p>Thank you for choosing Travel World! &nbsp;|&nbsp; This quotation is valid until <?= $q['valid_until'] ? date('d M Y', strtotime($q['valid_until'])) : 'further notice' ?></p>
-    <p style="margin-top:4px">For queries: info@travelworld.com &nbsp;|&nbsp; +91 98765 43210</p>
+    <p style="margin-top:4px">For queries: travelworld012@gmail.com &nbsp;|&nbsp; +91 99040 40001</p>
   </div>
 </div>
 </body>

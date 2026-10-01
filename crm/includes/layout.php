@@ -49,9 +49,11 @@ $navItems = array_values(array_filter($allNav, fn($i) => $i['perm'] === null || 
 <!-- Sidebar -->
 <aside class="crm-sidebar" id="crmSidebar">
   <div class="sidebar-logo">
-    <img src="/assets/image/logo-horizontal.png" alt="Travel World"
-         onerror="this.onerror=null;this.src='/assets/image/logo.webp';">
-    <span>CRM</span>
+    <a href="/crm/" class="sidebar-logo-link" aria-label="Travel World CRM">
+      <img src="/assets/image/logo-horizontal.png" alt="Travel World"
+           class="logo-horizontal"
+           onerror="this.onerror=null;this.classList.remove('logo-horizontal');this.classList.add('logo-square');this.src='/assets/image/logo.png';">
+    </a>
   </div>
 
   <nav class="sidebar-nav">
