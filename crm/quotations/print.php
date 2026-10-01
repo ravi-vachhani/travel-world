@@ -66,8 +66,8 @@ $items = json_decode($q['items'] ?? '[]', true) ?: [];
   <div class="header">
     <div>
       <img src="/assets/image/logo-horizontal.png" alt="Travel World"
-           style="height:70px;width:auto;max-width:280px;object-fit:contain;margin-bottom:0.5rem"
-           onerror="this.onerror=null;this.src='/assets/image/logo.png';this.style.height='74px';this.style.maxWidth='74px';">
+           style="height:64px;width:auto;max-width:300px;object-fit:contain;margin-bottom:0.5rem"
+           onerror="this.onerror=null;this.src='/assets/image/logo.webp';">
       <div style="margin-top:0.35rem;font-size:0.78rem;color:#555;line-height:1.6">
         📧 travelworld012@gmail.com<br>
         📞 +91 99040 40001

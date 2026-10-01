@@ -52,7 +52,7 @@ $navItems = array_values(array_filter($allNav, fn($i) => $i['perm'] === null || 
     <a href="/crm/" class="sidebar-logo-link" aria-label="Travel World CRM">
       <img src="/assets/image/logo-horizontal.png" alt="Travel World"
            class="logo-horizontal"
-           onerror="this.onerror=null;this.classList.remove('logo-horizontal');this.classList.add('logo-square');this.src='/assets/image/logo.png';">
+           onerror="this.onerror=null;this.src='/assets/image/logo.webp';">
     </a>
   </div>
 

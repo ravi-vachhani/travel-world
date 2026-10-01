@@ -97,21 +97,14 @@ a:hover { text-decoration: underline; }
   width: 100%;
   text-decoration: none;
 }
+/* Horizontal logo: fill the sidebar width (letterhead style) */
 .sidebar-logo img {
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  max-height: 60px;
   object-fit: contain;
   display: block;
-}
-/* Horizontal logo: fill the sidebar width nicely */
-.sidebar-logo img.logo-horizontal {
-  height: 44px;
-  width: auto;
-  max-width: 200px;
-}
-/* Square fallback logo: show as a tidy rounded badge */
-.sidebar-logo img.logo-square {
-  height: 64px;
-  width: 64px;
-  border-radius: 14px;
 }
 
 /* ── Sidebar Nav ────────────────────────────────────────── */
