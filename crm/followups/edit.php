@@ -29,6 +29,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     ];
     if (empty($data['customer_name'])) {
         $error = 'Customer name is required.';
+    } elseif ($date !== '' && $date < date('Y-m-d')) {
+        $error = 'Follow-up date cannot be in the past.';
     } else {
         $db->updateDocument(COL_FOLLOWUPS, $id, $data);
         $back = !empty($fu['enquiry_id']) ? '/crm/enquiries/view.php?id=' . $fu['enquiry_id'] . '&updated=1'
@@ -69,7 +71,7 @@ require_once __DIR__ . '/../includes/layout.php';
         <?php endforeach; ?>
       </select>
     </div>
-    <div class="form-group"><label>Date</label><input type="date" name="scheduled_date" value="<?= htmlspecialchars($schedDate) ?>"></div>
+    <div class="form-group"><label>Date</label><input type="date" name="scheduled_date" value="<?= htmlspecialchars($schedDate) ?>" data-date="future" min="<?= date('Y-m-d') ?>"></div>
     <div class="form-group"><label>Time</label><input type="time" name="scheduled_time" value="<?= htmlspecialchars($schedTime) ?>"></div>
     <div class="form-group full"><label>Notes</label><textarea name="notes" rows="3"><?= htmlspecialchars($_POST['notes'] ?? $cur('notes')) ?></textarea></div>
     <div class="form-group">

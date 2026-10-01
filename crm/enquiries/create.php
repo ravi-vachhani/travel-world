@@ -174,7 +174,7 @@ $serviceType = $_POST['service_type'] ?? 'package';
     </div>
     <div class="form-group">
       <label>Travel Date</label>
-      <input type="date" name="travel_date" value="<?= htmlspecialchars($_POST['travel_date']??$prefill['travel_date']??'') ?>">
+      <input type="date" name="travel_date" value="<?= htmlspecialchars($_POST['travel_date']??$prefill['travel_date']??'') ?>" data-date="future" min="<?= date('Y-m-d') ?>">
     </div>
     <div class="form-group">
       <label>Budget</label>
@@ -211,7 +211,7 @@ $serviceType = $_POST['service_type'] ?? 'package';
   <div class="card-title">✈️ Flight Details</div>
   <div class="form-grid">
     <div class="form-group"><label>Origin</label><input type="text" name="origin" placeholder="Mumbai, Delhi…" value="<?= htmlspecialchars($_POST['origin']??'') ?>"></div>
-    <div class="form-group"><label>Return Date</label><input type="date" name="return_date" value="<?= htmlspecialchars($_POST['return_date']??'') ?>"></div>
+    <div class="form-group"><label>Return Date</label><input type="date" name="return_date" value="<?= htmlspecialchars($_POST['return_date']??'') ?>" data-date="future" min="<?= date('Y-m-d') ?>"></div>
     <div class="form-group"><label>Class</label>
       <select name="flight_class">
         <?php foreach (['economy'=>'Economy','premium_economy'=>'Premium Economy','business'=>'Business','first'=>'First Class'] as $v=>$l): ?>
@@ -244,8 +244,8 @@ $serviceType = $_POST['service_type'] ?? 'package';
 <div class="card" id="fields-hotel" style="display:none">
   <div class="card-title">🏨 Hotel Details</div>
   <div class="form-grid">
-    <div class="form-group"><label>Check-in</label><input type="date" name="check_in" value="<?= htmlspecialchars($_POST['check_in']??'') ?>"></div>
-    <div class="form-group"><label>Check-out</label><input type="date" name="check_out" value="<?= htmlspecialchars($_POST['check_out']??'') ?>"></div>
+    <div class="form-group"><label>Check-in</label><input type="date" name="check_in" value="<?= htmlspecialchars($_POST['check_in']??'') ?>" data-date="future" min="<?= date('Y-m-d') ?>"></div>
+    <div class="form-group"><label>Check-out</label><input type="date" name="check_out" value="<?= htmlspecialchars($_POST['check_out']??'') ?>" data-date="future" data-date-after="check_in" min="<?= date('Y-m-d') ?>"></div>
     <div class="form-group"><label>Rooms</label><input type="number" name="rooms" value="<?= (int)($_POST['rooms']??1) ?>" min="1"></div>
     <div class="form-group"><label>Hotel Category</label>
       <select name="hotel_category">

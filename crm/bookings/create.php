@@ -145,11 +145,11 @@ require_once __DIR__ . '/../includes/layout.php';
     </div>
     <div class="form-group">
       <label>Travel Date</label>
-      <input type="date" name="travel_date" value="<?= htmlspecialchars($_POST['travel_date']??$prefill['travel_date']??'') ?>">
+      <input type="date" name="travel_date" value="<?= htmlspecialchars($_POST['travel_date']??$prefill['travel_date']??'') ?>" data-date="future" min="<?= date('Y-m-d') ?>">
     </div>
     <div class="form-group">
       <label>Return Date</label>
-      <input type="date" name="return_date" value="<?= htmlspecialchars($_POST['return_date']??'') ?>">
+      <input type="date" name="return_date" value="<?= htmlspecialchars($_POST['return_date']??'') ?>" data-date="future" data-date-after="travel_date" min="<?= date('Y-m-d') ?>">
     </div>
     <div class="form-group">
       <label>Adults</label>

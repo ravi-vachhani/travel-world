@@ -32,8 +32,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'notes'         => trim($_POST['notes'] ?? ''),
         'done'          => false,
     ];
+    $schedDate = $_POST['scheduled_date'] ?? '';
     if (empty($data['customer_name'])) {
         $error = 'Customer name is required.';
+    } elseif ($schedDate !== '' && $schedDate < date('Y-m-d')) {
+        // Server-side guard: a follow-up cannot be scheduled in the past.
+        $error = 'Follow-up date cannot be in the past.';
     } else {
         $res = $db->createDocument(COL_FOLLOWUPS, $data);
         if (!empty($res['$id'])) {
@@ -81,7 +85,8 @@ require_once __DIR__ . '/../includes/layout.php';
     </div>
     <div class="form-group">
       <label>Date *</label>
-      <input type="date" name="scheduled_date" value="<?= htmlspecialchars($_POST['scheduled_date']??date('Y-m-d')) ?>" required>
+      <input type="date" name="scheduled_date" value="<?= htmlspecialchars($_POST['scheduled_date']??date('Y-m-d')) ?>" required data-date="future" min="<?= date('Y-m-d') ?>">
+      <span class="date-hint">Today or a future date</span>
     </div>
     <div class="form-group">
       <label>Time</label>

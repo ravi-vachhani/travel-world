@@ -214,9 +214,78 @@
     });
   }
 
+  // ── Date fields: constraints + validation ────────────────────────────────
+  // Markup: <input type="date" data-date="future"|"past"> and optionally
+  // data-date-after="otherFieldName" so e.g. return_date >= travel_date.
+  function todayStr() {
+    const d = new Date();
+    const off = d.getTimezoneOffset();
+    return new Date(d.getTime() - off * 60000).toISOString().slice(0, 10);
+  }
+
+  function initDate(input) {
+    const mode = input.getAttribute('data-date');
+    const today = todayStr();
+    if (mode === 'future' && !input.min) input.min = today;   // today onwards
+    if (mode === 'past' && !input.max) input.max = today;     // today or earlier
+
+    // open the native calendar on click/focus anywhere in the field
+    input.addEventListener('focus', () => { if (input.showPicker) { try { input.showPicker(); } catch (e) {} } });
+    input.addEventListener('click', () => { if (input.showPicker) { try { input.showPicker(); } catch (e) {} } });
+
+    input.addEventListener('change', () => validateDate(input));
+  }
+
+  function validateDate(input) {
+    const mode = input.getAttribute('data-date');
+    const v = input.value;
+    input.setCustomValidity('');
+    if (!v) return true;
+    const today = todayStr();
+    if (mode === 'future' && v < today) {
+      input.setCustomValidity('Please pick today or a future date.');
+      flashInvalid(input);
+      return false;
+    }
+    if (mode === 'past' && v > today) {
+      input.setCustomValidity('This date cannot be in the future.');
+      flashInvalid(input);
+      return false;
+    }
+    const afterName = input.getAttribute('data-date-after');
+    if (afterName && input.form) {
+      const other = input.form.querySelector('[name="' + afterName + '"]');
+      if (other && other.value && v < other.value) {
+        input.setCustomValidity('This date must be on or after the earlier date.');
+        flashInvalid(input);
+        return false;
+      }
+    }
+    input.classList.remove('date-invalid');
+    return true;
+  }
+
+  function flashInvalid(input) {
+    input.classList.add('date-invalid');
+    if (input.reportValidity) input.reportValidity();
+  }
+
+  // Validate all constrained dates before a form submits.
+  function guardForm(form) {
+    form.addEventListener('submit', (e) => {
+      let ok = true;
+      form.querySelectorAll('input[type="date"][data-date]').forEach(inp => {
+        if (!validateDate(inp)) ok = false;
+      });
+      if (!ok) { e.preventDefault(); e.stopPropagation(); }
+    });
+  }
+
   document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('[data-autocomplete]').forEach(initAutocomplete);
     document.querySelectorAll('[data-mobile-lookup]').forEach(initMobileLookup);
+    document.querySelectorAll('input[type="date"]').forEach(initDate);
+    document.querySelectorAll('form').forEach(guardForm);
   });
 
   window.CRMSmart = { fillCustomer };

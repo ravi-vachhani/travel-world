@@ -113,7 +113,7 @@ require_once __DIR__ . '/../includes/layout.php';
     </div>
     <div class="form-group">
       <label>Payment Date</label>
-      <input type="date" name="paid_at" value="<?= htmlspecialchars($_POST['paid_at']??date('Y-m-d')) ?>">
+      <input type="date" name="paid_at" value="<?= htmlspecialchars($_POST['paid_at']??date('Y-m-d')) ?>" data-date="past" max="<?= date('Y-m-d') ?>">
     </div>
     <div class="form-group full">
       <label>Notes</label>

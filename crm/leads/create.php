@@ -115,7 +115,7 @@ require_once __DIR__ . '/../includes/layout.php';
     </div>
     <div class="form-group">
       <label>Travel Date</label>
-      <input type="date" name="travel_date" value="<?= htmlspecialchars($_POST['travel_date']??'') ?>">
+      <input type="date" name="travel_date" value="<?= htmlspecialchars($_POST['travel_date']??'') ?>" data-date="future" min="<?= date('Y-m-d') ?>">
     </div>
     <div class="form-group">
       <label>Budget</label>

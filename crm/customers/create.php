@@ -113,11 +113,12 @@ require_once __DIR__ . '/../includes/layout.php';
     </div>
     <div class="form-group">
       <label>Date of Birth</label>
-      <input type="date" name="dob" value="<?= htmlspecialchars($_POST['dob']??'') ?>">
+      <input type="date" name="dob" value="<?= htmlspecialchars($_POST['dob']??'') ?>" data-date="past" max="<?= date('Y-m-d') ?>">
+      <span class="date-hint">Cannot be a future date</span>
     </div>
     <div class="form-group">
       <label>Anniversary</label>
-      <input type="date" name="anniversary" value="<?= htmlspecialchars($_POST['anniversary']??'') ?>">
+      <input type="date" name="anniversary" value="<?= htmlspecialchars($_POST['anniversary']??'') ?>" data-date="past" max="<?= date('Y-m-d') ?>">
     </div>
   </div>
 </div>
@@ -153,7 +154,7 @@ require_once __DIR__ . '/../includes/layout.php';
     </div>
     <div class="form-group">
       <label>Passport Expiry</label>
-      <input type="date" name="passport_expiry" value="<?= htmlspecialchars($_POST['passport_expiry']??'') ?>">
+      <input type="date" name="passport_expiry" value="<?= htmlspecialchars($_POST['passport_expiry']??'') ?>" data-date="future" min="<?= date('Y-m-d') ?>">
     </div>
     <div class="form-group full">
       <label>Notes</label>
