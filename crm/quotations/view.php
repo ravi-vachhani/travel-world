@@ -1,7 +1,7 @@
 <?php
-require_once __DIR__ . '/../config/appwrite.php';
+require_once __DIR__ . '/../config/supabase.php';
 require_once __DIR__ . '/../config/auth.php';
-require_once __DIR__ . '/../config/appwrite-client.php';
+require_once __DIR__ . '/../config/supabase-client.php';
 
 crm_require_auth();
 

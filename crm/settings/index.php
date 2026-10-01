@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../config/appwrite.php';
+require_once __DIR__ . '/../config/supabase.php';
 require_once __DIR__ . '/../config/auth.php';
 
 crm_require_auth();
@@ -18,9 +18,9 @@ require_once __DIR__ . '/../includes/layout.php';
   <div><h1>Settings</h1><p>CRM configuration and account settings</p></div>
 </div>
 
-<!-- Appwrite Setup Guide -->
+<!-- Supabase Setup Guide -->
 <div class="card">
-  <div class="card-title"><?= crm_icon('settings') ?> Appwrite Configuration</div>
+  <div class="card-title"><?= crm_icon('settings') ?> Supabase Configuration</div>
   <p style="font-size:0.875rem;color:var(--muted);margin-bottom:1rem">
     Configure these environment variables in your Vercel project dashboard under <strong>Settings → Environment Variables</strong>.
   </p>
@@ -30,13 +30,12 @@ require_once __DIR__ . '/../includes/layout.php';
       <tbody>
         <?php
         $vars = [
-          'APPWRITE_ENDPOINT'    => ['Appwrite API endpoint', APPWRITE_ENDPOINT],
-          'APPWRITE_PROJECT_ID'  => ['Your Appwrite project ID', APPWRITE_PROJECT_ID ? '✅ Set' : '❌ Not set'],
-          'APPWRITE_API_KEY'     => ['Server API key (with DB + Storage access)', APPWRITE_API_KEY ? '✅ Set' : '❌ Not set'],
-          'APPWRITE_DATABASE_ID' => ['Database ID in Appwrite', APPWRITE_DATABASE_ID],
-          'APPWRITE_BUCKET_ID'   => ['Storage bucket ID for documents', APPWRITE_BUCKET_ID],
-          'CRM_ADMIN_EMAIL'      => ['Login email', CRM_ADMIN_EMAIL],
-          'CRM_ADMIN_PASSWORD'   => ['Login password', '••••••••'],
+          'NEXT_PUBLIC_SUPABASE_URL'  => ['Supabase project URL', SUPABASE_URL],
+          'SUPABASE_SERVICE_ROLE_KEY' => ['Server service-role key (full DB + Storage access)', SUPABASE_SERVICE_KEY ? '✅ Set' : '❌ Not set'],
+          'SUPABASE_ANON_KEY'         => ['Public anon key', SUPABASE_ANON_KEY ? '✅ Set' : '❌ Not set'],
+          'SUPABASE_BUCKET'           => ['Storage bucket for documents', SUPABASE_BUCKET],
+          'CRM_ADMIN_EMAIL'           => ['Login email', CRM_ADMIN_EMAIL],
+          'CRM_ADMIN_PASSWORD'        => ['Login password', '••••••••'],
         ];
         foreach ($vars as $key => [$desc, $val]): ?>
         <tr>
@@ -50,11 +49,11 @@ require_once __DIR__ . '/../includes/layout.php';
   </div>
 </div>
 
-<!-- Appwrite Collections Setup -->
+<!-- Supabase Tables Setup -->
 <div class="card">
-  <div class="card-title"><?= crm_icon('folder') ?> Required Appwrite Collections</div>
+  <div class="card-title"><?= crm_icon('folder') ?> Required Supabase Tables</div>
   <p style="font-size:0.875rem;color:var(--muted);margin-bottom:1rem">
-    Create these collections in your Appwrite database. Each needs the attributes listed below.
+    Create these tables in your Supabase database (run <code>crm/config/schema.sql</code> in the SQL editor). Each table has an <code>id text primary key</code> and <code>created_at timestamptz</code> plus the columns below.
   </p>
   <?php
   $collections = [
@@ -94,7 +93,7 @@ require_once __DIR__ . '/../includes/layout.php';
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem 2rem;font-size:0.875rem;">
     <?php $info = [
       'CRM Version'   => '1.0.0',
-      'Built With'    => 'PHP + Appwrite',
+      'Built With'    => 'PHP + Supabase',
       'Deployed On'   => 'Vercel',
       'PHP Runtime'   => 'vercel-php@0.7.2',
       'Logged In As'  => crm_current_user()['email'] ?? '—',

@@ -1,7 +1,7 @@
 <?php
-require_once __DIR__ . '/../config/appwrite.php';
+require_once __DIR__ . '/../config/supabase.php';
 require_once __DIR__ . '/../config/auth.php';
-require_once __DIR__ . '/../config/appwrite-client.php';
+require_once __DIR__ . '/../config/supabase-client.php';
 
 crm_require_auth();
 
@@ -19,35 +19,15 @@ if ($enquiryId)  $prefill = $db->getDocument(COL_ENQUIRIES, $enquiryId);
 if ($customerId) $prefill = $db->getDocument(COL_CUSTOMERS, $customerId);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Upload file to Appwrite Storage via multipart
+    // Upload file to Supabase Storage
     $file     = $_FILES['document'] ?? null;
     $fileUrl  = '';
     $filename = '';
 
     if ($file && $file['error'] === UPLOAD_ERR_OK) {
-        $filename = basename($file['name']);
-        // Upload to Appwrite Storage
-        $endpoint  = APPWRITE_ENDPOINT . '/storage/buckets/' . APPWRITE_BUCKET_ID . '/files';
-        $projectId = APPWRITE_PROJECT_ID;
-        $apiKey    = APPWRITE_API_KEY;
-
-        $ch = curl_init($endpoint);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, [
-            'X-Appwrite-Project: ' . $projectId,
-            'X-Appwrite-Key: ' . $apiKey,
-        ]);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, [
-            'fileId'   => 'unique()',
-            'file'     => new CURLFile($file['tmp_name'], $file['type'], $filename),
-        ]);
-        $response = curl_exec($ch);
-        curl_close($ch);
-        $uploaded = json_decode($response, true);
-        if (!empty($uploaded['$id'])) {
-            $fileUrl = APPWRITE_ENDPOINT . '/storage/buckets/' . APPWRITE_BUCKET_ID . '/files/' . $uploaded['$id'] . '/view?project=' . $projectId;
-        }
+        $filename    = basename($file['name']);
+        $contentType = $file['type'] ?: 'application/octet-stream';
+        $fileUrl     = $db->uploadFile($file['tmp_name'], $filename, $contentType);
     }
 
     $data = [

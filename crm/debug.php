@@ -1,13 +1,13 @@
 <?php
-require_once __DIR__ . '/config/appwrite.php';
+require_once __DIR__ . '/config/supabase.php';
 require_once __DIR__ . '/config/auth.php';
-require_once __DIR__ . '/config/appwrite-client.php';
+require_once __DIR__ . '/config/supabase-client.php';
 
 crm_require_auth();
 
-$db = appwrite();
+$db = supabase();
 
-// Test 1: List collections
+// Test 1: Connectivity check
 $collections = $db->testConnection();
 
 // Test 2: Try creating a test document in leads
@@ -46,12 +46,12 @@ header('Content-Type: text/html; charset=utf-8');
 
 <h2>Environment Variables</h2>
 <pre><?php
-echo "APPWRITE_ENDPOINT:    " . APPWRITE_ENDPOINT . "\n";
-echo "APPWRITE_PROJECT_ID:  " . (APPWRITE_PROJECT_ID ? '✅ ' . APPWRITE_PROJECT_ID : '❌ NOT SET') . "\n";
-echo "APPWRITE_API_KEY:     " . (APPWRITE_API_KEY ? '✅ Set (' . strlen(APPWRITE_API_KEY) . ' chars)' : '❌ NOT SET') . "\n";
-echo "APPWRITE_DATABASE_ID: " . (APPWRITE_DATABASE_ID ? '✅ ' . APPWRITE_DATABASE_ID : '❌ NOT SET') . "\n";
-echo "APPWRITE_BUCKET_ID:   " . (APPWRITE_BUCKET_ID ? '✅ ' . APPWRITE_BUCKET_ID : '❌ NOT SET') . "\n";
-echo "\nCollection IDs:\n";
+echo "SUPABASE_URL:         " . SUPABASE_URL . "\n";
+echo "SUPABASE_REST_URL:    " . SUPABASE_REST_URL . "\n";
+echo "SUPABASE_SERVICE_KEY: " . (SUPABASE_SERVICE_KEY ? '✅ Set (' . strlen(SUPABASE_SERVICE_KEY) . ' chars)' : '❌ NOT SET') . "\n";
+echo "SUPABASE_ANON_KEY:    " . (SUPABASE_ANON_KEY ? '✅ Set (' . strlen(SUPABASE_ANON_KEY) . ' chars)' : '❌ NOT SET') . "\n";
+echo "SUPABASE_BUCKET:      " . (SUPABASE_BUCKET ? '✅ ' . SUPABASE_BUCKET : '❌ NOT SET') . "\n";
+echo "\nTable Names:\n";
 echo "COL_LEADS:      " . COL_LEADS . "\n";
 echo "COL_CUSTOMERS:  " . COL_CUSTOMERS . "\n";
 echo "COL_ENQUIRIES:  " . COL_ENQUIRIES . "\n";
@@ -63,7 +63,7 @@ echo "COL_DOCUMENTS:  " . COL_DOCUMENTS . "\n";
 ?>
 </pre>
 
-<h2>Appwrite Connection Test</h2>
+<h2>Supabase Connection Test</h2>
 <pre><?= json_encode($collections, JSON_PRETTY_PRINT) ?></pre>
 
 <h2>List Leads (first 3)</h2>

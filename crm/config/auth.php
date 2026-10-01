@@ -4,7 +4,7 @@
  * Simple session-based auth with fixed credentials
  */
 
-require_once __DIR__ . '/appwrite.php';
+require_once __DIR__ . '/supabase.php';
 
 function crm_session_start() {
     if (session_status() === PHP_SESSION_NONE) {
