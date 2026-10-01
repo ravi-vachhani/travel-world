@@ -94,12 +94,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     margin-bottom: 2rem;
   }
   .login-logo img {
-    height: 72px;
+    height: 84px;
     width: auto;
-    max-width: 280px;
+    max-width: 300px;
     object-fit: contain;
     margin-bottom: 0.75rem;
+    filter: drop-shadow(0 6px 18px rgba(184,144,47,0.25));
+    animation: logoFloat 4s ease-in-out infinite;
   }
+  @keyframes logoFloat { 0%,100%{ transform: translateY(0); } 50%{ transform: translateY(-6px); } }
   .login-logo h1 {
     font-size: 1.1rem;
     font-weight: 600;
@@ -110,10 +113,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   .login-card {
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 16px;
+    border-radius: 20px;
     padding: 2.5rem 2rem;
-    box-shadow: 0 4px 24px rgba(16,24,40,0.08);
+    box-shadow: 0 20px 60px rgba(16,24,40,0.12);
+    animation: cardIn 0.6s cubic-bezier(0.22,1,0.36,1) both;
+    position: relative;
+    overflow: hidden;
   }
+  .login-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    background: linear-gradient(135deg, #D4AF49, #B8902F, #9a7726);
+  }
+  @keyframes cardIn { from { opacity: 0; transform: translateY(22px) scale(.98); } to { opacity: 1; transform: none; } }
   .login-card h2 {
     font-size: 1.5rem;
     font-weight: 700;
@@ -164,19 +175,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   }
   .btn-login {
     width: 100%;
-    background: var(--gold);
+    background: linear-gradient(135deg, #D4AF49 0%, #B8902F 55%, #9a7726 100%);
     color: #ffffff;
     border: none;
-    border-radius: 8px;
-    padding: 0.85rem;
+    border-radius: 10px;
+    padding: 0.9rem;
     font-size: 1rem;
     font-weight: 700;
     font-family: inherit;
     cursor: pointer;
-    transition: background 0.2s;
+    transition: transform 0.18s cubic-bezier(0.22,1,0.36,1), box-shadow 0.25s;
     margin-top: 0.5rem;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 14px rgba(184,144,47,0.3);
   }
-  .btn-login:hover { background: var(--gold-dark); }
+  .btn-login:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(184,144,47,0.4); }
+  .btn-login:active { transform: translateY(0) scale(.98); }
+  .btn-login::after {
+    content: ''; position: absolute; top: 0; left: -120%; width: 60%; height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255,255,255,0.45), transparent);
+    transform: skewX(-20deg); transition: left .6s cubic-bezier(0.22,1,0.36,1);
+  }
+  .btn-login:hover::after { left: 130%; }
   .back-link {
     text-align: center;
     margin-top: 1.5rem;

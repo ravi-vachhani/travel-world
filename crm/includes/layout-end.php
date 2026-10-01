@@ -19,6 +19,52 @@ document.querySelectorAll('.flash').forEach(el => {
     setTimeout(() => { el.style.opacity = '0'; setTimeout(() => el.remove(), 400); }, 4000);
 });
 
+// ── Interactive UI layer ────────────────────────────────────────────────────
+(function () {
+  // 1) Button ripple on click
+  document.addEventListener('click', function (e) {
+    const btn = e.target.closest('.btn, .nav-item');
+    if (!btn) return;
+    const rect = btn.getBoundingClientRect();
+    const size = Math.max(rect.width, rect.height);
+    const ink = document.createElement('span');
+    ink.className = 'tw-ripple';
+    ink.style.width = ink.style.height = size + 'px';
+    ink.style.left = (e.clientX - rect.left - size / 2) + 'px';
+    ink.style.top  = (e.clientY - rect.top  - size / 2) + 'px';
+    btn.appendChild(ink);
+    setTimeout(() => ink.remove(), 600);
+  });
+
+  // 2) Top progress bar + content fade-out on internal navigation
+  const bar = document.createElement('div');
+  bar.id = 'tw-progress';
+  document.body.appendChild(bar);
+  function startProgress() {
+    bar.classList.add('active');
+    bar.style.width = '0';
+    requestAnimationFrame(() => { bar.style.width = '72%'; });
+  }
+  function isInternal(a) {
+    return a && a.href && a.target !== '_blank' && !a.hasAttribute('download') &&
+           a.origin === location.origin && !a.getAttribute('href').startsWith('#') &&
+           !a.getAttribute('href').startsWith('javascript');
+  }
+  document.addEventListener('click', function (e) {
+    const a = e.target.closest('a');
+    if (!isInternal(a)) return;
+    // let modified clicks (new tab) behave normally
+    if (e.metaKey || e.ctrlKey || e.shiftKey) return;
+    startProgress();
+    const main = document.querySelector('.crm-content');
+    if (main) { main.style.transition = 'opacity .22s ease, transform .22s ease'; main.style.opacity = '0'; main.style.transform = 'translateY(-6px)'; }
+  }, true);
+  // On form submit, also show progress
+  document.addEventListener('submit', function () { startProgress(); }, true);
+  // Finish the bar once the new page is fully shown
+  window.addEventListener('pageshow', function () { bar.style.width = '100%'; setTimeout(() => { bar.classList.remove('active'); bar.style.width = '0'; }, 250); });
+})();
+
 // ── Punch in / out widget ──────────────────────────────────────────────────
 (function () {
   const widget = document.getElementById('punchWidget');
