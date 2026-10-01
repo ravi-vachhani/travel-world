@@ -47,6 +47,63 @@ $upcomingTravel = $db->listDocuments(COL_BOOKINGS, [
 ]);
 $upcomingTravel = $upcomingTravel['documents'] ?? [];
 
+// ── Chart data ───────────────────────────────────────────────────────────────
+
+// 1) Lead pipeline: count per status
+$leadStatuses = ['new','contacted','quoted','negotiation','booking','completed','lost'];
+$pipeline = [];
+foreach ($leadStatuses as $s) {
+    $pipeline[$s] = safeCount($db->listDocuments(COL_LEADS, ['equal("status","'.$s.'")', 'limit(1)']));
+}
+
+// 2) Enquiries by service type
+$serviceTypes = ['flight','visa','package','hotel','transfer','insurance','cruise','other'];
+$byService = [];
+foreach ($serviceTypes as $svc) {
+    $c = safeCount($db->listDocuments(COL_ENQUIRIES, ['equal("service_type","'.$svc.'")', 'limit(1)']));
+    if ($c > 0) $byService[$svc] = $c;
+}
+arsort($byService);
+
+// 3) Revenue (sum of all payments) + bookings trend over the last 6 months
+$allPayments = ($db->listDocuments(COL_PAYMENTS, ['orderDesc("paid_at")', 'limit(500)']))['documents'] ?? [];
+$totalRevenue = array_sum(array_column($allPayments, 'amount'));
+
+// Last 6 months labels (IST)
+$months = [];
+for ($i = 5; $i >= 0; $i--) {
+    $t = strtotime("first day of -$i month");
+    $months[date('Y-m', $t)] = ['label' => date('M', $t), 'bookings' => 0, 'revenue' => 0];
+}
+// Bookings per month
+$allBookings = ($db->listDocuments(COL_BOOKINGS, ['orderDesc("$createdAt")', 'limit(500)']))['documents'] ?? [];
+foreach ($allBookings as $b) {
+    $key = date('Y-m', strtotime($b['$createdAt'] ?? 'now'));
+    if (isset($months[$key])) $months[$key]['bookings']++;
+}
+// Revenue per month (by payment date)
+foreach ($allPayments as $p) {
+    $key = date('Y-m', strtotime($p['paid_at'] ?? $p['$createdAt'] ?? 'now'));
+    if (isset($months[$key])) $months[$key]['revenue'] += (float)($p['amount'] ?? 0);
+}
+
+// Conversion funnel counts
+$funnel = [
+    'Leads'      => $totalLeads,
+    'Enquiries'  => $totalEnquiries,
+    'Quotations' => $totalQuotations,
+    'Bookings'   => $totalBookings,
+];
+
+$serviceLabels = [
+    'flight'=>'Flight','visa'=>'Visa','package'=>'Package','hotel'=>'Hotel',
+    'transfer'=>'Transfer','insurance'=>'Insurance','cruise'=>'Cruise','other'=>'Other',
+];
+$serviceColors = [
+    'flight'=>'#3b6ef0','visa'=>'#8b5cf6','package'=>'#B8902F','hotel'=>'#0891b2',
+    'transfer'=>'#059669','insurance'=>'#d97706','cruise'=>'#db2777','other'=>'#64748b',
+];
+
 $serviceIcons = [
     'flight'    => '✈️', 'visa'      => '🛂', 'package'   => '🏖️',
     'hotel'     => '🏨', 'transfer'  => '🚕', 'insurance' => '🛡️',
@@ -109,6 +166,117 @@ require_once __DIR__ . '/includes/layout.php';
     <div class="stat-icon"><?= crm_icon('bookmark') ?></div>
     <div class="stat-label">Bookings</div>
     <div class="stat-value"><?= $totalBookings ?></div>
+  </div>
+  <div class="stat-card gold">
+    <div class="stat-icon"><?= crm_icon('dollar-sign') ?></div>
+    <div class="stat-label">Total Revenue</div>
+    <div class="stat-value" style="font-size:1.5rem">₹<?= number_format($totalRevenue) ?></div>
+  </div>
+</div>
+
+<!-- ── Charts row ──────────────────────────────────────────── -->
+<div class="dash-charts">
+
+  <!-- Bookings & Revenue trend (6 months) -->
+  <div class="card chart-card" style="margin-bottom:0">
+    <div class="card-title">
+      Bookings &amp; Revenue — Last 6 Months
+      <span class="chart-legend">
+        <span class="lg-dot" style="background:var(--gold)"></span> Bookings
+        <span class="lg-dot" style="background:#3b6ef0;margin-left:0.75rem"></span> Revenue
+      </span>
+    </div>
+    <?php
+      $maxBk = max(1, max(array_column($months, 'bookings')));
+      $maxRv = max(1, max(array_column($months, 'revenue')));
+    ?>
+    <div class="bar-chart">
+      <?php foreach ($months as $m): ?>
+      <div class="bar-col" title="<?= $m['label'] ?>: <?= $m['bookings'] ?> bookings, ₹<?= number_format($m['revenue']) ?>">
+        <div class="bar-stack">
+          <div class="bar bar-rev" style="height:<?= round(($m['revenue']/$maxRv)*100) ?>%"></div>
+          <div class="bar bar-bk"  style="height:<?= round(($m['bookings']/$maxBk)*100) ?>%"></div>
+        </div>
+        <div class="bar-val"><?= $m['bookings'] ?></div>
+        <div class="bar-label"><?= $m['label'] ?></div>
+      </div>
+      <?php endforeach; ?>
+    </div>
+  </div>
+
+  <!-- Enquiries by service type (donut) -->
+  <div class="card chart-card" style="margin-bottom:0">
+    <div class="card-title">Enquiries by Service</div>
+    <?php
+      $svcTotal = array_sum($byService);
+      // build conic-gradient stops
+      $stops = []; $acc = 0;
+      foreach ($byService as $svc => $cnt) {
+          $start = $svcTotal ? ($acc / $svcTotal) * 360 : 0;
+          $acc += $cnt;
+          $end = $svcTotal ? ($acc / $svcTotal) * 360 : 0;
+          $stops[] = ($serviceColors[$svc] ?? '#999') . ' ' . round($start,1) . 'deg ' . round($end,1) . 'deg';
+      }
+      $conic = $svcTotal ? 'conic-gradient(' . implode(',', $stops) . ')' : 'var(--surface2)';
+    ?>
+    <?php if (!$svcTotal): ?>
+      <div class="empty-state"><?= crm_icon('message-square') ?><p>No enquiries yet</p></div>
+    <?php else: ?>
+    <div class="donut-wrap">
+      <div class="donut" style="background:<?= $conic ?>">
+        <div class="donut-hole">
+          <div class="donut-total"><?= $svcTotal ?></div>
+          <div class="donut-sub">Enquiries</div>
+        </div>
+      </div>
+      <div class="donut-legend">
+        <?php foreach ($byService as $svc => $cnt): ?>
+        <div class="dl-row">
+          <span class="dl-dot" style="background:<?= $serviceColors[$svc] ?? '#999' ?>"></span>
+          <span class="dl-name"><?= $serviceLabels[$svc] ?? ucfirst($svc) ?></span>
+          <span class="dl-count"><?= $cnt ?></span>
+        </div>
+        <?php endforeach; ?>
+      </div>
+    </div>
+    <?php endif; ?>
+  </div>
+</div>
+
+<!-- ── Pipeline + Funnel row ───────────────────────────────── -->
+<div class="dash-charts">
+
+  <!-- Lead pipeline (horizontal bars) -->
+  <div class="card chart-card" style="margin-bottom:0">
+    <div class="card-title">Lead Pipeline</div>
+    <?php $maxPipe = max(1, max($pipeline)); ?>
+    <div class="hbar-chart">
+      <?php foreach ($pipeline as $st => $cnt): ?>
+      <div class="hbar-row">
+        <span class="hbar-label"><?= ucfirst(str_replace('_',' ',$st)) ?></span>
+        <div class="hbar-track">
+          <div class="hbar-fill <?= $statusBadge[$st] ?? 'badge-new' ?>" style="width:<?= round(($cnt/$maxPipe)*100) ?>%"></div>
+        </div>
+        <span class="hbar-count"><?= $cnt ?></span>
+      </div>
+      <?php endforeach; ?>
+    </div>
+  </div>
+
+  <!-- Conversion funnel -->
+  <div class="card chart-card" style="margin-bottom:0">
+    <div class="card-title">Conversion Funnel</div>
+    <?php $maxFn = max(1, max($funnel)); $fnColors = ['#3b6ef0','#8b5cf6','#d97706','#059669']; $fi = 0; ?>
+    <div class="funnel">
+      <?php foreach ($funnel as $label => $cnt): $w = round(($cnt/$maxFn)*100); ?>
+      <div class="funnel-row">
+        <div class="funnel-bar" style="width:<?= max($w,12) ?>%;background:<?= $fnColors[$fi++ % 4] ?>">
+          <span class="funnel-name"><?= $label ?></span>
+          <span class="funnel-count"><?= $cnt ?></span>
+        </div>
+      </div>
+      <?php endforeach; ?>
+    </div>
   </div>
 </div>
 

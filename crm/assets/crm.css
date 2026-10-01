@@ -1068,3 +1068,91 @@ form > div[style*="justify-content: flex-end"] { margin-top: 0.25rem; margin-bot
   .page-header { margin-bottom: 1.25rem; }
   .stat-grid { gap: 0.9rem; }
 }
+
+/* ════════════════════════════════════════════════════════════
+   ✦ DASHBOARD CHARTS
+   ════════════════════════════════════════════════════════════ */
+.dash-charts {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.chart-card { display: flex; flex-direction: column; }
+.chart-legend { font-size: 0.72rem; color: var(--muted); font-weight: 500; display: inline-flex; align-items: center; }
+.lg-dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 4px; }
+
+/* ── Vertical bar chart (bookings + revenue) ───────────────── */
+.bar-chart {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  gap: 0.75rem; height: 190px; padding-top: 0.5rem;
+}
+.bar-col { flex: 1; display: flex; flex-direction: column; align-items: center; height: 100%; }
+.bar-stack {
+  flex: 1; width: 100%; max-width: 46px; margin: 0 auto;
+  display: flex; align-items: flex-end; justify-content: center; gap: 4px;
+  position: relative;
+}
+.bar {
+  width: 14px; border-radius: 6px 6px 0 0; min-height: 3px;
+  transition: height .8s var(--ease); animation: tw-bar-grow .9s var(--ease) both;
+  transform-origin: bottom;
+}
+.bar-bk  { background: var(--gold-grad); }
+.bar-rev { background: linear-gradient(180deg,#5b8bff,#3b6ef0); }
+@keyframes tw-bar-grow { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+.bar-val { font-size: 0.72rem; font-weight: 700; color: var(--text); margin-top: 6px; }
+.bar-label { font-size: 0.7rem; color: var(--muted); }
+
+/* ── Donut chart ───────────────────────────────────────────── */
+.donut-wrap { display: flex; align-items: center; gap: 1.25rem; flex-wrap: wrap; }
+.donut {
+  width: 150px; height: 150px; border-radius: 50%; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  animation: tw-fade-in .6s ease both; position: relative;
+}
+.donut-hole {
+  width: 96px; height: 96px; border-radius: 50%; background: var(--surface);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  box-shadow: inset 0 0 0 1px var(--border);
+}
+.donut-total { font-size: 1.6rem; font-weight: 800; line-height: 1;
+  background: var(--gold-grad); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.donut-sub { font-size: 0.68rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+.donut-legend { flex: 1; min-width: 150px; display: flex; flex-direction: column; gap: 0.4rem; }
+.dl-row { display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; }
+.dl-dot { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
+.dl-name { flex: 1; color: var(--text); }
+.dl-count { font-weight: 700; color: var(--text); }
+
+/* ── Horizontal bar (pipeline) ─────────────────────────────── */
+.hbar-chart { display: flex; flex-direction: column; gap: 0.6rem; }
+.hbar-row { display: flex; align-items: center; gap: 0.65rem; font-size: 0.8rem; }
+.hbar-label { width: 92px; flex-shrink: 0; color: var(--muted); }
+.hbar-track { flex: 1; background: var(--surface2); border-radius: 20px; height: 12px; overflow: hidden; }
+.hbar-fill { height: 100%; border-radius: 20px; min-width: 2px; animation: tw-hbar .9s var(--ease) both; }
+@keyframes tw-hbar { from { width: 0 !important; } }
+.hbar-fill.badge-new       { background: var(--c-new); }
+.hbar-fill.badge-contacted { background: var(--c-contacted); }
+.hbar-fill.badge-quoted    { background: var(--c-quoted); }
+.hbar-fill.badge-confirmed { background: var(--c-confirmed); }
+.hbar-fill.badge-completed { background: var(--c-completed); }
+.hbar-fill.badge-lost      { background: var(--c-lost); }
+.hbar-fill.badge-gold      { background: var(--gold); }
+.hbar-count { width: 28px; text-align: right; font-weight: 700; flex-shrink: 0; }
+
+/* ── Conversion funnel ─────────────────────────────────────── */
+.funnel { display: flex; flex-direction: column; gap: 0.5rem; align-items: center; padding-top: 0.25rem; }
+.funnel-row { width: 100%; display: flex; justify-content: center; }
+.funnel-bar {
+  height: 38px; border-radius: 8px; color: #fff;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 0.9rem; font-size: 0.82rem; font-weight: 600;
+  animation: tw-fade-up .5s var(--ease) both; box-shadow: var(--shadow);
+}
+.funnel-name { opacity: 0.95; }
+.funnel-count { font-weight: 800; font-size: 0.95rem; }
+
+@media (max-width: 900px) {
+  .dash-charts { grid-template-columns: 1fr; }
+}
