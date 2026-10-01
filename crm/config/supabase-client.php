@@ -19,11 +19,19 @@ class SupabaseClient {
     private string $serviceKey;
     private string $bucket;
 
+    /** Human-readable description of the most recent failed request, if any. */
+    private string $lastError = '';
+
     public function __construct() {
         $this->restUrl    = SUPABASE_REST_URL;
         $this->url        = SUPABASE_URL;
         $this->serviceKey = SUPABASE_SERVICE_KEY;
         $this->bucket     = SUPABASE_BUCKET;
+    }
+
+    /** Returns the last error message captured by a request (empty if none). */
+    public function lastError(): string {
+        return $this->lastError;
     }
 
     // ── Low level REST request ───────────────────────────────────────────────
@@ -32,6 +40,7 @@ class SupabaseClient {
      * @return array{status:int, body:mixed, headers:array}
      */
     private function request(string $method, string $path, $body = null, array $extraHeaders = []): array {
+        $this->lastError = '';
         $url = rtrim($this->restUrl, '/') . $path;
 
         $headers = array_merge([
@@ -59,6 +68,7 @@ class SupabaseClient {
         curl_close($ch);
 
         if ($curlErr) {
+            $this->lastError = 'Connection error: ' . $curlErr;
             error_log("Supabase cURL error: " . $curlErr);
             return ['status' => 0, 'body' => ['error' => $curlErr], 'headers' => []];
         }
@@ -67,11 +77,18 @@ class SupabaseClient {
         $rawBody    = substr($raw, $headerSize);
         $headers    = $this->parseHeaders($rawHeaders);
 
+        $data = $rawBody === '' ? [] : (json_decode($rawBody, true));
+
         if ($httpCode >= 400) {
-            error_log("Supabase error [{$httpCode}] {$path}: " . $rawBody);
+            // PostgREST errors look like {"code":..,"message":..,"details":..,"hint":..}
+            $msg = '';
+            if (is_array($data)) {
+                $msg = trim(($data['message'] ?? '') . ' ' . ($data['details'] ?? '') . ' ' . ($data['hint'] ?? ''));
+            }
+            $this->lastError = "[{$httpCode}] " . ($msg !== '' ? $msg : $rawBody);
+            error_log("Supabase error {$this->lastError} on {$method} {$path}");
         }
 
-        $data = $rawBody === '' ? [] : (json_decode($rawBody, true));
         return ['status' => $httpCode, 'body' => $data, 'headers' => $headers];
     }
 

@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header('Location: /crm/customers/view.php?id=' . $res['$id'] . '&created=1');
             exit;
         }
-        $error = 'Failed to create customer.';
+        $error = 'Failed to create customer.' . ($db->lastError() ? ' (' . $db->lastError() . ')' : '');
     }
 }
 
