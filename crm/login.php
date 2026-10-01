@@ -17,7 +17,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password'] ?? '';
 
     if (crm_login($email, $password)) {
-        header('Location: /crm/');
+        // IMPORTANT: do NOT redirect with a 302 here. Some browsers refuse to
+        // store a Set-Cookie that arrives on a redirect response, which would
+        // bounce the user straight back to the login page. Instead we return a
+        // normal 200 HTML page (so the cookie is reliably stored) and redirect
+        // on the client once the cookie is committed.
+        ?><!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8">
+<title>Signing in…</title>
+<meta http-equiv="refresh" content="0;url=/crm/">
+<link rel="icon" href="/assets/image/favicon.ico">
+<style>
+  body{font-family:'Inter',system-ui,sans-serif;background:#f4f6fa;color:#1f2433;
+       display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0}
+  .box{text-align:center}
+  .spin{width:34px;height:34px;border:3px solid #e2e6ee;border-top-color:#B8902F;
+        border-radius:50%;margin:0 auto 1rem;animation:spin .8s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  a{color:#9a7726}
+</style></head>
+<body>
+  <div class="box">
+    <div class="spin"></div>
+    <div>Signing you in…</div>
+    <div style="font-size:.85rem;color:#6b7280;margin-top:.5rem">
+      If you are not redirected, <a href="/crm/">click here</a>.
+    </div>
+  </div>
+  <script>window.location.replace('/crm/');</script>
+</body></html><?php
         exit;
     } else {
         $error = 'Invalid email or password.';
