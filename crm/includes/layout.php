@@ -31,6 +31,7 @@ $navItems = [
 <title><?= htmlspecialchars($pageTitle) ?> — Travel World CRM</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="/assets/image/logo-square.png">
 <link rel="stylesheet" href="/crm/assets/crm.css">
 </head>
 <body>
@@ -38,7 +39,8 @@ $navItems = [
 <!-- Sidebar -->
 <aside class="crm-sidebar" id="crmSidebar">
   <div class="sidebar-logo">
-    <img src="/assets/image/logo.webp" alt="Travel World">
+    <img src="/assets/image/logo-horizontal.png" alt="Travel World"
+         onerror="this.onerror=null;this.src='/assets/image/logo.webp';">
     <span>CRM</span>
   </div>
 

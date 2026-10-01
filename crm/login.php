@@ -30,23 +30,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CRM Login — Travel World</title>
+<link rel="icon" type="image/png" href="/assets/image/logo-square.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
-    --gold: #C9A84C;
-    --gold-dark: #a8872e;
-    --bg: #0f1117;
-    --surface: #1a1d27;
-    --border: #2a2d3a;
-    --text: #e8eaf0;
-    --muted: #8b8fa8;
-    --error: #ff5c5c;
+    --gold: #B8902F;
+    --gold-dark: #9a7726;
+    --gold-light: rgba(184,144,47,0.12);
+    --bg: #f4f6fa;
+    --surface: #ffffff;
+    --border: #e2e6ee;
+    --text: #1f2433;
+    --muted: #6b7280;
+    --error: #dc2626;
   }
   body {
     font-family: 'Inter', sans-serif;
     background: var(--bg);
+    background-image: radial-gradient(circle at 50% 0%, rgba(184,144,47,0.08), transparent 60%);
     color: var(--text);
     min-height: 100vh;
     display: flex;
@@ -63,7 +66,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     margin-bottom: 2rem;
   }
   .login-logo img {
-    height: 48px;
+    height: 72px;
+    width: auto;
+    max-width: 280px;
+    object-fit: contain;
     margin-bottom: 0.75rem;
   }
   .login-logo h1 {
@@ -78,6 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     border: 1px solid var(--border);
     border-radius: 16px;
     padding: 2.5rem 2rem;
+    box-shadow: 0 4px 24px rgba(16,24,40,0.08);
   }
   .login-card h2 {
     font-size: 1.5rem;
@@ -104,18 +111,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   input[type="email"],
   input[type="password"] {
     width: 100%;
-    background: var(--bg);
+    background: #ffffff;
     border: 1px solid var(--border);
     border-radius: 8px;
     padding: 0.75rem 1rem;
     color: var(--text);
     font-size: 0.95rem;
     font-family: inherit;
-    transition: border-color 0.2s;
+    transition: border-color 0.2s, box-shadow 0.2s;
     outline: none;
   }
   input:focus {
     border-color: var(--gold);
+    box-shadow: 0 0 0 3px var(--gold-light);
   }
   .error-msg {
     background: rgba(255,92,92,0.1);
@@ -129,7 +137,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   .btn-login {
     width: 100%;
     background: var(--gold);
-    color: #0f1117;
+    color: #ffffff;
     border: none;
     border-radius: 8px;
     padding: 0.85rem;
@@ -154,7 +162,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
 <div class="login-wrap">
   <div class="login-logo">
-    <img src="/assets/image/logo.webp" alt="Travel World">
+    <img src="/assets/image/logo-horizontal.png" alt="Travel World"
+         onerror="this.onerror=null;this.src='/assets/image/logo.webp';">
     <h1>CRM Portal</h1>
   </div>
   <div class="login-card">

@@ -39,7 +39,7 @@ header('Content-Type: text/html; charset=utf-8');
 <!DOCTYPE html>
 <html>
 <head><title>CRM Debug</title>
-<style>body{font-family:monospace;padding:2rem;background:#111;color:#eee} pre{background:#1a1a1a;padding:1rem;border-radius:6px;overflow:auto;font-size:0.8rem} h2{color:#C9A84C} .ok{color:#4ade80} .err{color:#f87171} a{color:#C9A84C}</style>
+<style>body{font-family:monospace;padding:2rem;background:#f4f6fa;color:#1f2433} pre{background:#fff;border:1px solid #e2e6ee;padding:1rem;border-radius:6px;overflow:auto;font-size:0.8rem} h2{color:#9a7726} .ok{color:#059669} .err{color:#dc2626} a{color:#9a7726}</style>
 </head>
 <body>
 <h1>CRM Debug Panel</h1>

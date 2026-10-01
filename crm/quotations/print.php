@@ -60,7 +60,10 @@ $items = json_decode($q['items'] ?? '[]', true) ?: [];
 
   <div class="header">
     <div>
-      <div class="logo">Travel World<small>Your Dream, Our Journey</small></div>
+      <img src="/assets/image/logo-horizontal.png" alt="Travel World"
+           style="height:56px;width:auto;max-width:260px;object-fit:contain;margin-bottom:0.35rem"
+           onerror="this.onerror=null;this.style.display='none';document.getElementById('qLogoText').style.display='block';">
+      <div class="logo" id="qLogoText" style="display:none">Travel World<small>Your Dream, Our Journey</small></div>
       <div style="margin-top:0.5rem;font-size:0.75rem;color:#666">
         📧 info@travelworld.com &nbsp;|&nbsp; 📞 +91 98765 43210
       </div>

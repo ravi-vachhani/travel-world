@@ -5,24 +5,30 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --gold:        #C9A84C;
-  --gold-dark:   #a8872e;
-  --gold-light:  rgba(201,168,76,0.12);
-  --bg:          #0f1117;
-  --surface:     #1a1d27;
-  --surface2:    #22263a;
-  --border:      #2a2d3a;
-  --text:        #e8eaf0;
-  --muted:       #8b8fa8;
+  /* Brand gold (matches the Travel World logo) */
+  --gold:        #B8902F;
+  --gold-dark:   #9a7726;
+  --gold-light:  rgba(184,144,47,0.12);
+  --gold-ink:    #ffffff;   /* text/icon colour that sits on a gold fill */
+
+  /* Light theme surfaces */
+  --bg:          #f4f6fa;   /* app background (light gray) */
+  --surface:     #ffffff;   /* cards, sidebar, topbar */
+  --surface2:    #f0f2f7;   /* hover / subtle fills */
+  --border:      #e2e6ee;   /* clean light borders */
+  --text:        #1f2433;   /* primary text */
+  --muted:       #6b7280;   /* secondary text */
+  --shadow:      0 1px 2px rgba(16,24,40,0.04), 0 1px 3px rgba(16,24,40,0.06);
+  --shadow-md:   0 4px 12px rgba(16,24,40,0.08);
   --sidebar-w:   240px;
 
-  /* Status colours */
-  --c-new:       #6c8ef5;
-  --c-contacted: #a78bfa;
-  --c-quoted:    #f59e0b;
-  --c-confirmed: #10b981;
-  --c-lost:      #ef4444;
-  --c-completed: #06b6d4;
+  /* Status colours (kept vivid for light backgrounds) */
+  --c-new:       #3b6ef0;
+  --c-contacted: #8b5cf6;
+  --c-quoted:    #d97706;
+  --c-confirmed: #059669;
+  --c-lost:      #dc2626;
+  --c-completed: #0891b2;
 }
 
 html, body {
@@ -50,6 +56,7 @@ a:hover { text-decoration: underline; }
   z-index: 1000;
   transition: transform 0.3s ease;
   overflow-y: auto;
+  box-shadow: var(--shadow);
 }
 
 .crm-main {
@@ -64,14 +71,20 @@ a:hover { text-decoration: underline; }
 .sidebar-logo {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 0.6rem;
-  padding: 1.25rem 1rem;
+  padding: 1rem 1rem;
   border-bottom: 1px solid var(--border);
   flex-shrink: 0;
 }
-.sidebar-logo img { height: 32px; }
+.sidebar-logo img {
+  height: 38px;
+  width: auto;
+  max-width: 150px;
+  object-fit: contain;
+}
 .sidebar-logo span {
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -79,6 +92,7 @@ a:hover { text-decoration: underline; }
   background: var(--gold-light);
   padding: 2px 8px;
   border-radius: 4px;
+  flex-shrink: 0;
 }
 
 /* ── Sidebar Nav ────────────────────────────────────────── */
@@ -154,7 +168,7 @@ a:hover { text-decoration: underline; }
 .user-avatar {
   width: 32px; height: 32px;
   background: var(--gold);
-  color: #0f1117;
+  color: var(--gold-ink);
   border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
   font-weight: 700;
@@ -202,6 +216,7 @@ a:hover { text-decoration: underline; }
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  box-shadow: var(--shadow);
 }
 .stat-card .stat-label {
   font-size: 0.75rem;
@@ -236,6 +251,7 @@ a:hover { text-decoration: underline; }
   border-radius: 12px;
   padding: 1.25rem;
   margin-bottom: 1.25rem;
+  box-shadow: var(--shadow);
 }
 .card-title {
   font-size: 0.95rem;
@@ -315,7 +331,7 @@ tbody tr:hover { background: var(--surface2); }
   white-space: nowrap;
 }
 .btn:hover { text-decoration: none; opacity: 0.9; }
-.btn-primary  { background: var(--gold); color: #0f1117; }
+.btn-primary  { background: var(--gold); color: var(--gold-ink); }
 .btn-primary:hover { background: var(--gold-dark); opacity: 1; }
 .btn-secondary { background: var(--surface2); color: var(--text); border: 1px solid var(--border); }
 .btn-danger   { background: rgba(239,68,68,0.15); color: #ef4444; border: 1px solid rgba(239,68,68,0.3); }
@@ -350,7 +366,7 @@ input[type="time"],
 input[type="password"],
 select,
 textarea {
-  background: var(--bg);
+  background: #ffffff;
   border: 1px solid var(--border);
   border-radius: 8px;
   padding: 0.6rem 0.85rem;
@@ -358,10 +374,14 @@ textarea {
   font-size: 0.875rem;
   font-family: inherit;
   outline: none;
-  transition: border-color 0.2s;
+  transition: border-color 0.2s, box-shadow 0.2s;
   width: 100%;
 }
-input:focus, select:focus, textarea:focus { border-color: var(--gold); }
+input:focus, select:focus, textarea:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px var(--gold-light);
+}
+input::placeholder, textarea::placeholder { color: #9aa1ad; }
 select option { background: var(--surface); }
 textarea { resize: vertical; min-height: 80px; }
 
@@ -371,7 +391,7 @@ textarea { resize: vertical; min-height: 80px; }
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  background: var(--bg);
+  background: #ffffff;
   border: 1px solid var(--border);
   border-radius: 8px;
   padding: 0.5rem 0.85rem;
@@ -548,6 +568,7 @@ textarea { resize: vertical; min-height: 80px; }
   overflow-y: auto;
   transform: translateY(20px);
   transition: transform 0.2s;
+  box-shadow: var(--shadow-md);
 }
 .modal-backdrop.open .modal { transform: translateY(0); }
 .modal-header {
@@ -609,4 +630,4 @@ textarea { resize: vertical; min-height: 80px; }
   transition: background 0.15s, color 0.15s;
 }
 .pagination a:hover { background: var(--surface2); color: var(--text); }
-.pagination .active { background: var(--gold); color: #0f1117; border-color: var(--gold); }
+.pagination .active { background: var(--gold); color: var(--gold-ink); border-color: var(--gold); }
