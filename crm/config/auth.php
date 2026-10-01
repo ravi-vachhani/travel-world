@@ -56,14 +56,40 @@ function _crm_is_https(): bool {
     return false;
 }
 
+/**
+ * Work out the cookie Domain so the session survives www <-> non-www.
+ * Returns the registrable domain with a leading dot (e.g. ".travelworld.co.in")
+ * so both www.travelworld.co.in and travelworld.co.in share one cookie. For
+ * Vercel preview hosts / localhost / IPs we return '' (host-only cookie).
+ */
+function _crm_cookie_domain(): string {
+    $host = $_SERVER['HTTP_HOST'] ?? '';
+    $host = preg_replace('/:\d+$/', '', $host);     // strip port
+    if ($host === '' || filter_var($host, FILTER_VALIDATE_IP)) return '';
+    if (substr($host, -strlen('travelworld.co.in')) === 'travelworld.co.in') {
+        return '.travelworld.co.in';
+    }
+    // Any other custom domain: share across its own www/non-www by using the
+    // last two labels (best-effort; falls back to host-only on short hosts).
+    $parts = explode('.', $host);
+    if (count($parts) >= 2 && !str_contains($host, 'vercel.app') && $host !== 'localhost') {
+        // keep it host-only to be safe on unknown multi-label TLDs
+        return '';
+    }
+    return '';
+}
+
 function _crm_set_cookie(string $value, int $expires): void {
-    setcookie(CRM_SESSION_NAME, $value, [
+    $params = [
         'expires'  => $expires,
         'path'     => '/',                 // whole site, so /api/crm.php sees it too
         'secure'   => _crm_is_https(),
         'httponly' => true,
         'samesite' => 'Lax',
-    ]);
+    ];
+    $domain = _crm_cookie_domain();
+    if ($domain !== '') $params['domain'] = $domain;
+    setcookie(CRM_SESSION_NAME, $value, $params);
     // Make it available within the same request too.
     $_COOKIE[CRM_SESSION_NAME] = $value;
 }
